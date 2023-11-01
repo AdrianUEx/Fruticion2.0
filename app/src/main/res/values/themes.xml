@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Fruticion" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.Fruticion" parent="Theme.AppCompat.Light.NoActionBar"></style>
+
+    <style name="BottomNavigationStyle">
+        <item name="android:background">@color/colorGris</item>
+        <!-- Otros atributos de estilo que puedas necesitar -->
+    </style>
+
 </resources>
