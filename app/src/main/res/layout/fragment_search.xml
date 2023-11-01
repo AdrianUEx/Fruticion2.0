@@ -9,13 +9,14 @@
     android:padding="16dp"
     tools:context=".Fragments.SearchFragment">
 
-    <SearchView
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:iconifiedByDefault="false"
         android:queryHint="Buscar frutas"
         app:iconifiedByDefault="false" />
+
 
     <!-- Aquí puedes agregar más elementos de diseño según tus necesidades -->
 </LinearLayout>
