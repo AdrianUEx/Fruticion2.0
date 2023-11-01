@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <!--Estilo basico de la aplicacion. Al parecer es obligatorio que este definido y que aparezca en mil sitios, porque si no, la aplicacion no ejecuta-->
     <style name="Theme.Fruticion" parent="Theme.AppCompat.Light.NoActionBar"></style>
 
+    <!--Esta etiqueta style es para cambiar el color de la barra de navegación inferior en la pantalla de HomeActivity. Permite que se vean los iconos, ya que son negros-->
     <style name="BottomNavigationStyle">
         <item name="android:background">@color/colorGris</item>
         <!-- Otros atributos de estilo que puedas necesitar -->

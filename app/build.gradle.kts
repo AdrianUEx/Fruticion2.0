@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    //Dependiencia de SafeArgs para la tranferencia de datos entre Fragments. Otorga clases generadas automaticamente para llevar a cabo estas operaciones.
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -54,9 +56,10 @@ android {
 
 dependencies {
 
+    //NO UTILIZAR LAS DEPENDENCIAS DE GOOGLE. UTILIZAR SIEMPRE LAS DEPENDENCIAS DE ANDROIDX
+
     implementation("androidx.appcompat:appcompat:1.6.1")
-    val nav_version =
-        "2.5.3"
+    val nav_version = "2.5.3"
     // Kotlin implementation
     ("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
@@ -77,11 +80,16 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
+
+    //Pruebas unitarias
     testImplementation("junit:junit:4.13.2")
+
+    //Espresso (pruebas de IU)
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 

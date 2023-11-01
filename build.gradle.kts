@@ -2,4 +2,6 @@
 plugins {
     id("com.android.application") version "8.1.2" apply false
     id("org.jetbrains.kotlin.android") version "1.8.10" apply false
+    //Esta dependencia es de SafeArgs para pasar argumentos de un Fragment a otro (como en el caso del patron Master-Detail)
+    id("androidx.navigation.safeargs.kotlin") version "2.5.3" apply false
 }
