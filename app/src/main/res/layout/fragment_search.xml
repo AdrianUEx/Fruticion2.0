@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:iconifiedByDefault="false"
-        android:queryHint="Buscar frutas"
+        android:queryHint="@string/searh_text"
         app:iconifiedByDefault="false" />
 
 
