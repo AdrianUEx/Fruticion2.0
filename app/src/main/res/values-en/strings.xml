@@ -23,4 +23,24 @@
     <string name="text_profile_password">Password:</string>
     <string name="value_profile_password">Password</string>
     <string name="edit_profile_button">Edit Profile</string>
+    <string name="logout_profile_button">Logout</string>
+    <string name="title_detail">Details</string>
+    <string name="text_detail_name">Fruit name</string>
+    <string name="text_detail_family">Family</string>
+    <string name="text_detail_genus">Genus</string>
+    <string name="text_detail_order">Order</string>
+    <string name="text_detail_nutrition">Nutritional information:</string>
+    <string name="text_detail_carbo">Carbohydrates</string>
+    <string name="text_detail_calories">Calories</string>
+    <string name="text_detail_fat">Fat</string>
+    <string name="text_detail_sugar">Sugar</string>
+    <string name="text_detail_protein">Protein</string>
+    <string name="value_detail_family">Family</string>
+    <string name="value_detail_genus">Genus</string>
+    <string name="value_detail_order">Order</string>
+    <string name="value_detail_carbo">Carbohydrates</string>
+    <string name="value_detail_calories">Calories</string>
+    <string name="value_detail_fat">Fat</string>
+    <string name="value_detail_sugar">Sugar</string>
+    <string name="value_detail_protein">Protein</string>
 </resources>
