@@ -58,10 +58,13 @@ android {
 dependencies {
 
     //NO UTILIZAR LAS DEPENDENCIAS DE GOOGLE. UTILIZAR SIEMPRE LAS DEPENDENCIAS DE ANDROIDX
+    //Estas dependencias son tomadas del Lab04, y la aplicación funciona (en 2/11/2023)
 
+    //Las Preference
     implementation("androidx.preference:preference-ktx:1.2.1")
+
     // Navigation Component
-    val navVersion = "2.5.3"
+    val navVersion = "2.5.3" //La version 2.5.3 es la ultima version estable de NavigationComponent (de 22/02/2023)
 
     // Kotlin
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
@@ -70,7 +73,7 @@ dependencies {
     // Feature module Support
     implementation("androidx.navigation:navigation-dynamic-features-fragment:$navVersion")
 
-    // Testing Navigation
+    // Testing Navigation (testeo del NavigationComponent)
     androidTestImplementation("androidx.navigation:navigation-testing:$navVersion")
 
     // Jetpack Preferences
@@ -79,9 +82,9 @@ dependencies {
     // Jetpack Compose Integration
     implementation("androidx.navigation:navigation-compose:$navVersion")
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
+    implementation("androidx.core:core-ktx:1.9.0")//Esta libreria no puede faltar (SharedPreferences y otras cosas)
+    implementation("androidx.appcompat:appcompat:1.6.1")//Esta libreria es para proporcionar compatibilidad con las versiones anteriores de Android para la IU
+    implementation("com.google.android.material:material:1.9.0")//Elementos como botones, barras de herramientas y tal basados en los principios de la biblioteca Material Design de Google
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

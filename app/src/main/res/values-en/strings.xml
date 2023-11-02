@@ -12,7 +12,7 @@
     <string name="title_join">Register</string>
     <string name="text_join_check_pass">Repeat password</string>
     <string name="button_join_join">Join</string>
-    <string name="searh_text">Search for fruits</string>
+    <string name="search_text">Search for fruits</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_home">HomeActivity</string>

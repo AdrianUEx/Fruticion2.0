@@ -10,7 +10,7 @@
     <string name="title_join">Registro</string>
     <string name="text_join_check_pass">Confirmar contraseña</string>
     <string name="button_join_join">Registrarse</string>
-    <string name="searh_text">Buscar frutas</string>
+    <string name="search_text">Buscar frutas</string>
 
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>

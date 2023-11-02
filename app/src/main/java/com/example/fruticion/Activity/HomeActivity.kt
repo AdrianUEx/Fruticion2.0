@@ -13,6 +13,7 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var bottomNavigationView: BottomNavigationView
     private val navController by lazy {
+
         (supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment).navController
     }
 
@@ -36,6 +37,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    //Este metodo es el que carga los Fragmentos dentro de la Activty. Muy probablemente lo borraremos para gestionarlo con el grafo de navegacion
     private fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
