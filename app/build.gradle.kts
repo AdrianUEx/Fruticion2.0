@@ -40,6 +40,7 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
@@ -59,6 +60,8 @@ dependencies {
     //NO UTILIZAR LAS DEPENDENCIAS DE GOOGLE. UTILIZAR SIEMPRE LAS DEPENDENCIAS DE ANDROIDX
 
     implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.recyclerview:recyclerview:1.3.1")
     val nav_version = "2.5.3"
     // Kotlin implementation
     ("androidx.navigation:navigation-fragment-ktx:$nav_version")

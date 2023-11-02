@@ -15,7 +15,13 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_home">HomeActivity</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <!--  Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hola fragmento blanco</string>
     <string name="title_home">Inicio</string>
+    <string name="title_profile">Perfil</string>
+    <string name="text_profile_name">Nombre:</string>
+    <string name="value_profile_name">Nombre</string>
+    <string name="text_profile_password">Contraseña:</string>
+    <string name="value_profile_password">Contraseña</string>
+    <string name="edit_profile_button">Editar perfil</string>
 </resources>
