@@ -1,5 +1,7 @@
 package com.example.fruticion.Activity
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,6 +17,15 @@ class HomeActivity : AppCompatActivity() {
     private val navController by lazy {
 
         (supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment).navController
+    }
+
+    companion object {
+        fun start(
+            context: Context,
+        ) {
+            val intent = Intent(context, HomeActivity::class.java)
+            context.startActivity(intent)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
