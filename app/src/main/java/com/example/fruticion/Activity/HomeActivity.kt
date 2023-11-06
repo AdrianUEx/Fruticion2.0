@@ -4,8 +4,15 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.fruticion.Fragments.ProfileFragment
 import com.example.fruticion.Fragments.SearchFragment
@@ -22,6 +29,8 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnShowClickListener {
 
         (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
     }
+
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     companion object {
         fun start(
@@ -42,8 +51,34 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnShowClickListener {
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         binding.bottomNavigationView.setupWithNavController(navHostFragment.navController)
+
+        //codigo del lab de  toolbar
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.searchFragment,
+                R.id.profileFragment
+            )
+        )
+        setSupportActionBar(binding.toolbar)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+
+        // Hide toolbar and bottom navigation when in detail fragment
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.detailActivity) {
+                binding.toolbar.menu.clear()
+                binding.bottomNavigationView.visibility = View.GONE
+            } else {
+                binding.toolbar.visibility = View.VISIBLE
+                binding.bottomNavigationView.visibility = View.VISIBLE
+            }
+        }
     }
 
+    //Este metodo controla la flecha UP
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp(appBarConfiguration)
+                || super.onSupportNavigateUp()
+    }
     override fun onShowClick(fruit: Fruit) {
         // Aquí puedes manejar la navegación a la actividad de detalles o cualquier otra acción que desees realizar.
         val intent = Intent(this, DetailActivity::class.java)
@@ -51,7 +86,14 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnShowClickListener {
         startActivity(intent)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.actionbar_menu, menu)
+        val searchItem = menu?.findItem(R.id.action_search)
+        val searchView = searchItem?.actionView as SearchView
 
+        // Configure the search info and add any event listeners.
+        return super.onCreateOptionsMenu(menu)
+    }
 
 
 }
