@@ -6,17 +6,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.example.fruticion.Fragments.ProfileFragment
 import com.example.fruticion.Fragments.SearchFragment
 import com.example.fruticion.R
+import com.example.fruticion.databinding.ActivityHomeBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityHomeBinding
 
     private lateinit var bottomNavigationView: BottomNavigationView
     private val navController by lazy {
 
-        (supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment).navController
+        (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
     }
 
     companion object {
@@ -30,28 +33,14 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
 
-        // Cargar el fragmento inicial
-        loadFragment(SearchFragment())
-
-        // Manejar clics en la barra de navegación inferior
-        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.navigation_home -> loadFragment(SearchFragment())
-                //R.id.navigation_fav -> loadFragment(FavoriteFragment())
-                R.id.navigation_profile -> loadFragment(ProfileFragment())
-            }
-            true
-        }
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        binding.bottomNavigationView.setupWithNavController(navHostFragment.navController)
     }
 
-    //Este metodo es el que carga los Fragmentos dentro de la Activty. Muy probablemente lo borraremos para gestionarlo con el grafo de navegacion
-    private fun loadFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .commit()
-    }
+
 }

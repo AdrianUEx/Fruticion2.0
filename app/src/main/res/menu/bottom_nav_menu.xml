@@ -1,19 +1,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <!--barra de navegacion entre fragments-->
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/searchFragment"
         android:title="@string/title_home"
         android:enabled="true"
         android:icon="@drawable/ic_home"
         />
-    <item
+   <item
         android:id="@+id/navigation_fav"
         android:title="@string/bottom_fav"
         android:enabled="true"
 
         android:icon="@drawable/ic_fav" />
     <item
-        android:id="@+id/navigation_profile"
+        android:id="@+id/profileFragment"
         android:title="@string/bottom_profile"
         android:enabled="true"
         android:icon="@drawable/ic_profile" />
