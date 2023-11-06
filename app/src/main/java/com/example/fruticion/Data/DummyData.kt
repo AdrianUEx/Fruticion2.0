@@ -2,7 +2,6 @@ package com.example.fruticion.Data
 
 import com.example.fruticion.Model.Fruit
 
-class DummyData {
     val dummyFruit: List<Fruit> = listOf(
         Fruit( "Manzana", "Manzana roja", "Rojo", "1.5", "Chile", "Mediana"),
         Fruit( "Pera", "Pera verde", "Verde", "1.5", "Chile", "Mediana"),
@@ -17,4 +16,3 @@ class DummyData {
         Fruit( "Sandia", "Sandia", "Verde", "1.5", "Chile", "Mediana"),
         Fruit( "Melon", "Melon", "Verde", "1.5", "Chile", "Mediana")
     )
-}

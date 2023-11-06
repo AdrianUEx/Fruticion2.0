@@ -9,11 +9,12 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.fruticion.Fragments.ProfileFragment
 import com.example.fruticion.Fragments.SearchFragment
+import com.example.fruticion.Model.Fruit
 import com.example.fruticion.R
 import com.example.fruticion.databinding.ActivityHomeBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), SearchFragment.OnShowClickListener {
     private lateinit var binding: ActivityHomeBinding
 
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -38,9 +39,19 @@ class HomeActivity : AppCompatActivity() {
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
 
+
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         binding.bottomNavigationView.setupWithNavController(navHostFragment.navController)
     }
+
+    override fun onShowClick(fruit: Fruit) {
+        // Aquí puedes manejar la navegación a la actividad de detalles o cualquier otra acción que desees realizar.
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra("fruit", fruit)
+        startActivity(intent)
+    }
+
+
 
 
 }

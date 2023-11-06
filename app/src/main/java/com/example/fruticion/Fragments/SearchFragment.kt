@@ -5,8 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.fruticion.R
 import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fruticion.Activity.HomeActivity
+import com.example.fruticion.Data.dummyFruit
+import com.example.fruticion.Model.Fruit
+import com.example.fruticion.databinding.FragmentSearchBinding
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -20,13 +26,23 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class SearchFragment : Fragment()   {
+
+    interface OnShowClickListener {
+        fun onShowClick(fruit: Fruit)
+    }
+
+    private var _binding: FragmentSearchBinding? = null
+    private val binding get() = _binding!!
+
+    public var homeActivity: HomeActivity? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_search, container, false)
+_binding = FragmentSearchBinding.inflate(inflater, container, false)
 
-        val searchView = view.findViewById<SearchView>(R.id.searchView)
+        val searchView = binding.searchView
 
         // Configurar escucha de cambios en la barra de búsqueda
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -41,6 +57,24 @@ class SearchFragment : Fragment()   {
             }
         })
 
-        return view
+        return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpRecyclerView()
+    }
+
+    private fun setUpRecyclerView() {
+        val recyclerView = binding.rvFruitList
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = SearchAdapter(dummyFruit) { fruit -> onItemSelected(fruit) }
+        
+    }
+
+    fun onItemSelected(fruit: Fruit) {
+        (requireActivity() as OnShowClickListener).onShowClick(fruit)
+    }
+
+
 }
