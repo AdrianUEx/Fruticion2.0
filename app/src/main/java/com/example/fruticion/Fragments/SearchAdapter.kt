@@ -1,10 +1,9 @@
 package com.example.fruticion.Fragments
 
-import android.content.DialogInterface.OnClickListener
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fruticion.Model.Fruit
+import com.example.fruticion.model.Fruit
 import com.example.fruticion.R
 
 class SearchAdapter(private val fruitList: List<Fruit>, private val onClickListener: (Fruit)->Unit) : RecyclerView.Adapter<SearchViewHolder>() {

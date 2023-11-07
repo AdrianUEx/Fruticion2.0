@@ -9,7 +9,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fruticion.Activity.HomeActivity
 import com.example.fruticion.dummy.dummyFruit
-import com.example.fruticion.Model.Fruit
+import com.example.fruticion.model.Fruit
 import com.example.fruticion.databinding.FragmentSearchBinding
 /*
 private const val ARG_PARAM1 = "param1"

@@ -2,8 +2,7 @@ package com.example.fruticion.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.fruticion.Model.Fruit
-import com.example.fruticion.R
+import com.example.fruticion.model.Fruit
 import com.example.fruticion.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {

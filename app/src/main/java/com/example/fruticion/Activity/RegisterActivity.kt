@@ -4,9 +4,11 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.fruticion.R
 import com.example.fruticion.databinding.ActivityLoginBinding
 import com.example.fruticion.databinding.ActivityRegisterBinding
+import com.example.fruticion.util.CredentialCheck
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -33,8 +35,14 @@ class RegisterActivity : AppCompatActivity() {
         with(binding) {
 
             buttonRegister.setOnClickListener {
-                //comprobar credenciales
-                finish()
+                val check = CredentialCheck.join(editTextRegisterUsername.text.toString(), editTextRegisterPassword.text.toString(), editTextConfirmPassword.text.toString())
+                if(check.fail)
+                    Toast.makeText(binding.root.context, check.msg, Toast.LENGTH_SHORT).show()
+                else {
+                    Toast.makeText(binding.root.context, check.msg, Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+
             }
 
         }

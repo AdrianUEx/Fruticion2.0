@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.fruticion.R
 import com.example.fruticion.databinding.ActivityLoginBinding
+import com.example.fruticion.util.CredentialCheck
 
 class LoginActivity : AppCompatActivity() {
 
@@ -24,7 +25,13 @@ class LoginActivity : AppCompatActivity() {
 
             buttonLogin.setOnClickListener {
                 //comprobar credenciales
-                navigateToHomeActivity()
+                val check = CredentialCheck.login(editTextUsername.text.toString(), editTextPassword.text.toString())
+                if(check.fail)
+                    Toast.makeText(binding.root.context, check.msg, Toast.LENGTH_SHORT).show()
+                else {
+                    Toast.makeText(binding.root.context, check.msg, Toast.LENGTH_SHORT).show()
+                    navigateToHomeActivity()
+                }
             }
 
             buttonRegister.setOnClickListener {

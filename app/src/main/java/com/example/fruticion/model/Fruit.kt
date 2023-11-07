@@ -1,4 +1,4 @@
-package com.example.fruticion.Model
+package com.example.fruticion.model
 
 import java.io.Serializable
 
