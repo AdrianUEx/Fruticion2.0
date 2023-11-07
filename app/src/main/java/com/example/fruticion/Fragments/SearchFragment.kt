@@ -11,34 +11,25 @@ import com.example.fruticion.Activity.HomeActivity
 import com.example.fruticion.dummy.dummyFruit
 import com.example.fruticion.Model.Fruit
 import com.example.fruticion.databinding.FragmentSearchBinding
-
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+/*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+*/
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SearchFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
+
 class SearchFragment : Fragment()   {
-
-    interface OnShowClickListener {
-        fun onShowClick(fruit: Fruit)
-    }
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
-    public var homeActivity: HomeActivity? = null
+    var homeActivity: HomeActivity? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-_binding = FragmentSearchBinding.inflate(inflater, container, false)
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
 
         val searchView = binding.searchView
 
@@ -58,21 +49,25 @@ _binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+    //Este metodo actua despues de que el Fragment ya se ha creado, para añadir cosas extra al Fragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerView()
     }
 
     private fun setUpRecyclerView() {
-        val recyclerView = binding.rvFruitList
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        val recyclerView = binding.rvFruitList //Linkea la RecyclerView del layout con ViewBinding en esta variable
+        recyclerView.layoutManager = LinearLayoutManager(context) //Configura el layoutManager de la RecyclerView para que adopte una configuracion vertical en lugar de en grid
         recyclerView.adapter = SearchAdapter(dummyFruit) { fruit -> onItemSelected(fruit) }
-        
     }
 
+    //
     fun onItemSelected(fruit: Fruit) {
-        (requireActivity() as OnShowClickListener).onShowClick(fruit)
+        (requireActivity() as OnShowClickListener).onShowClick(fruit)//En esta linea se esta recuperando la Activity a la que pertenece este Fragment para invocar al override de onShowClick() alli definido
+        //requireActivity() obtiene la Activity de este Fragment. Hace un Casting de OnShowClickListener, por tanto, se "asume" que la HomeActivity debe implementar OnShowClickListener o si no, lanzara una excepcion
     }
-
+    interface OnShowClickListener {
+        fun onShowClick(fruit: Fruit)//Esta funcion es overrideada en HomeActivity para lanzar una Intent para viajar a la pantalla de detalle de la fruta pinchada
+    }
 
 }
