@@ -18,7 +18,7 @@ class CredentialCheck private constructor() {
             },
             CredentialCheck().apply {
                 fail = true
-                msg = "Invalid username"
+                msg = "Invalid Username"
                 error = CredentialError.UsernameError
             },
             CredentialCheck().apply {
