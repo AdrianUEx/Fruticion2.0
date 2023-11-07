@@ -64,9 +64,8 @@ class SearchFragment : Fragment()   {
 
             setUpRecyclerView(fruits)
         }
-
-
     }
+
     private suspend fun fetchAllFruits(): List<Fruit> {
         var fruitList = listOf<Fruit>()
         try {

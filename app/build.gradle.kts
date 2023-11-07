@@ -3,6 +3,9 @@ plugins {
     id("org.jetbrains.kotlin.android")
     //Dependiencia de SafeArgs para la tranferencia de datos entre Fragments. Otorga clases generadas automaticamente para llevar a cabo estas operaciones.
     id("androidx.navigation.safeargs.kotlin")
+    //Dependencia que no funciona de ksp (la del Gradle del Project si)
+    //id("com.google.devtools.ksp")
+    //id("com.google.devtools.ksp") version "1.8.10-1.0.9" apply false
 }
 
 android {
@@ -31,6 +34,10 @@ android {
             )
         }
     }
+
+    viewBinding {
+        enable = true
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -38,6 +45,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
     buildFeatures {
         compose = true
         viewBinding = true
@@ -50,15 +58,26 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-    viewBinding {
-        enable = true
-    }
+
 }
 
 dependencies {
 
     //NO UTILIZAR LAS DEPENDENCIAS DE GOOGLE. UTILIZAR SIEMPRE LAS DEPENDENCIAS DE ANDROIDX
     //Estas dependencias son tomadas del Lab04, y la aplicación funciona (en 2/11/2023)
+
+    //Dependencias de Lab06 para Room
+    val room_version = "2.5.0"
+
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+    // To use Kotlin Symbol Processing (KSP)
+        //ksp("androidx.room:room-compiler:$room_version")
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$room_version")
+
+    // optional - Test helpers
+    testImplementation("androidx.room:room-testing:$room_version")
 
     //Dependencias del Lab05
     implementation("com.google.code.gson:gson:2.10.1")//Para serializar y deserializar codigo Java y Kotlin
