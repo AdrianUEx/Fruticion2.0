@@ -6,11 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fruticion.Activity.HomeActivity
-import com.example.fruticion.dummy.dummyFruit
+import com.example.fruticion.api.APIError
+import com.example.fruticion.api.SerializedFruit
+import com.example.fruticion.api.getNetworkService
+//import com.example.fruticion.dummy.dummyFruit
 import com.example.fruticion.model.Fruit
 import com.example.fruticion.databinding.FragmentSearchBinding
+import kotlinx.coroutines.launch
+
 /*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -52,13 +58,29 @@ class SearchFragment : Fragment()   {
     //Este metodo actua despues de que el Fragment ya se ha creado, para añadir cosas extra al Fragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpRecyclerView()
-    }
 
-    private fun setUpRecyclerView() {
+        lifecycleScope.launch{
+            var fruits: List<Fruit> = fetchAllFruits()
+
+            setUpRecyclerView(fruits)
+        }
+
+
+    }
+    private suspend fun fetchAllFruits(): List<Fruit> {
+        var fruitList = listOf<Fruit>()
+        try {
+           fruitList = getNetworkService().getAllFruits()
+        } catch (cause: Throwable) {
+            throw APIError("Unable to fetch data from API", cause)
+        }
+        return fruitList
+    }
+    private fun setUpRecyclerView(fruits: List<Fruit>) {
         val recyclerView = binding.rvFruitList //Linkea la RecyclerView del layout con ViewBinding en esta variable
         recyclerView.layoutManager = LinearLayoutManager(context) //Configura el layoutManager de la RecyclerView para que adopte una configuracion vertical en lugar de en grid
-        recyclerView.adapter = SearchAdapter(dummyFruit) { fruit -> onItemSelected(fruit) }
+        //TODO:cambiar de vuelta a dummyFruits si no funciona
+        recyclerView.adapter = SearchAdapter(fruits) { fruit -> onItemSelected(fruit) }
     }
 
     //
