@@ -1,6 +1,6 @@
 package com.example.fruticion.dummy
 
-import com.example.fruticion.Model.Fruit
+import com.example.fruticion.model.Fruit
 
     val dummyFruit: List<Fruit> = listOf(
         Fruit( "Manzana", "Manzana roja", "Rojo", "1.5", "Chile", "Mediana"),
