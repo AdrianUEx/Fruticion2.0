@@ -7,6 +7,30 @@
     tools:context=".Activity.DetailActivity"
     android:id="@+id/detailActivity">
 
+    <ImageButton
+        android:id="@+id/add_favourite"
+        android:layout_width="85dp"
+        android:layout_height="74dp"
+        android:background="#FFFFFF"
+        android:contentDescription="Boton de anadir a favoritos con forma de corazon rosa"
+        android:src="@drawable/corazon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/value_detail_carbo" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/Toolbar"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
     <EditText
         android:id="@+id/title_profile"
         android:layout_width="wrap_content"

@@ -5,12 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.example.fruticion.R
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fruticion.Activity.HomeActivity
-import com.example.fruticion.Data.dummyFruit
+import com.example.fruticion.dummy.dummyFruit
 import com.example.fruticion.Model.Fruit
 import com.example.fruticion.databinding.FragmentSearchBinding
 

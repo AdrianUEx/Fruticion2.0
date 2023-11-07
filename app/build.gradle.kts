@@ -60,6 +60,13 @@ dependencies {
     //NO UTILIZAR LAS DEPENDENCIAS DE GOOGLE. UTILIZAR SIEMPRE LAS DEPENDENCIAS DE ANDROIDX
     //Estas dependencias son tomadas del Lab04, y la aplicación funciona (en 2/11/2023)
 
+    //Dependencias del Lab05
+    implementation("com.google.code.gson:gson:2.10.1")//Para serializar y deserializar codigo Java y Kotlin
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")//Extension de Retrofit para que pueda usar Gson
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")//Para realizar peticiones a una API
+    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11")//Interceptor HTTP. Sirve para cosas de las peticiones HTTP, pero Roberto no lo ha explicado en este video
+    implementation("com.github.bumptech.glide:glide:5.0.0-rc01")//Para renderizar las imagenes, sean de la carpeta drawable o de una URL remota. Es sencillo de usar.
+
     //Las Preference
     implementation("androidx.preference:preference-ktx:1.2.1")
 

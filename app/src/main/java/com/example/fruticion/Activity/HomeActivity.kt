@@ -74,16 +74,21 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnShowClickListener {
         }
     }
 
-    //Este metodo controla la flecha UP
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
-    }
+
     override fun onShowClick(fruit: Fruit) {
         // Aquí puedes manejar la navegación a la actividad de detalles o cualquier otra acción que desees realizar.
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra("fruit", fruit)
         startActivity(intent)
+    }
+
+
+    //Metodos ToolBar
+
+    //Este metodo controla la flecha Up que aparece cuando pinchas la lupa
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp(appBarConfiguration)
+                || super.onSupportNavigateUp()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

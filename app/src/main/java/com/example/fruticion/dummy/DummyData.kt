@@ -1,4 +1,4 @@
-package com.example.fruticion.Data
+package com.example.fruticion.dummy
 
 import com.example.fruticion.Model.Fruit
 
