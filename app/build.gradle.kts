@@ -3,9 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     //Dependiencia de SafeArgs para la tranferencia de datos entre Fragments. Otorga clases generadas automaticamente para llevar a cabo estas operaciones.
     id("androidx.navigation.safeargs.kotlin")
-    //Dependencia que no funciona de ksp (la del Gradle del Project si)
-    //id("com.google.devtools.ksp")
-    //id("com.google.devtools.ksp") version "1.8.10-1.0.9" apply false
+    //Dependencia de KSP del Lab06
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -72,7 +71,7 @@ dependencies {
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
     // To use Kotlin Symbol Processing (KSP)
-        //ksp("androidx.room:room-compiler:$room_version")
+    ksp("androidx.room:room-compiler:$room_version")
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$room_version")
 
