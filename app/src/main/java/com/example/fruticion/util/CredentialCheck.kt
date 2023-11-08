@@ -57,6 +57,14 @@ class CredentialCheck private constructor() {
             else
                 check[0]
         }
+
+        fun passwordOk(password: String, secindpass: String): CredentialCheck {
+
+            return if(password!=secindpass)
+                check[3]
+            else
+                check[0]
+        }
     }
 
     enum class CredentialError{

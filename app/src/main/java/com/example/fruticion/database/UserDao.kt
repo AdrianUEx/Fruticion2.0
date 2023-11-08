@@ -20,9 +20,9 @@ interface UserDao {
 
         //Borra un unico usuario si el usuario pasado por parametros existe exactamente en la BD
         @Delete
-        suspend fun deleteUser(user: User): Long
+        suspend fun deleteUser(user: User)
 
         //Actualiza el usuario de la BD. Room se encarga de encontrar el usuario y actualizar sus campos. Devuelve el id del usuario actualizado si tuvo exito.
         @Update
-        suspend fun updateUser(user: User): Long
+        suspend fun updateUser(user: User)
 }

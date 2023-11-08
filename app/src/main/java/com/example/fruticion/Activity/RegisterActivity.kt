@@ -5,13 +5,18 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.example.fruticion.R
+import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.databinding.ActivityLoginBinding
 import com.example.fruticion.databinding.ActivityRegisterBinding
+import com.example.fruticion.model.User
 import com.example.fruticion.util.CredentialCheck
+import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
 
+    private lateinit var db: FruticionDatabase
     private lateinit var binding: ActivityRegisterBinding
 
     companion object {
@@ -28,6 +33,9 @@ class RegisterActivity : AppCompatActivity() {
          binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //Inicializacion de la base de datos
+        db = FruticionDatabase.getInstance(applicationContext)!!
+
         setUpListeners()
     }
 
@@ -39,8 +47,16 @@ class RegisterActivity : AppCompatActivity() {
                 if(check.fail)
                     Toast.makeText(binding.root.context, check.msg, Toast.LENGTH_SHORT).show()
                 else {
-                    Toast.makeText(binding.root.context, check.msg, Toast.LENGTH_SHORT).show()
-                    finish()
+                    lifecycleScope.launch {
+                        val user = User (null, editTextRegisterUsername.text.toString(), editTextRegisterPassword.text.toString())
+
+                        val id = db?.userDao()?.insertUser(user)
+
+                        Toast.makeText(binding.root.context, check.msg, Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+
+
                 }
 
             }
