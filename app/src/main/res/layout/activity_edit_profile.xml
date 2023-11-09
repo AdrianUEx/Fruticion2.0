@@ -8,65 +8,73 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="277dp"
+        android:layout_width="300dp"
         android:layout_height="80dp"
         android:layout_marginTop="28dp"
-        android:text="Nombre usuario"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/value_edit_username"
+        app:layout_constraintStart_toStartOf="@+id/editTextText3"
         app:layout_constraintTop_toBottomOf="@+id/editTextText3" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="304dp"
+        android:layout_width="300dp"
         android:layout_height="66dp"
         android:layout_marginTop="32dp"
-        android:text="Contraseña"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/value_edit_password"
+        app:layout_constraintStart_toStartOf="@+id/editTextText4"
         app:layout_constraintTop_toBottomOf="@+id/editTextText4" />
 
     <EditText
         android:id="@+id/editTextText3"
-        android:layout_width="271dp"
+        android:layout_width="300dp"
         android:layout_height="81dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="100dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Nombre usuario"
+        android:text="@string/text_edit_username"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_edit_profile" />
 
     <EditText
         android:id="@+id/editTextText4"
-        android:layout_width="289dp"
+        android:layout_width="300dp"
         android:layout_height="72dp"
         android:layout_marginTop="36dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Contraseña"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/text_edit_password"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/button_save_changes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:text="Guardar cambios"
+        android:layout_marginTop="100dp"
+        android:text="@string/save_edit_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
+    <Button
+        android:id="@+id/button_cancel_changes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="@string/cancel_edit_button"
+        app:layout_constraintEnd_toEndOf="@+id/button_save_changes"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="@+id/button_save_changes"
+        app:layout_constraintTop_toBottomOf="@+id/button_save_changes" />
+
     <EditText
         android:id="@+id/title_edit_profile"
-        android:layout_width="407dp"
-        android:layout_height="59dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:ems="10"
         android:inputType="text"
         android:text="Editar perfil"

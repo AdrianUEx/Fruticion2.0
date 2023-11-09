@@ -39,6 +39,7 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnShowClickListener, Se
             val intent = Intent(context, HomeActivity::class.java)
             context.startActivity(intent)
         }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
