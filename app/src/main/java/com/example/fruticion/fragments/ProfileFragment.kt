@@ -1,18 +1,12 @@
-package com.example.fruticion.Fragments
+package com.example.fruticion.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.fruticion.Activity.EditProfileActivity
-import com.example.fruticion.Activity.HomeActivity
-import com.example.fruticion.Activity.LoginActivity
-import com.example.fruticion.R
-import com.example.fruticion.databinding.ActivityHomeBinding
-import com.example.fruticion.databinding.ActivityLoginBinding
+import com.example.fruticion.activity.EditProfileActivity
 import com.example.fruticion.databinding.FragmentProfileBinding
-import com.example.fruticion.databinding.FragmentSearchBinding
 
 //  Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

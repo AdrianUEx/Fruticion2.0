@@ -1,4 +1,4 @@
-package com.example.fruticion.Activity
+package com.example.fruticion.activity
 
 import android.content.Context
 import android.content.Intent
@@ -12,7 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.fruticion.Fragments.SearchFragment
+import com.example.fruticion.fragments.SearchFragment
 import com.example.fruticion.model.Fruit
 import com.example.fruticion.R
 import com.example.fruticion.databinding.ActivityHomeBinding

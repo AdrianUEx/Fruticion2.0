@@ -1,11 +1,9 @@
-package com.example.fruticion.Activity
+package com.example.fruticion.activity
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import com.example.fruticion.R
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.databinding.ActivityLoginBinding
 import com.example.fruticion.util.CredentialCheck

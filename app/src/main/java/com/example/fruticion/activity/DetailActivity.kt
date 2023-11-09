@@ -1,4 +1,4 @@
-package com.example.fruticion.Activity
+package com.example.fruticion.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

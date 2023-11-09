@@ -1,12 +1,10 @@
-package com.example.fruticion.Activity
+package com.example.fruticion.activity
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.fruticion.R
 import com.example.fruticion.databinding.ActivityEditProfileBinding
-import com.example.fruticion.databinding.ActivityHomeBinding
 
 class EditProfileActivity : AppCompatActivity() {
 

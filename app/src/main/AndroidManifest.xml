@@ -16,22 +16,22 @@
         android:theme="@style/Theme.Fruticion"
         tools:targetApi="34">
         <activity
-            android:name=".Activity.EditProfileActivity"
+            android:name=".activity.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.DetailActivity"
+            android:name=".activity.DetailActivity"
             android:exported="false"
             android:label="DetailActivity"
             android:theme="@style/Theme.Fruticion" />
         <activity
-            android:name=".Activity.HomeActivity"
+            android:name=".activity.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.RegisterActivity"
+            android:name=".activity.RegisterActivity"
             android:exported="false"
             android:label="RegisterActivity" />
         <activity
-            android:name=".Activity.LoginActivity"
+            android:name=".activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,6 +1,5 @@
-package com.example.fruticion.Fragments
+package com.example.fruticion.fragments
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
