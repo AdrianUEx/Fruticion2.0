@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,28 +10,14 @@
     android:padding="16dp"
     tools:context=".Fragments.SearchFragment">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:iconifiedByDefault="false"
-        android:queryHint="@string/search_text"
-        app:iconifiedByDefault="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_fruit_list"
         android:layout_width="380dp"
-        android:layout_height="619dp"
+        android:layout_height="717dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <!-- Aquí puedes agregar más elementos de diseño según tus necesidades -->
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

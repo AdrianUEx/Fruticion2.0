@@ -18,7 +18,7 @@ import com.example.fruticion.R
 import com.example.fruticion.databinding.ActivityHomeBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class HomeActivity : AppCompatActivity(), SearchFragment.OnShowClickListener {
+class HomeActivity : AppCompatActivity(), SearchFragment.OnShowClickListener, SearchFragment.OnFruitsLoadedListener {
     private lateinit var binding: ActivityHomeBinding
 
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -28,6 +28,9 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnShowClickListener {
     }
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+
+    private var originalFruitList: List<Fruit> = emptyList()
+
 
     companion object {
         fun start(
@@ -93,8 +96,45 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnShowClickListener {
         val searchItem = menu?.findItem(R.id.action_search)
         val searchView = searchItem?.actionView as SearchView
 
-        // Configure the search info and add any event listeners.
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // Realiza la acción cuando se envía la búsqueda (por ejemplo, inicia la búsqueda)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val query = newText.orEmpty().trim()
+                val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+                val searchFragment = navHostFragment.childFragmentManager.fragments.firstOrNull { it is SearchFragment } as SearchFragment?
+
+                if (searchFragment != null) {
+                    if (query.isNotEmpty()) {
+                        // Filtra las frutas basadas en el texto de búsqueda en minúsculas
+                        val filteredFruits = originalFruitList.filter { fruit ->
+                            fruit.name.toString().lowercase().contains(query)
+                        }
+
+                        // Actualiza la lista de frutas en SearchFragment
+                        searchFragment?.updateRecyclerView(filteredFruits)
+                    } else {
+                        // Si la búsqueda está vacía, muestra todas las frutas
+                        searchFragment?.updateRecyclerView(originalFruitList)
+                    }
+                }
+
+                return true
+            }
+
+
+        })
+
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onFruitsLoaded(fruits: List<Fruit>) {
+        // Llamado cuando los datos de frutas se cargan en SearchFragment
+        originalFruitList = fruits
+
     }
 
 

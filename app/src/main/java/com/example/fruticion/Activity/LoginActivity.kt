@@ -32,7 +32,8 @@ class LoginActivity : AppCompatActivity() {
 
             buttonLogin.setOnClickListener {
                 //comprobar credenciales
-                checkLogin()
+                //checkLogin()
+                navigateToHomeActivity()
             }
 
             buttonRegister.setOnClickListener {

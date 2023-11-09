@@ -1,6 +1,8 @@
 package com.example.fruticion.Fragments
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -31,26 +33,19 @@ class SearchFragment : Fragment()   {
 
     var homeActivity: HomeActivity? = null
 
+    private lateinit var searchAdapter: SearchAdapter
+    private var onFruitsLoadedListener: OnFruitsLoadedListener? = null
+    interface OnFruitsLoadedListener {
+        fun onFruitsLoaded(fruits: List<Fruit>)
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
 
-        val searchView = binding.searchView
-
-        // Configurar escucha de cambios en la barra de búsqueda
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                // Realizar acción cuando se envía la búsqueda (por ejemplo, iniciar búsqueda)
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                // Realizar acción cuando se cambia el texto en la barra de búsqueda
-                return true
-            }
-        })
 
         return binding.root
     }
@@ -70,17 +65,31 @@ class SearchFragment : Fragment()   {
         var fruitList = listOf<Fruit>()
         try {
            fruitList = getNetworkService().getAllFruits()
+            onFruitsLoadedListener?.onFruitsLoaded(fruitList)
         } catch (cause: Throwable) {
             throw APIError("Unable to fetch data from API", cause)
         }
         return fruitList
     }
     private fun setUpRecyclerView(fruits: List<Fruit>) {
-        val recyclerView = binding.rvFruitList //Linkea la RecyclerView del layout con ViewBinding en esta variable
-        recyclerView.layoutManager = LinearLayoutManager(context) //Configura el layoutManager de la RecyclerView para que adopte una configuracion vertical en lugar de en grid
-        //TODO:cambiar de vuelta a dummyFruits si no funciona
-        recyclerView.adapter = SearchAdapter(fruits) { fruit -> onItemSelected(fruit) }
+        val recyclerView = binding.rvFruitList // Linkea la RecyclerView del layout con ViewBinding en esta variable
+        recyclerView.layoutManager = LinearLayoutManager(context) // Configura el layoutManager de la RecyclerView para que adopte una configuración vertical en lugar de en grid
+
+        // Inicializa searchAdapter con la lista de frutas
+        searchAdapter = SearchAdapter(fruits) { fruit -> onItemSelected(fruit) }
+
+        // Asigna el adaptador a la RecyclerView
+        recyclerView.adapter = searchAdapter
     }
+
+
+
+    fun updateRecyclerView(newData: List<Fruit>) {
+        val modifiedData = ArrayList(newData)
+        searchAdapter.updateList(modifiedData)
+        Log.d("SearchFragment", "updateRecyclerView se llamó con ${modifiedData.size} elementos")
+    }
+
 
     //
     fun onItemSelected(fruit: Fruit) {
@@ -90,5 +99,13 @@ class SearchFragment : Fragment()   {
     interface OnShowClickListener {
         fun onShowClick(fruit: Fruit)//Esta funcion es overrideada en HomeActivity para lanzar una Intent para viajar a la pantalla de detalle de la fruta pinchada
     }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnFruitsLoadedListener) {
+            onFruitsLoadedListener = context
+        }
+    }
+
 
 }
