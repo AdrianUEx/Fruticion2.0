@@ -1,5 +1,6 @@
 package com.example.fruticion.Fragments
 
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fruticion.model.Fruit
