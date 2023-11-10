@@ -1,6 +1,7 @@
 package com.example.fruticion.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -75,7 +76,8 @@ class ProfileFragment : Fragment() {
 
     // finaliza la Activity de la que cuelga este Fragment (invoca por detras a onDestroy())
     private fun logout(){
-       // currentUserId = null // Lo pongo a null para asegurarme de que no sigue cargado cuando se cierra sesión. currentUserId es un companion object que esta cargado desde la invocacion del login
+        Log.i("valor de currentUserId", "El valor de currentUserId justo antes de cerrar sesión es: ${currentUserId}")
+        currentUserId = null // Lo pongo a null para asegurarme de que no sigue cargado cuando se cierra sesión. currentUserId es un companion object que esta cargado desde la invocacion del login
         requireActivity().finish()
     }
 }

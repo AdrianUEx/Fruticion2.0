@@ -2,6 +2,7 @@ package com.example.fruticion.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
@@ -53,7 +54,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setUpListeners() {
         with(binding) {
-
             buttonLogin.setOnClickListener {
                 //comprobar credenciales
                 checkLogin()
@@ -94,5 +94,11 @@ class LoginActivity : AppCompatActivity() {
 
     private fun navigateToRegister() {
         RegisterActivity.start(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i("Valor de currentUserId","El valor de currentUserId es: ${currentUserId}")
+
     }
 }

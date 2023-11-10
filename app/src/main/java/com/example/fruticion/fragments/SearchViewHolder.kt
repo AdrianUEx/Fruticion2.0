@@ -11,8 +11,8 @@ class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun render (fruit: Fruit, onClickListener: (Fruit)->Unit) {
         binding.fruitName.text = fruit.name
-        binding.fruitCountry.text = fruit.family
-        binding.fruitColor.text = fruit.genus
+        binding.fruitFamily.text = fruit.family
+        binding.fruitOrder.text = fruit.genus
         binding.cvItem.setOnClickListener { onClickListener(fruit) }
     }
 }

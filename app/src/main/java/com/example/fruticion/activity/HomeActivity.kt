@@ -53,7 +53,7 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnShowClickListener, Se
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         binding.bottomNavigationView.setupWithNavController(navHostFragment.navController)
 
-        //codigo del lab de  toolbar
+        //codigo del lab de toolbar
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.searchFragment,
@@ -63,7 +63,7 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnShowClickListener, Se
         setSupportActionBar(binding.toolbar)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        // Hide toolbar and bottom navigation when in detail fragment
+        // Hide toolbar and bottom navigation when in detail fragment. (CODIGO LAB03 PREFERENCES)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if ((destination.id == R.id.detailActivity) ||
                     (destination.id == R.id.settingsFragment)) {
@@ -77,8 +77,9 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnShowClickListener, Se
     }
 
 
+    //Este metodo se encarga de viajar a la actividad de detalles de la fruta pinchada
     override fun onShowClick(fruit: Fruit) {
-        // Aquí puedes manejar la navegación a la actividad de detalles o cualquier otra acción que desees realizar.
+        // Aquí puedes manejar la navegación a la actividad de Detalles o cualquier otra acción que desees realizar.
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra("fruit", fruit)
         startActivity(intent)
