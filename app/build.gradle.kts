@@ -49,6 +49,7 @@ android {
 
 dependencies {
 
+    implementation("androidx.preference:preference:1.2.1")
     //NO UTILIZAR LAS DEPENDENCIAS DE GOOGLE. UTILIZAR SIEMPRE LAS DEPENDENCIAS DE ANDROIDX
     //Estas dependencias son tomadas del Lab04, y la aplicación funciona (en 2/11/2023)
 

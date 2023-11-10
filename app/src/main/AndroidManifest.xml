@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <!--Este es el permiso para que la aplicacion pueda conectarse a Internet. Necesario para contactar con la API-->
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Este es el permiso para que la aplicacion pueda conectarse a Internet. Necesario para contactar con la API -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"

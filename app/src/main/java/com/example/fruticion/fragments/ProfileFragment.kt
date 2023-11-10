@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.example.fruticion.activity.EditProfileActivity
 import com.example.fruticion.databinding.FragmentProfileBinding
 
@@ -45,6 +47,10 @@ class ProfileFragment : Fragment() {
 
         binding.editProfileButton2.setOnClickListener {
             logout()
+        }
+        binding.settingButton.setOnClickListener {
+            val action = SettingsFragmentDirections.settingButton()
+            findNavController().navigate(action)
         }
     }
 

@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.preference.Preference
+import androidx.preference.PreferenceManager
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.databinding.ActivityLoginBinding
 import com.example.fruticion.util.CredentialCheck
@@ -23,6 +25,22 @@ class LoginActivity : AppCompatActivity() {
         db = FruticionDatabase.getInstance(applicationContext)!!
 
         setUpListeners()
+
+        //read settings
+        readSettings()
+    }
+
+    private fun readSettings(){
+        val preferences = PreferenceManager.getDefaultSharedPreferences(this).all
+
+        val rememberme = preferences["preferences_autologin"] as Boolean? ?: false
+        val username = preferences["preferences_username"] as String? ?: ""
+        val password = preferences["preferences_password"] as String? ?: ""
+
+        if(rememberme) {
+            binding.editTextUsername.setText(username)
+            binding.editTextPassword.setText(password)
+        }
     }
 
     private fun setUpListeners() {

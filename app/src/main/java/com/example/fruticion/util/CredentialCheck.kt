@@ -36,14 +36,12 @@ class CredentialCheck private constructor() {
         )
 
         fun login(username: String, password: String): CredentialCheck {
-            //TODO: que no se nos olvide descomentar esto y borrar el return para que el login funcione
-
-            /*return if(username.isBlank() || username.length < longmin)
-            check[1]
-        else if(password.isBlank() || password.length < longmin)
-            check[2]
-        else */
-            return check[0]
+            return if(username.isBlank() || username.length < longmin)
+                check[1]
+            else if(password.isBlank() || password.length < longmin)
+                check[2]
+            else
+                check[0]
         }
 
         fun join(username: String, password: String, secondpass: String): CredentialCheck {

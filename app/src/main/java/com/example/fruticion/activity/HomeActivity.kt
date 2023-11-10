@@ -65,7 +65,8 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnShowClickListener, Se
 
         // Hide toolbar and bottom navigation when in detail fragment
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.detailActivity) {
+            if ((destination.id == R.id.detailActivity) ||
+                    (destination.id == R.id.settingsFragment)) {
                 binding.toolbar.menu.clear()
                 binding.bottomNavigationView.visibility = View.GONE
             } else {
