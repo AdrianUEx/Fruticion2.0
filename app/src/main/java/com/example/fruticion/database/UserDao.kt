@@ -10,9 +10,13 @@ import com.example.fruticion.model.User
 
 @Dao
 interface UserDao {
-        //Devuelve el usuario al completo con todos sus datos
+        //Devuelve el usuario al completo con todos sus datos recuperandolo por su nombre de usuario
         @Query("SELECT * FROM user WHERE username LIKE :first LIMIT 1")//Esta query tiene LIMIT para asegurar que es eficiente si o si aunque la consulta este equivocada
         suspend fun findUserByName(first: String): User
+
+        //Devuelve el usuario al completo con todos sus datos recuperandolo por su id
+        @Query("SELECT * FROM user WHERE userId LIKE :userId LIMIT 1")
+        suspend fun getUserById(userId: Long?): User
 
         //Devuelve el id del usuario si la insercion ocurrió correctamente
         @Insert
@@ -22,7 +26,7 @@ interface UserDao {
         @Delete
         suspend fun deleteUser(user: User)
 
-        //Actualiza el usuario de la BD. Room se encarga de encontrar el usuario y actualizar sus campos. Devuelve el id del usuario actualizado si tuvo exito.
+        //Actualiza el usuario de la BD. Room se encarga de encontrar el usuario y actualizar sus campos usando la clave primario. Puede devolver un int con el numero de filas actualizadas
         @Update
         suspend fun updateUser(user: User)
 }

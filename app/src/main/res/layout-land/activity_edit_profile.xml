@@ -20,17 +20,17 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/editPassword"
                 android:layout_width="300dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/value_edit_password"
-                app:layout_constraintBottom_toBottomOf="@+id/textView"
-                app:layout_constraintStart_toStartOf="@+id/editTextText4"
-                app:layout_constraintTop_toBottomOf="@+id/editTextText4" />
+                app:layout_constraintBottom_toBottomOf="@+id/editNameTextView"
+                app:layout_constraintStart_toStartOf="@+id/editPasswordTitle"
+                app:layout_constraintTop_toBottomOf="@+id/editPasswordTitle" />
 
             <EditText
-                android:id="@+id/editTextText3"
+                android:id="@+id/editNameTitle"
                 android:layout_width="300dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="44dp"
@@ -44,16 +44,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/title_edit_profile" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/editNameTextView"
                 android:layout_width="300dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/value_edit_username"
-                app:layout_constraintStart_toStartOf="@+id/editTextText3"
-                app:layout_constraintTop_toBottomOf="@+id/editTextText3" />
+                app:layout_constraintStart_toStartOf="@+id/editNameTitle"
+                app:layout_constraintTop_toBottomOf="@+id/editNameTitle" />
 
             <EditText
-                android:id="@+id/editTextText4"
+                android:id="@+id/editPasswordTitle"
                 android:layout_width="300dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="52dp"
@@ -63,8 +63,8 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/editTextText3"
-                app:layout_constraintTop_toTopOf="@+id/editTextText3" />
+                app:layout_constraintStart_toEndOf="@+id/editNameTitle"
+                app:layout_constraintTop_toTopOf="@+id/editNameTitle" />
 
             <Button
                 android:id="@+id/button_save_changes"
@@ -72,10 +72,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="@string/save_edit_button"
-                app:layout_constraintEnd_toEndOf="@+id/textView"
+                app:layout_constraintEnd_toEndOf="@+id/editNameTextView"
                 app:layout_constraintHorizontal_bias="0.85"
-                app:layout_constraintStart_toStartOf="@+id/textView"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintStart_toStartOf="@+id/editNameTextView"
+                app:layout_constraintTop_toBottomOf="@+id/editNameTextView" />
 
             <Button
                 android:id="@+id/button_save_changes2"
@@ -83,10 +83,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="@string/cancel_edit_button"
-                app:layout_constraintEnd_toEndOf="@+id/textView2"
+                app:layout_constraintEnd_toEndOf="@+id/editPassword"
                 app:layout_constraintHorizontal_bias="0.15"
-                app:layout_constraintStart_toStartOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                app:layout_constraintStart_toStartOf="@+id/editPassword"
+                app:layout_constraintTop_toBottomOf="@+id/editPassword" />
 
             <EditText
                 android:id="@+id/title_edit_profile"

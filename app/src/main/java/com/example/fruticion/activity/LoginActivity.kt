@@ -15,6 +15,14 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var db: FruticionDatabase
     private lateinit var binding: ActivityLoginBinding
+
+
+    companion object{
+        //Esta variable se puede modificar para que no salte error al usarla en los metodos del Dao quitandole el ? y metiendole un valor cualquiera
+        var currentUserId: Long? = null //no se pone public porque es redundante. Es var y no val porque su valor va a ser modificado de null a otra cosa.
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -48,14 +56,14 @@ class LoginActivity : AppCompatActivity() {
 
             buttonLogin.setOnClickListener {
                 //comprobar credenciales
-                //checkLogin()
-                navigateToHomeActivity()
+                checkLogin()
+                //TODO: descomentar cuando se quieran hacer pruebas de otros componentes en lugar de estar haciendo el login todo el rato
+                //navigateToHomeActivity()
             }
 
             buttonRegister.setOnClickListener {
                 navigateToRegister()
             }
-
         }
     }
 
@@ -63,14 +71,17 @@ class LoginActivity : AppCompatActivity() {
         val check = CredentialCheck.login(binding.editTextUsername.text.toString(), binding.editTextPassword.text.toString())
         if(!check.fail){
             lifecycleScope.launch {
-                val user = db?.userDao()?.findUserByName(binding.editTextUsername.text.toString())
+                val user = db.userDao().findUserByName(binding.editTextUsername.text.toString())
+
                 if(user != null){
+                    currentUserId = user.userId //obtiene el id de Room del usuario actual de la sesión.
+
                     val check = CredentialCheck.passwordOk(binding.editTextPassword.text.toString(), user.password)
                     if(check.fail)
                         Toast.makeText(binding.root.context, check.msg, Toast.LENGTH_SHORT).show()
                     else
                         navigateToHomeActivity()
-                } else
+                } else // si el usuario no existe
                     Toast.makeText(binding.root.context, "Invalid username", Toast.LENGTH_SHORT).show()
             }
         } else
