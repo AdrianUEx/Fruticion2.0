@@ -22,5 +22,5 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.fruticion.fragments.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="@string/settings_header" />
 </navigation>

@@ -49,6 +49,7 @@ class LoginActivity : AppCompatActivity() {
         if(rememberme) {
             binding.editTextUsername.setText(username)
             binding.editTextPassword.setText(password)
+            checkLogin()
         }
     }
 
