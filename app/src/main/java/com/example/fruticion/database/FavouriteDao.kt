@@ -1,15 +1,16 @@
 package com.example.fruticion.database
 
-import Favourite
+
+
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.fruticion.model.Fruit
-
+import com.example.fruticion.model.Favourite
 @Dao
 interface FavouriteDao {
 
-    @Query("SELECT * FROM Favourite JOIN Fruit ON Favourite.fruitId = Fruit.roomId WHERE Favourite.userId=':userId'")
+    @Query("SELECT * FROM Favourite INNER JOIN Fruit ON Favourite.fruitId = Fruit.roomId WHERE Favourite.userId=:userId")
     suspend fun getAllFavFruitsByUser(userId: Long): List<Fruit>
 
     @Insert
