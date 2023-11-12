@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fruticion.activity.HomeActivity
 import com.example.fruticion.api.APIError
 import com.example.fruticion.api.getNetworkService
+import com.example.fruticion.database.FruticionDatabase
 //import com.example.fruticion.dummy.dummyFruit
 import com.example.fruticion.model.Fruit
 import com.example.fruticion.databinding.FragmentSearchBinding
@@ -33,6 +34,8 @@ class SearchFragment : Fragment()   {
 
     private lateinit var searchAdapter: SearchAdapter
     private var onFruitsLoadedListener: OnFruitsLoadedListener? = null
+
+    private lateinit var db: FruticionDatabase
     interface OnFruitsLoadedListener {
         fun onFruitsLoaded(fruits: List<Fruit>)
     }
@@ -52,8 +55,11 @@ class SearchFragment : Fragment()   {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Se invoca a la API para cargar el fragment con las frutas al principio
         lifecycleScope.launch{
             var fruits: List<Fruit> = fetchAllFruits()
+
+
 
             setUpRecyclerView(fruits)
         }
@@ -89,7 +95,7 @@ class SearchFragment : Fragment()   {
     }
 
 
-    //
+    //Este metodo obtiene la Activity a la que pertenece el Fragment e invoca al startActivity() para mandarle la fruta pinchada con una Intent.
     fun onItemSelected(fruit: Fruit) {
         (requireActivity() as OnShowClickListener).onShowClick(fruit)//En esta linea se esta recuperando la Activity a la que pertenece este Fragment para invocar al override de onShowClick() alli definido
         //requireActivity() obtiene la Activity de este Fragment. Hace un Casting de OnShowClickListener, por tanto, se "asume" que la HomeActivity debe implementar OnShowClickListener o si no, lanzara una excepcion
