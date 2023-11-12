@@ -47,6 +47,8 @@ class SearchFragment : Fragment()   {
     ): View? {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
 
+        //Se obtiene la instancia de la BD
+        db = FruticionDatabase.getInstance(requireActivity().applicationContext)!!
 
         return binding.root
     }
@@ -57,24 +59,40 @@ class SearchFragment : Fragment()   {
 
         //Se invoca a la API para cargar el fragment con las frutas al principio
         lifecycleScope.launch{
+            //obtenemos TODAS las frutas de la API (45 frutas)
             var fruits: List<Fruit> = fetchAllFruits()
+            Log.i("Contenido de fetchAllFruits","$fruits")
 
+            //Metemos en Room todas las frutas una a una. Si ya existen, no se insertan (gestionado por Room)
+            for (fruit in fruits) {
+                Log.i("Carga db de la API","$fruit")
+                db.fruitDao().addFruit(fruit)
+            }
 
-
+            //Recuperamos de Room todas las frutas para meterlas por el RecyclerView
+            fruits = db.fruitDao().getAll()
+            Log.i("Contenido de fruits","$fruits")
+            onFruitsLoadedListener?.onFruitsLoaded(fruits)
             setUpRecyclerView(fruits)
         }
     }
 
+    //Este metodo solamente se encarga de llamar al getAllFruits de FruticionAPI.
     private suspend fun fetchAllFruits(): List<Fruit> {
         var fruitList = listOf<Fruit>()
         try {
-           fruitList = getNetworkService().getAllFruits()
-            onFruitsLoadedListener?.onFruitsLoaded(fruitList)
+                fruitList = getNetworkService().getAllFruits()
         } catch (cause: Throwable) {
             throw APIError("Unable to fetch data from API", cause)
         }
         return fruitList
     }
+
+
+
+
+
+//-----METODOS RECYCLER VIEW---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     private fun setUpRecyclerView(fruits: List<Fruit>) {
         val recyclerView = binding.rvFruitList // Linkea la RecyclerView del layout con ViewBinding en esta variable
         recyclerView.layoutManager = LinearLayoutManager(context) // Configura el layoutManager de la RecyclerView para que adopte una configuración vertical en lugar de en grid
@@ -86,20 +104,18 @@ class SearchFragment : Fragment()   {
         recyclerView.adapter = searchAdapter
     }
 
-
-
     fun updateRecyclerView(newData: List<Fruit>) {
         val modifiedData = ArrayList(newData)
         searchAdapter.updateList(modifiedData)
         Log.d("SearchFragment", "updateRecyclerView se llamó con ${modifiedData.size} elementos")
     }
 
-
     //Este metodo obtiene la Activity a la que pertenece el Fragment e invoca al startActivity() para mandarle la fruta pinchada con una Intent.
     fun onItemSelected(fruit: Fruit) {
         (requireActivity() as OnShowClickListener).onShowClick(fruit)//En esta linea se esta recuperando la Activity a la que pertenece este Fragment para invocar al override de onShowClick() alli definido
         //requireActivity() obtiene la Activity de este Fragment. Hace un Casting de OnShowClickListener, por tanto, se "asume" que la HomeActivity debe implementar OnShowClickListener o si no, lanzara una excepcion
     }
+
     interface OnShowClickListener {
         fun onShowClick(fruit: Fruit)//Esta funcion es overrideada en HomeActivity para lanzar una Intent para viajar a la pantalla de detalle de la fruta pinchada
     }

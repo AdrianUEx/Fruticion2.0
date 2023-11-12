@@ -1,3 +1,6 @@
+package com.example.fruticion.model
+
+import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
@@ -15,14 +18,15 @@ import java.io.Serializable
         ),
         ForeignKey(
             entity = Fruit::class,
-            parentColumns = ["fruitId"],
+            parentColumns = ["roomId"],
             childColumns = ["fruitId"]
         )
     ]
 )
 data class Favourite(
-    @PrimaryKey(autoGenerate = true)
-    var favId: Long? = null,
-    var userId: Long? = null,
+    @NonNull
+    var favId: Long,
+    @NonNull
+    var userId: Long,
     var fruitId: Long? = null
 ) : Serializable
