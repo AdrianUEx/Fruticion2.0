@@ -17,6 +17,12 @@ data class Fruit (
     var family: String? = null,
     var order: String? = null,
     var genus: String? = null,
+
+    var calories: Double? = null,
+    var fat: Double? = null,
+    var sugar: Double? = null,
+    var carbohydrates: Double? = null,
+    var protein: Double? = null
     //var nutritions: Nutrition? = null
 ) : Serializable
 

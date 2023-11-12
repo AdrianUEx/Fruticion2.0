@@ -24,11 +24,11 @@ class DetailActivity : AppCompatActivity() {
         binding.valueDetailGenus.text = fruit.genus
         binding.valueDetailOrder.text = fruit.order
         //Informacion nutricional
-       /* binding.valueDetailCalories.text = fruit.nutritions?.calories.toString()
-        binding.valueDetailFat.text= fruit.nutritions?.fat.toString()
-        binding.valueDetailProtein.text= fruit.nutritions?.protein.toString()
-        binding.valueDetailSugar.text= fruit.nutritions?.sugar.toString()
-        binding.valueDetailCarbo.text = fruit.nutritions?.carbohydrates.toString()*/
+        binding.valueDetailCalories.text = fruit.calories.toString()
+        binding.valueDetailFat.text= fruit.fat.toString()
+        binding.valueDetailProtein.text= fruit.protein.toString()
+        binding.valueDetailSugar.text= fruit.sugar.toString()
+        binding.valueDetailCarbo.text = fruit.carbohydrates.toString()
 
 
 

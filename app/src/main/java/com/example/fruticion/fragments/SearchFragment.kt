@@ -11,6 +11,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fruticion.activity.HomeActivity
 import com.example.fruticion.api.APIError
+import com.example.fruticion.api.FruitMapper
+import com.example.fruticion.api.Nutrition
+import com.example.fruticion.api.SerializedFruit
 import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
 //import com.example.fruticion.dummy.dummyFruit
@@ -60,26 +63,29 @@ class SearchFragment : Fragment()   {
         //Se invoca a la API para cargar el fragment con las frutas al principio
         lifecycleScope.launch{
             //obtenemos TODAS las frutas de la API (45 frutas)
-            var fruits: List<Fruit> = fetchAllFruits()
+            var fruits: List<SerializedFruit> = fetchAllFruits()
             Log.i("Contenido de fetchAllFruits","$fruits")
+
 
             //Metemos en Room todas las frutas una a una. Si ya existen, no se insertan (gestionado por Room)
             for (fruit in fruits) {
-                Log.i("Carga db de la API","$fruit")
-                db.fruitDao().addFruit(fruit)
+                var fruit2 = FruitMapper.mapFromSerializedFruit(fruit)
+
+                Log.i("Carga db de la API","$fruit2")
+                db.fruitDao().addFruit(fruit2)
             }
 
             //Recuperamos de Room todas las frutas para meterlas por el RecyclerView
-            fruits = db.fruitDao().getAll()
-            Log.i("Contenido de fruits","$fruits")
-            onFruitsLoadedListener?.onFruitsLoaded(fruits)
-            setUpRecyclerView(fruits)
+            var DBfruits = db.fruitDao().getAll()
+            Log.i("Contenido de DBfruits","$DBfruits")
+            onFruitsLoadedListener?.onFruitsLoaded(DBfruits)
+            setUpRecyclerView(DBfruits)
         }
     }
 
     //Este metodo solamente se encarga de llamar al getAllFruits de FruticionAPI.
-    private suspend fun fetchAllFruits(): List<Fruit> {
-        var fruitList = listOf<Fruit>()
+    private suspend fun fetchAllFruits(): List<SerializedFruit> {
+        var fruitList = listOf<SerializedFruit>()
         try {
                 fruitList = getNetworkService().getAllFruits()
         } catch (cause: Throwable) {

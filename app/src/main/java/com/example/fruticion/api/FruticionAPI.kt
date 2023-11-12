@@ -30,7 +30,7 @@ fun getNetworkService() = service
 //En esta interfaz es donde se hacen las llamadas a la API concatenando los endpoint
 interface FruticionAPI{
     @GET("all")
-    suspend fun getAllFruits(): List<Fruit>//Call<> es un wrapper de Retrofit. Mientras que SerializedFruit es el tipo de objeto que se va a obtener de la invocacion de getAllFruits(), Call lo va a envolver para poder realizar la llamada de forma sincrona o asincrona (bloqueante o no bloqueante)
+    suspend fun getAllFruits(): List<SerializedFruit>//Call<> es un wrapper de Retrofit. Mientras que SerializedFruit es el tipo de objeto que se va a obtener de la invocacion de getAllFruits(), Call lo va a envolver para poder realizar la llamada de forma sincrona o asincrona (bloqueante o no bloqueante)
 
     //Tengo duda aqui, porque la URL no es id=6 por ejemplo, sino que es directamente 6
     @GET("id")
