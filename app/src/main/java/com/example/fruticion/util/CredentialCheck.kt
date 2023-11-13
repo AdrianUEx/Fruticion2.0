@@ -8,7 +8,7 @@ class CredentialCheck private constructor() {
 
     companion object {
 
-        private val longmin = 3
+        private const val longmin = 3
 
         private val check = arrayOf(
             CredentialCheck().apply {

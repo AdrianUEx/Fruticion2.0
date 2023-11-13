@@ -13,7 +13,11 @@
         android:id="@+id/searchFragment"
         android:name="com.example.fruticion.fragments.SearchFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.fruticion.fragments.ProfileFragment"
@@ -23,4 +27,13 @@
         android:id="@+id/settingsFragment"
         android:name="com.example.fruticion.fragments.SettingsFragment"
         android:label="@string/settings_header" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.fruticion.fragments.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="fruitId"
+            app:argType="long" />
+    </fragment>
 </navigation>

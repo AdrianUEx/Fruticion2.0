@@ -10,9 +10,12 @@ class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val binding = SearchItemListBinding.bind(view)
 
     fun render (fruit: Fruit, onClickListener: (Fruit)->Unit) {
-        binding.fruitName.text = fruit.name
-        binding.fruitFamily.text = fruit.family
-        binding.fruitOrder.text = fruit.genus
-        binding.cvItem.setOnClickListener { onClickListener(fruit) }
+        with(binding){//Recordar que with() es para no poner el "binding" delante de cada linea dentro del with
+            fruitName.text = fruit.name
+            fruitFamily.text = fruit.family
+            fruitOrder.text = fruit.order
+            cvItem.setOnClickListener { onClickListener(fruit) }
+        }
+
     }
 }

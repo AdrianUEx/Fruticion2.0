@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fruticion.activity.HomeActivity
 import com.example.fruticion.api.APIError
@@ -39,10 +40,6 @@ class SearchFragment : Fragment()   {
     private var onFruitsLoadedListener: OnFruitsLoadedListener? = null
 
     private lateinit var db: FruticionDatabase
-    interface OnFruitsLoadedListener {
-        fun onFruitsLoaded(fruits: List<Fruit>)
-    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,23 +60,23 @@ class SearchFragment : Fragment()   {
         //Se invoca a la API para cargar el fragment con las frutas al principio
         lifecycleScope.launch{
             //obtenemos TODAS las frutas de la API (45 frutas)
-            var fruits: List<SerializedFruit> = fetchAllFruits()
+            val fruits: List<SerializedFruit> = fetchAllFruits()
             Log.i("Contenido de fetchAllFruits","$fruits")
 
 
             //Metemos en Room todas las frutas una a una. Si ya existen, no se insertan (gestionado por Room)
             for (fruit in fruits) {
-                var fruit2 = FruitMapper.mapFromSerializedFruit(fruit)
+                val fruit2 = FruitMapper.mapFromSerializedFruit(fruit)
 
                 Log.i("Carga db de la API","$fruit2")
                 db.fruitDao().addFruit(fruit2)
             }
 
             //Recuperamos de Room todas las frutas para meterlas por el RecyclerView
-            var DBfruits = db.fruitDao().getAll()
-            Log.i("Contenido de DBfruits","$DBfruits")
-            onFruitsLoadedListener?.onFruitsLoaded(DBfruits)
-            setUpRecyclerView(DBfruits)
+            val dbFruits = db.fruitDao().getAll()
+            Log.i("Contenido de DBfruits","$dbFruits")
+            onFruitsLoadedListener?.onFruitsLoaded(dbFruits)
+            setUpRecyclerView(dbFruits)
         }
     }
 
@@ -94,7 +91,11 @@ class SearchFragment : Fragment()   {
         return fruitList
     }
 
-
+    //Este metodo es SOLO para evitar posibles fugas de memoria del Fragment.
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null // avoid memory leaks
+    }
 
 
 
@@ -104,21 +105,17 @@ class SearchFragment : Fragment()   {
         recyclerView.layoutManager = LinearLayoutManager(context) // Configura el layoutManager de la RecyclerView para que adopte una configuración vertical en lugar de en grid
 
         // Inicializa searchAdapter con la lista de frutas
-        searchAdapter = SearchAdapter(fruits) { fruit -> onItemSelected(fruit) }
+        searchAdapter = SearchAdapter(fruits) { fruit -> onItemSelected(fruit.roomId!!) }
 
         // Asigna el adaptador a la RecyclerView
         recyclerView.adapter = searchAdapter
     }
 
-    fun updateRecyclerView(newData: List<Fruit>) {
-        val modifiedData = ArrayList(newData)
-        searchAdapter.updateList(modifiedData)
-        Log.d("SearchFragment", "updateRecyclerView se llamó con ${modifiedData.size} elementos")
-    }
-
     //Este metodo obtiene la Activity a la que pertenece el Fragment e invoca al startActivity() para mandarle la fruta pinchada con una Intent.
-    fun onItemSelected(fruit: Fruit) {
-        (requireActivity() as OnShowClickListener).onShowClick(fruit)//En esta linea se esta recuperando la Activity a la que pertenece este Fragment para invocar al override de onShowClick() alli definido
+    private fun onItemSelected(fruitId: Long) {
+        findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment(fruitId=fruitId))
+
+        //(requireActivity() as OnShowClickListener).onShowClick(fruit)//En esta linea se esta recuperando la Activity a la que pertenece este Fragment para invocar al override de onShowClick() alli definido
         //requireActivity() obtiene la Activity de este Fragment. Hace un Casting de OnShowClickListener, por tanto, se "asume" que la HomeActivity debe implementar OnShowClickListener o si no, lanzara una excepcion
     }
 
@@ -126,11 +123,22 @@ class SearchFragment : Fragment()   {
         fun onShowClick(fruit: Fruit)//Esta funcion es overrideada en HomeActivity para lanzar una Intent para viajar a la pantalla de detalle de la fruta pinchada
     }
 
+    interface OnFruitsLoadedListener {
+        fun onFruitsLoaded(fruits: List<Fruit>)
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnFruitsLoadedListener) {
             onFruitsLoadedListener = context
         }
+    }
+
+    //Este metodo SOLAMENTE es invocado desde HomeActivity
+    fun updateRecyclerView(newData: List<Fruit>) {
+        val modifiedData = ArrayList(newData)
+        searchAdapter.updateList(modifiedData)
+        Log.d("SearchFragment", "updateRecyclerView se llamó con ${modifiedData.size} elementos")
     }
 
 

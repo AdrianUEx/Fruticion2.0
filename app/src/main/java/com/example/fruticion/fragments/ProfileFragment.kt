@@ -65,7 +65,7 @@ class ProfileFragment : Fragment() {
         super.onStart()
         //se recupera el nombre y la contraseña del usuario desde la BD
         lifecycleScope.launch{
-            var user = db.userDao().getUserById(currentUserId)
+            val user = db.userDao().getUserById(currentUserId)
             binding.valueProfileName.text = user.username
             binding.valueProfilePassword.text = user.password
         }
@@ -76,8 +76,15 @@ class ProfileFragment : Fragment() {
 
     // finaliza la Activity de la que cuelga este Fragment (invoca por detras a onDestroy())
     private fun logout(){
-        Log.i("valor de currentUserId", "El valor de currentUserId justo antes de cerrar sesión es: ${currentUserId}")
+        Log.i("valor de currentUserId", "El valor de currentUserId justo antes de cerrar sesión es: $currentUserId")
         currentUserId = null // Lo pongo a null para asegurarme de que no sigue cargado cuando se cierra sesión. currentUserId es un companion object que esta cargado desde la invocacion del login
         requireActivity().finish()
+    }
+
+
+    //Este metodo es SOLO para evitar posibles fugas de memoria.
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null // avoid memory leaks
     }
 }
