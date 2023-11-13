@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.fruticion.fragments.DetailFragment"
-        android:label="fragment_detail"
+        android:label="@string/title_detail"
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="fruitId"

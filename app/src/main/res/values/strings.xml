@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">Frutición</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="hello_blank_fragment">Hola fragmento blanco</string>
+    <!-- Bottom Navigation Bar-->
+    <string name="title_home">Inicio</string>
     <string name="bottom_fav">Favoritos</string>
     <string name="bottom_profile">Perfil</string>
+    <!--Login y registro-->
+    <string name="title_activity_login">LoginActivity</string>
     <string name="text_login_name">Nombre de usuario</string>
     <string name="text_login_password">Contraseña</string>
     <string name="button_login_login">Iniciar sesión</string>
@@ -10,12 +14,13 @@
     <string name="title_join">Registro</string>
     <string name="text_join_check_pass">Confirmar contraseña</string>
     <string name="button_join_join">Registrarse</string>
+    <!-- ?????? -->
     <string name="search_text">Buscar frutas</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_home">HomeActivity</string>
-    <string name="hello_blank_fragment">Hola fragmento blanco</string>
-    <string name="title_home">Inicio</string>
+
+    <!-- Perfil -->
     <string name="title_profile">Perfil</string>
     <string name="text_profile_name">Nombre:</string>
     <string name="value_profile_name">Nombre</string>
@@ -23,6 +28,7 @@
     <string name="value_profile_password">Contraseña</string>
     <string name="edit_profile_button">Editar perfil</string>
     <string name="logout_profile_button">Cerrar sesión</string>
+    <!-- Detalles fruta -->
     <string name="title_detail">Detalles</string>
     <string name="text_detail_name">Nombre de la fruta</string>
     <string name="text_detail_family">Familia</string>
@@ -42,6 +48,7 @@
     <string name="value_detail_fat">Grasas</string>
     <string name="value_detail_sugar">Azúcar</string>
     <string name="value_detail_protein">Proteínas</string>
+    <!-- Editar perfil -->
     <string name="title_edit">Editar perfil</string>
     <string name="text_edit_username">Nuevo nombre de usuario</string>
     <string name="value_edit_username">Nuevo nombre de usuario</string>
@@ -49,10 +56,12 @@
     <string name="value_edit_password">Nueva contraseña</string>
     <string name="save_edit_button">Guardar cambios</string>
     <string name="cancel_edit_button">Cancelar</string>
+    <!-- Ajustes -->
     <string name="autologin">Autologin</string>
     <string name="sorting">Ordenación</string>
     <string name="enable_sorting">Permitir ordenación</string>
     <string name="criteria">Criterio ordenación</string>
+    <string name="settings_header">Ajustes</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Mensajes</string>
@@ -66,6 +75,6 @@
     <string name="attachment_title">Download incoming attachments</string>
     <string name="attachment_summary_on">"Descarga automaticamente adjuntos de un email entrante "</string>
     <string name="attachment_summary_off">"Solo descargar adjuntos cuando se requiere manualmente "</string>
-    <string name="settings_header">Ajustes</string>
     <string name="signature_title">Tu firma</string>
+
 </resources>
