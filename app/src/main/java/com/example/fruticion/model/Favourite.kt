@@ -5,7 +5,7 @@ import androidx.room.ForeignKey
 import java.io.Serializable
 
 @Entity(
-    primaryKeys = ["favId", "userId"],
+    primaryKeys = ["userId", "fruitId"],
     foreignKeys = [
         ForeignKey(
             entity = User::class,
@@ -20,7 +20,6 @@ import java.io.Serializable
     ]
 )
 data class Favourite(
-    var favId: Long,
     var userId: Long,
-    var fruitId: Long? = null
+    var fruitId: Long
 ) : Serializable

@@ -18,7 +18,7 @@ import com.example.fruticion.R
 import com.example.fruticion.databinding.ActivityHomeBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class HomeActivity : AppCompatActivity(), SearchFragment.OnShowClickListener, SearchFragment.OnFruitsLoadedListener {
+class HomeActivity : AppCompatActivity(), SearchFragment.OnFruitsLoadedListener {
     private lateinit var binding: ActivityHomeBinding
 
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -57,6 +57,7 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnShowClickListener, Se
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.searchFragment,
+                R.id.favoriteFragment,
                 R.id.profileFragment
             )
         )
@@ -65,7 +66,7 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnShowClickListener, Se
 
         // Hide toolbar and bottom navigation when in detail fragment. (CODIGO LAB03 PREFERENCES)
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if ((destination.id == R.id.detailActivity) ||
+            if ((destination.id == R.id.detailFragment) ||
                     (destination.id == R.id.settingsFragment)) {
                 binding.toolbar.menu.clear()
                 binding.bottomNavigationView.visibility = View.GONE
@@ -78,12 +79,12 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnShowClickListener, Se
 
 
     //Este metodo se encarga de viajar a la actividad de detalles de la fruta pinchada
-    override fun onShowClick(fruit: Fruit) {
+    /*override fun onShowClick(fruit: Fruit) {
         // Aquí puedes manejar la navegación a la actividad de Detalles o cualquier otra acción que desees realizar.
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra("fruit", fruit)
         startActivity(intent)
-    }
+    }*/
 
 
     //Metodos ToolBar

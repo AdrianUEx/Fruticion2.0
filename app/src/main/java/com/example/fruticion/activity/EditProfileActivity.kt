@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import com.example.fruticion.activity.LoginActivity.Companion.currentUserId
 import com.example.fruticion.database.FruticionDatabase
@@ -46,6 +47,10 @@ class EditProfileActivity : AppCompatActivity() {
 
                 //corrutina obligatoria para hacer operaciones con la BD o con la API (tareas pesadas)
                 lifecycleScope.launch {
+                    if(newName.isEmpty())
+                        newName = db.userDao().getUserById(currentUserId).username
+                    if(newPassword.isEmpty())
+                        newPassword = db.userDao().getUserById(currentUserId).password
                     db.userDao().updateUser(User(
                         currentUserId, //este es un companion object que viene cargado desde el login
                         newName,

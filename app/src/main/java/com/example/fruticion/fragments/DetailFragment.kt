@@ -5,10 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.example.fruticion.R
+import com.example.fruticion.activity.LoginActivity
+import com.example.fruticion.activity.LoginActivity.Companion.currentUserId
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.databinding.FragmentDetailBinding
+import com.example.fruticion.model.Favourite
 import com.example.fruticion.model.Fruit
 import kotlinx.coroutines.launch
 
@@ -39,6 +44,8 @@ class DetailFragment : Fragment() {
 
         val fruitId = args.fruitId
         setUpUI(fruitId)
+        setUpListeners(fruitId)
+
     }
 
     private fun setUpUI(fruitId: Long) {
@@ -64,7 +71,41 @@ class DetailFragment : Fragment() {
                 valueDetailProtein.text = fruit?.protein.toString()
             }
 
+            if(db.favouriteDao().geFavFruitByUser(currentUserId!!, fruitId).isEmpty())
+                removeFavFruit()
+            else
+                addFavFruit()
+
         }
+    }
+
+    private fun setUpListeners(fruitId: Long) {
+        with(binding) {
+            addFavourite.setOnClickListener {
+
+                lifecycleScope.launch {
+                    if(db.favouriteDao().geFavFruitByUser(currentUserId!!, fruitId).isEmpty()) {
+                        db.favouriteDao().addFavFruit(Favourite(currentUserId!!, fruitId))
+                        addFavFruit()
+                    }
+                    else {
+                        db.favouriteDao().deleteFavById(currentUserId!!, fruitId)
+                        removeFavFruit()
+                    }
+                }
+            }
+
+        }
+    }
+
+    private fun addFavFruit(){
+        val drawable = ContextCompat.getDrawable( requireContext(), R.drawable.corazon)
+        binding.addFavourite.setImageDrawable(drawable)
+    }
+
+    private fun removeFavFruit(){
+        val drawable = ContextCompat.getDrawable( requireContext(), R.drawable.sin_fav_corazon)
+        binding.addFavourite.setImageDrawable(drawable)
     }
 
     //Este metodo es SOLO para evitar posibles fugas de memoria.

@@ -7,7 +7,7 @@
         android:icon="@drawable/ic_home"
         />
    <item
-        android:id="@+id/navigation_fav"
+        android:id="@+id/favoriteFragment"
         android:title="@string/bottom_fav"
         android:enabled="true"
 

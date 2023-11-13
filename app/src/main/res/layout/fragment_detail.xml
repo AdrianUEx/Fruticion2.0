@@ -114,8 +114,8 @@
         android:layout_marginTop="8dp"
         android:text="@string/text_detail_carbo"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/text_detail_protein"
-        app:layout_constraintTop_toBottomOf="@+id/text_detail_protein" />
+        app:layout_constraintStart_toStartOf="@+id/text_detail_sugar"
+        app:layout_constraintTop_toBottomOf="@+id/text_detail_sugar" />
 
     <TextView
         android:id="@+id/text_detail_protein"
@@ -124,8 +124,8 @@
         android:layout_marginTop="8dp"
         android:text="@string/text_detail_protein"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/text_detail_sugar"
-        app:layout_constraintTop_toBottomOf="@+id/text_detail_sugar" />
+        app:layout_constraintStart_toStartOf="@+id/text_detail_carbo"
+        app:layout_constraintTop_toBottomOf="@+id/text_detail_carbo" />
 
     <TextView
         android:id="@+id/value_detail_family"
@@ -164,7 +164,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:text="@string/value_detail_calories"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/text_detail_calories"
@@ -198,7 +198,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/value_detail_carbo"
         app:layout_constraintStart_toEndOf="@+id/text_detail_carbo"
-        app:layout_constraintTop_toBottomOf="@+id/value_detail_protein" />
+        app:layout_constraintTop_toBottomOf="@+id/value_detail_sugar" />
 
     <TextView
         android:id="@+id/value_detail_protein"
@@ -208,7 +208,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/value_detail_protein"
         app:layout_constraintStart_toEndOf="@+id/text_detail_protein"
-        app:layout_constraintTop_toBottomOf="@+id/value_detail_sugar" />
+        app:layout_constraintTop_toBottomOf="@+id/value_detail_carbo" />
 
     <ImageButton
         android:id="@+id/add_favourite"
@@ -220,5 +220,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/value_detail_carbo" />
+        app:layout_constraintTop_toBottomOf="@+id/value_detail_protein" />
 </androidx.constraintlayout.widget.ConstraintLayout>
