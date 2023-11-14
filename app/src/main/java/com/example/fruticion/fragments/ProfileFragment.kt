@@ -7,13 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.example.fruticion.activity.EditProfileActivity
 import com.example.fruticion.activity.LoginActivity.Companion.currentUserId
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.databinding.FragmentProfileBinding
-import com.example.fruticion.model.User
 import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
@@ -38,46 +35,52 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //se recupera el nombre y la contraseña del usuario desde la BD
-        lifecycleScope.launch{
-            var user = db.userDao().getUserById(currentUserId)
-            binding.valueProfileName.text = user.username
-            binding.valueProfilePassword.text = user.password
+        with(binding){
+            //se recupera el nombre y la contraseña del usuario desde la BD por primera vez
+            lifecycleScope.launch {
+                var user = db.userDao().getUserById(currentUserId)
+                valueProfileName.text = user.username
+                valueProfilePassword.text = user.password
+            }
+
+            //boton de Editar Perfil
+            editProfileButton.setOnClickListener {
+                val action = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment()
+                findNavController().navigate(action)
+                // navigateToEditProfileActivity()
+            }
+            //boton de Logout
+            logoutButton.setOnClickListener {
+                logout()
+            }
+            //boton de Ajustes
+            settingButton.setOnClickListener {
+                val action = SettingsFragmentDirections.settingButton()
+                findNavController().navigate(action)
+            }
         }
 
-        //boton de Editar Perfil
-        binding.editProfileButton.setOnClickListener{
-            navigateToEditProfileActivity()
-        }
-        //boton de Logout
-        binding.logoutButton.setOnClickListener {
-            logout()
-        }
-        //boton de Ajustes
-        binding.settingButton.setOnClickListener {
-            val action = SettingsFragmentDirections.settingButton()
-            findNavController().navigate(action)
-        }
     }
 
-    //Este metodo sirve para que los campos estén actualizados al volver desde EditProfileActivity. No funciona usando onViewStateRestored()
+    //Este metodo sirve para que los campos estén actualizados al volver desde EditProfileFragment. No funciona usando onViewStateRestored()
     override fun onStart() {
         super.onStart()
         //se recupera el nombre y la contraseña del usuario desde la BD
-        lifecycleScope.launch{
+        lifecycleScope.launch {
             val user = db.userDao().getUserById(currentUserId)
             binding.valueProfileName.text = user.username
             binding.valueProfilePassword.text = user.password
         }
     }
-    private fun navigateToEditProfileActivity() {
-        EditProfileActivity.start(requireContext())
-    }
 
     // finaliza la Activity de la que cuelga este Fragment (invoca por detras a onDestroy())
-    private fun logout(){
-        Log.i("valor de currentUserId", "El valor de currentUserId justo antes de cerrar sesión es: $currentUserId")
-        currentUserId = null // Lo pongo a null para asegurarme de que no sigue cargado cuando se cierra sesión. currentUserId es un companion object que esta cargado desde la invocacion del login
+    private fun logout() {
+        Log.i(
+            "valor de currentUserId",
+            "El valor de currentUserId justo antes de cerrar sesión es: $currentUserId"
+        )
+        currentUserId =
+            null // Lo pongo a null para asegurarme de que no sigue cargado cuando se cierra sesión. currentUserId es un companion object que esta cargado desde la invocacion del login
         requireActivity().finish()
     }
 

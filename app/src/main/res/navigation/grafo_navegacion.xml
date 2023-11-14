@@ -31,7 +31,11 @@
         android:id="@+id/profileFragment"
         android:name="com.example.fruticion.fragments.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.fruticion.fragments.SettingsFragment"
@@ -44,5 +48,14 @@
         <argument
             android:name="fruitId"
             app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.fruticion.fragments.EditProfileFragment"
+        android:label="@string/title_edit"
+        tools:layout="@layout/fragment_edit_profile" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 </navigation>
