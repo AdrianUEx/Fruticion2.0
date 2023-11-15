@@ -59,6 +59,14 @@ class RegisterActivity : AppCompatActivity() {
 
             }
 
+            buttonCancelRegister.setOnClickListener {
+                finish()
+            }
+
+            buttonBackToLogin?.setOnClickListener {
+                finish()
+            }
+
         }
     }
 }

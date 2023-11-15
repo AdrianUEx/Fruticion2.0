@@ -50,6 +50,8 @@
     <string name="value_detail_fat">Fat</string>
     <string name="value_detail_sugar">Sugar</string>
     <string name="value_detail_protein">Protein</string>
+    <string name="add_fav_mes">Add fruit to favorites</string>
+    <string name="remove_fav_mes">Remove fruit from favorites</string>
     <!--Edit profile-->
     <string name="text_edit_username">New username</string>
     <string name="value_edit_username">New username</string>
@@ -79,4 +81,5 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="settings_header">Settings</string>
+
 </resources>

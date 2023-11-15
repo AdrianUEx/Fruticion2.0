@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -87,10 +88,14 @@ class DetailFragment : Fragment() {
                     if(db.favouriteDao().geFavFruitByUser(currentUserId!!, fruitId).isEmpty()) {
                         db.favouriteDao().addFavFruit(Favourite(currentUserId!!, fruitId))
                         addFavFruit()
+                        val message = getString(R.string.add_fav_mes)
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                     }
                     else {
                         db.favouriteDao().deleteFavById(currentUserId!!, fruitId)
                         removeFavFruit()
+                        val message = getString(R.string.remove_fav_mes)
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                     }
                 }
             }

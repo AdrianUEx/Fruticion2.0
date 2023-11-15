@@ -65,7 +65,7 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnFruitsLoadedListener 
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         // Hide toolbar and bottom navigation when in detail fragment. (CODIGO LAB03 PREFERENCES)
-        navController.addOnDestinationChangedListener { _, destination, _ ->
+       /* navController.addOnDestinationChangedListener { _, destination, _ ->
             if ((destination.id == R.id.detailFragment) ||
                     (destination.id == R.id.settingsFragment)) {
                 binding.toolbar.menu.clear()
@@ -73,6 +73,20 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnFruitsLoadedListener 
             } else {
                 binding.toolbar.visibility = View.VISIBLE
                 binding.bottomNavigationView.visibility = View.VISIBLE
+            }
+        }*/
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if ((destination.id == R.id.detailFragment) ||
+                (destination.id == R.id.settingsFragment)) {
+                binding.toolbar.menu.clear()
+                binding.bottomNavigationView.visibility = View.GONE
+            } else {
+                setSupportActionBar(binding.toolbar)
             }
         }
     }
