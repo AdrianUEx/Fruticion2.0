@@ -14,14 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fruticion"
         tools:targetApi="34">
-        <activity
-            android:name=".activity.EditProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.DetailActivity"
-            android:exported="false"
-            android:label="DetailActivity"
-            android:theme="@style/Theme.Fruticion" />
+
         <activity
             android:name=".activity.HomeActivity"
             android:exported="false" />

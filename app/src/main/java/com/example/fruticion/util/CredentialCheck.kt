@@ -8,7 +8,7 @@ class CredentialCheck private constructor() {
 
     companion object {
 
-        private const val longmin = 3
+        private const val longMin = 3
 
         private val check = arrayOf(
             CredentialCheck().apply {
@@ -28,7 +28,7 @@ class CredentialCheck private constructor() {
             },
             CredentialCheck().apply {
                 fail = true
-                msg = "Passwords not march"
+                msg = "Passwords don't match"
                 error = CredentialError.PasswordError
             }
 
@@ -36,9 +36,9 @@ class CredentialCheck private constructor() {
         )
 
         fun login(username: String, password: String): CredentialCheck {
-            return if(username.isBlank() || username.length < longmin)
+            return if(username.isBlank() || username.length < longMin)
                 check[1]
-            else if(password.isBlank() || password.length < longmin)
+            else if(password.isBlank() || password.length < longMin)
                 check[2]
             else
                 check[0]
@@ -46,9 +46,9 @@ class CredentialCheck private constructor() {
 
         fun join(username: String, password: String, secondpass: String): CredentialCheck {
 
-            return if (username.isBlank() || username.length < longmin)
+            return if (username.isBlank() || username.length < longMin)
                 check[1]
-            else if (password.isBlank() || password.length < longmin)
+            else if (password.isBlank() || password.length < longMin)
                 check[2]
             else if (password != secondpass)
                 check[3]
@@ -56,9 +56,9 @@ class CredentialCheck private constructor() {
                 check[0]
         }
 
-        fun passwordOk(password: String, secindpass: String): CredentialCheck {
+        fun passwordOk(password: String, secondpass: String): CredentialCheck {
 
-            return if(password!=secindpass)
+            return if(password!=secondpass)
                 check[3]
             else
                 check[0]

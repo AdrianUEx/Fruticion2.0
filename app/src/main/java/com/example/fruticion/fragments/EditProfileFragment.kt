@@ -42,8 +42,8 @@ class EditProfileFragment : Fragment() {
             buttonSaveChanges.setOnClickListener {
 
                 //Hay que usar toString() porque text (getText() por detras) devuelve de tipo CharSequence!
-                var newName = newUsernameEditText?.text.toString()
-                var newPassword = newPasswordEditText?.text.toString()
+                var newName = newUsernameEditText.text.toString()
+                var newPassword = newPasswordEditText.text.toString()
 
                 //corrutina obligatoria para hacer operaciones con la BD o con la API (tareas pesadas)
                 lifecycleScope.launch {
@@ -65,7 +65,7 @@ class EditProfileFragment : Fragment() {
                 findNavController().navigate(action)
             }
             // Al pulsar el boton Cancelar, se vuelve al ProfileFragment
-            buttonCancelChanges?.setOnClickListener {
+            buttonCancelChanges.setOnClickListener {
                 val action =
                     EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment()
                 findNavController().navigate(action)

@@ -2,7 +2,6 @@ package com.example.fruticion.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,14 +9,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fruticion.R
 import com.example.fruticion.activity.HomeActivity
-import com.example.fruticion.activity.LoginActivity
 import com.example.fruticion.activity.LoginActivity.Companion.currentUserId
-import com.example.fruticion.api.APIError
-import com.example.fruticion.api.FruitMapper
-import com.example.fruticion.api.SerializedFruit
-import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.databinding.FragmentFavoriteBinding
 import com.example.fruticion.model.Fruit
@@ -27,8 +20,6 @@ class FavoriteFragment : Fragment() {
 
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
-
-    var homeActivity: HomeActivity? = null
 
     private lateinit var favoriteAdapter: FavoriteAdapter
     private var onFavFruitsLoadedListener: OnFavFruitsLoadedListener? = null
@@ -64,7 +55,7 @@ class FavoriteFragment : Fragment() {
         val recyclerView = binding.rvFruitFavList
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        favoriteAdapter = FavoriteAdapter(dbFruit) { dbFruit -> onItemSelected(dbFruit.roomId!!)}
+        favoriteAdapter = FavoriteAdapter(dbFruit) { fruitList -> onItemSelected(fruitList.roomId!!)}
 
         recyclerView.adapter = favoriteAdapter
     }

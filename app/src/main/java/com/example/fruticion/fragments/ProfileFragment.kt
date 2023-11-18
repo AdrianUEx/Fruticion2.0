@@ -38,7 +38,7 @@ class ProfileFragment : Fragment() {
         with(binding){
             //se recupera el nombre y la contraseña del usuario desde la BD por primera vez
             lifecycleScope.launch {
-                var user = db.userDao().getUserById(currentUserId)
+                val user = db.userDao().getUserById(currentUserId)
                 valueProfileName.text = user.username
                 valueProfilePassword.text = user.password
             }

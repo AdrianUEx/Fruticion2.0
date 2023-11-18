@@ -31,7 +31,7 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnFruitsLoadedListener 
 
     private var originalFruitList: List<Fruit> = emptyList()
 
-
+    //Esto es para hacer HomeActivity.start() desde cualquier punto del codigo para iniciar HomeActivity en lugar de crearte la intent donde sea necesario
     companion object {
         fun start(
             context: Context,

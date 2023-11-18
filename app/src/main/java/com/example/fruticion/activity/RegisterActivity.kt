@@ -48,7 +48,7 @@ class RegisterActivity : AppCompatActivity() {
                     lifecycleScope.launch {
                         val user = User (null, editTextRegisterUsername.text.toString(), editTextRegisterPassword.text.toString())
 
-                        val id = db?.userDao()?.insertUser(user)
+                        db.userDao().insertUser(user)
 
                         Toast.makeText(binding.root.context, check.msg, Toast.LENGTH_SHORT).show()
                         finish()
@@ -63,7 +63,7 @@ class RegisterActivity : AppCompatActivity() {
                 finish()
             }
 
-            buttonBackToLogin?.setOnClickListener {
+            buttonBackToLogin.setOnClickListener {
                 finish()
             }
 

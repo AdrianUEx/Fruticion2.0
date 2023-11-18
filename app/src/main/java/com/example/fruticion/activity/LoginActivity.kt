@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.databinding.ActivityLoginBinding
@@ -77,9 +76,9 @@ class LoginActivity : AppCompatActivity() {
                 if(user != null){
                     currentUserId = user.userId //obtiene el id de Room del usuario actual de la sesión.
 
-                    val check = CredentialCheck.passwordOk(binding.editTextPassword.text.toString(), user.password)
-                    if(check.fail)
-                        Toast.makeText(binding.root.context, check.msg, Toast.LENGTH_SHORT).show()
+                    val passOkCheck = CredentialCheck.passwordOk(binding.editTextPassword.text.toString(), user.password)
+                    if(passOkCheck.fail)
+                        Toast.makeText(binding.root.context, passOkCheck.msg, Toast.LENGTH_SHORT).show()
                     else
                         navigateToHomeActivity()
                 } else // si el usuario no existe
@@ -99,7 +98,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        Log.i("Valor de currentUserId","El valor de currentUserId es: ${currentUserId}")
+        Log.i("Valor de currentUserId","El valor de currentUserId es: $currentUserId")
 
     }
 }

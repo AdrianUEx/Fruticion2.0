@@ -26,6 +26,7 @@ abstract class FruticionDatabase : RoomDatabase() {
             }
             return INSTANCE
         }
+        //TODO: invocar a destroyInstance() al pulsar el boton CerrarSesion (no se necesita la instancia de la BD si se ha cerrado sesión, ahorrando memoria)
         fun destroyInstance() {
             INSTANCE = null
         }
