@@ -22,9 +22,9 @@ interface UserDao {
         @Insert
         suspend fun insertUser(user: User): Long
 
-        //Borra un unico usuario si el usuario pasado por parametros existe exactamente en la BD
-        @Delete
-        suspend fun deleteUser(user: User)
+        //Borra un unico usuario buscándolo por su id (ahorra una llamada a la BD)
+        @Query("DELETE FROM user WHERE userId = :userId")
+        suspend fun deleteUserById(userId: Long)
 
         //Actualiza el usuario de la BD. Room se encarga de encontrar el usuario y actualizar sus campos usando la clave primario. Puede devolver un int con el numero de filas actualizadas
         @Update

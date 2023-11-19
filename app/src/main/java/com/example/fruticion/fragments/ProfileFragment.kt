@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.fruticion.activity.LoginActivity
 import com.example.fruticion.activity.LoginActivity.Companion.currentUserId
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.databinding.FragmentProfileBinding
@@ -54,6 +55,16 @@ class ProfileFragment : Fragment() {
             logoutButton.setOnClickListener {
                 logout()
             }
+            //boton de borrar Usuario
+            deleteUserButton?.setOnClickListener{
+                lifecycleScope.launch {
+                    db.userDao().deleteUserById(currentUserId!!)
+
+                    logout()
+                }
+            }
+
+
             //boton de Ajustes
             settingButton.setOnClickListener {
                 val action = SettingsFragmentDirections.settingButton()

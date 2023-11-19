@@ -11,12 +11,14 @@ import java.time.LocalDate
         ForeignKey(
             entity = User::class,
             parentColumns = ["userId"],
-            childColumns = ["userId"]
+            childColumns = ["userId"],
+            onDelete = ForeignKey.CASCADE
         ),
         ForeignKey(
             entity = Fruit::class,
             parentColumns = ["roomId"],
-            childColumns = ["fruitId"]
+            childColumns = ["fruitId"],
+            onDelete = ForeignKey.CASCADE
         )
     ])
 data class DailyIntake(

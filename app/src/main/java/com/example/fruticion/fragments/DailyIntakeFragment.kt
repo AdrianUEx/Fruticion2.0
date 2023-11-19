@@ -54,7 +54,7 @@ class DailyIntakeFragment : Fragment() {
 
     }
 
-    fun obtainDailyNutritions(dbFruit: List<Fruit>) {
+    private fun obtainDailyNutritions(dbFruit: List<Fruit>) {
         var totalCalories = 0.0
         var totalSugars = 0.0
         var totalFats = 0.0
