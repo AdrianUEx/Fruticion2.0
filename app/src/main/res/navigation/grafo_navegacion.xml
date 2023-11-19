@@ -58,4 +58,10 @@
             android:id="@+id/action_editProfileFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/dailyIntakeFragment"
+        android:name="com.example.fruticion.fragments.DailyIntakeFragment"
+        android:label="Diario"
+        tools:layout="@layout/fragment_daily_intake" >
+    </fragment>
 </navigation>

@@ -12,6 +12,7 @@ import com.example.fruticion.activity.LoginActivity.Companion.currentUserId
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.databinding.FragmentProfileBinding
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 class ProfileFragment : Fragment() {
 
@@ -60,6 +61,10 @@ class ProfileFragment : Fragment() {
             }
         }
 
+        var fechaActual = LocalDate.now()
+        Log.i("Fecha Actual","La fecha actual es $fechaActual")
+        var semanaSiguiente = fechaActual.plusWeeks(1)
+        Log.i("Semana siguiente", "La fecha actual mas una semana es $semanaSiguiente")
     }
 
     //Este metodo sirve para que los campos estén actualizados al volver desde EditProfileFragment. No funciona usando onViewStateRestored()

@@ -86,7 +86,9 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnFruitsLoadedListener 
                 binding.toolbar.menu.clear()
                 binding.bottomNavigationView.visibility = View.GONE
             } else {
-                setSupportActionBar(binding.toolbar)
+                binding.toolbar.visibility = View.VISIBLE
+                binding.bottomNavigationView.visibility = View.VISIBLE
+               // setSupportActionBar(binding.toolbar)
             }
         }
     }

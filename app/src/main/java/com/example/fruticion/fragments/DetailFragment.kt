@@ -8,15 +8,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.fruticion.R
 import com.example.fruticion.activity.LoginActivity
 import com.example.fruticion.activity.LoginActivity.Companion.currentUserId
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.databinding.FragmentDetailBinding
+import com.example.fruticion.model.DailyIntake
 import com.example.fruticion.model.Favourite
 import com.example.fruticion.model.Fruit
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
@@ -87,19 +90,32 @@ class DetailFragment : Fragment() {
                 lifecycleScope.launch {
                     if(db.favouriteDao().geFavFruitByUser(currentUserId!!, fruitId).isEmpty()) {
                         db.favouriteDao().addFavFruit(Favourite(currentUserId!!, fruitId))
-                        addFavFruit()
+
+                        addFavFruit()//cambia el aspecto del boton
                         val message = getString(R.string.add_fav_mes)
                         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                     }
                     else {
                         db.favouriteDao().deleteFavById(currentUserId!!, fruitId)
-                        removeFavFruit()
+                        removeFavFruit()//cambia el aspecto del boton
                         val message = getString(R.string.remove_fav_mes)
                         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
 
+            addDailyButton?.setOnClickListener{
+
+                lifecycleScope.launch {
+                    db.dailyIntakeDao().insertDailyFruit(
+                        DailyIntake(
+                        fruitId,
+                        currentUserId!!,
+                        LocalDate.now()
+                    ))
+                }
+                //findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToDailyIntakeFragment(fruitId=fruitId))
+            }
         }
     }
 

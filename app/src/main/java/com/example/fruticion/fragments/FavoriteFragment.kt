@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fruticion.activity.HomeActivity
 import com.example.fruticion.activity.LoginActivity.Companion.currentUserId
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.databinding.FragmentFavoriteBinding

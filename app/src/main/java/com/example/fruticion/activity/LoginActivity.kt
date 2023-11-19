@@ -10,6 +10,7 @@ import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.databinding.ActivityLoginBinding
 import com.example.fruticion.util.CredentialCheck
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 class LoginActivity : AppCompatActivity() {
 
@@ -89,6 +90,13 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun navigateToHomeActivity() {
+
+        var fechaSistema=LocalDate.now()
+        lifecycleScope.launch {
+            db.dailyIntakeDao().deleteDailyfruits(currentUserId!!,fechaSistema)
+        }
+
+
         HomeActivity.start(this)
     }
 
