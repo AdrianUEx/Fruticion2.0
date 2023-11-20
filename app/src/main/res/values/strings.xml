@@ -73,7 +73,7 @@
     <string name="criteria">Criterio ordenación</string>
     <string name="settings_header">Ajustes</string>
     <!-- Info -->
-    <string name="text_title_info">Información de la applicación</string>
+    <string name="text_title_info">Información de la aplicación</string>
     <string name="text_title_what_info">¿Qué es Frutición?</string>
     <string name="text_what_info">Frutición es una aplicación que está pensada para llevar un control sobre las frutas ingeridas semanalmenre y diariamente para controlar la nutrición. Además de esto, se pueden marcar las frutas más deliciosas o que gusten más como favoritas.</string>
     <string name="text_title_who_info">¿Quienes somos?</string>

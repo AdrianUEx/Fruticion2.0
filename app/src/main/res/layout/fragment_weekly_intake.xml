@@ -21,6 +21,7 @@
         android:id="@+id/rv_fruit_weekly_list"
         android:layout_width="414dp"
         android:layout_height="368dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,12 +61,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:layout_marginBottom="400dp"
         android:text="@string/text_total_proteins"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/text_total_sugars"
-        app:layout_constraintTop_toBottomOf="@+id/text_total_sugars"
-        app:layout_constraintVertical_bias="0.952" />
+        app:layout_constraintTop_toBottomOf="@+id/text_total_sugars" />
 
     <TextView
         android:id="@+id/value_total_calories"
