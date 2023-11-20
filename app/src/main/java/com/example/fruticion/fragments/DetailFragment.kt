@@ -1,16 +1,29 @@
 package com.example.fruticion.fragments
 
+import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.TimePickerDialog
+import android.content.Context
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.fruticion.R
 import com.example.fruticion.activity.LoginActivity.Companion.currentUserId
+import com.example.fruticion.alarmReceiver.AlarmReceiver
+import com.example.fruticion.alarmReceiver.AlarmReceiver.Companion.NOTIFICATION_ID
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.databinding.FragmentDetailBinding
 import com.example.fruticion.model.DailyIntake
@@ -19,6 +32,7 @@ import com.example.fruticion.model.Fruit
 import com.example.fruticion.model.WeeklyIntake
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+import java.util.Calendar
 
 class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
@@ -27,6 +41,10 @@ class DetailFragment : Fragment() {
     private lateinit var db: FruticionDatabase
 
     private val args: DetailFragmentArgs by navArgs()//Esto tiene que ser val porque si no, peta
+
+    companion object {
+        const val MY_CHANNEL_ID = "myChannel"
+    }
 
     //Se crean los elementos de la pantalla (sin valores o con aquellos valores que no corran de nuestra cuenta)
     override fun onCreateView(
@@ -48,6 +66,7 @@ class DetailFragment : Fragment() {
         val fruitId = args.fruitId
         setUpUI(fruitId)
         setUpListeners(fruitId)
+        createChannel()
 
     }
 
@@ -123,6 +142,71 @@ class DetailFragment : Fragment() {
                 }
                 //findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToDailyIntakeFragment(fruitId=fruitId))
             }
+            timePickerButton?.setOnClickListener {
+                val calendar = Calendar.getInstance()
+                val hour = calendar.get(Calendar.HOUR_OF_DAY)
+                val minute = calendar.get(Calendar.MINUTE)
+
+                val timePickerDialog = TimePickerDialog(
+                    requireContext(),
+                    TimePickerDialog.OnTimeSetListener { _, selectedHour, selectedMinute ->
+                        // Aquí puedes manejar la hora seleccionada
+                        val selectedTime = "$selectedHour:$selectedMinute"
+                        Toast.makeText(requireContext(), "Hora seleccionada: $selectedTime", Toast.LENGTH_SHORT).show()
+
+                        // Lanza la notificación a la hora seleccionada
+                        scheduleNotification(fruitId, selectedHour, selectedMinute)
+                    },
+                    hour,
+                    minute,
+                    true // true para el formato de 24 horas, false para el formato de 12 horas
+                )
+
+                timePickerDialog.show()
+            }
+        }
+    }
+
+    private fun scheduleNotification(fruitId: Long, selectedHour: Int, selectedMinute: Int) {
+        Log.d("DetailFragment", "Estamos dentro del scheduleNotification: ")
+
+        // Configura la hora seleccionada en el calendario
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, selectedHour)
+        calendar.set(Calendar.MINUTE, selectedMinute)
+        calendar.set(Calendar.SECOND, 0)
+        var fruit : Fruit?
+
+        lifecycleScope.launch {
+            fruit = db.fruitDao().getFruitById(fruitId)
+
+            val intent = Intent(requireActivity().applicationContext, AlarmReceiver::class.java).putExtra("FRUIT_NAME", fruit!!.name)
+            val pendingIntent = PendingIntent.getBroadcast(
+                requireActivity().applicationContext,
+                NOTIFICATION_ID,
+                intent,
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            )
+
+            val alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+        }
+    }
+
+    private fun createChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                MY_CHANNEL_ID,
+                "MySuperChannel",
+                NotificationManager.IMPORTANCE_DEFAULT
+            ).apply {
+                description = "SUSCRIBETE"
+            }
+
+            val notificationManager: NotificationManager =
+                requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            notificationManager.createNotificationChannel(channel)
         }
     }
 
