@@ -8,16 +8,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.fruticion.R
-import com.example.fruticion.activity.LoginActivity
 import com.example.fruticion.activity.LoginActivity.Companion.currentUserId
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.databinding.FragmentDetailBinding
 import com.example.fruticion.model.DailyIntake
 import com.example.fruticion.model.Favourite
 import com.example.fruticion.model.Fruit
+import com.example.fruticion.model.WeeklyIntake
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
@@ -113,6 +112,14 @@ class DetailFragment : Fragment() {
                         currentUserId!!,
                         LocalDate.now()
                     ))
+
+                    db.weeklyIntakeDao().insertWeeklyFruit(
+                        WeeklyIntake(
+                            fruitId,
+                            currentUserId!!,
+                            LocalDate.now()
+                        )
+                    )
                 }
                 //findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToDailyIntakeFragment(fruitId=fruitId))
             }

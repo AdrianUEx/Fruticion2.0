@@ -64,4 +64,9 @@
         android:label="Diario"
         tools:layout="@layout/fragment_daily_intake" >
     </fragment>
+    <fragment
+        android:id="@+id/weeklyIntakeFragment"
+        android:name="com.example.fruticion.fragments.WeeklyIntakeFragment"
+        android:label="fragment_weekly_intake"
+        tools:layout="@layout/fragment_weekly_intake" />
 </navigation>

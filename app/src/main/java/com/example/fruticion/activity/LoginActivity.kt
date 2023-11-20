@@ -11,6 +11,8 @@ import com.example.fruticion.databinding.ActivityLoginBinding
 import com.example.fruticion.util.CredentialCheck
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+import java.time.temporal.WeekFields
+import java.util.Locale
 
 class LoginActivity : AppCompatActivity() {
 
@@ -18,9 +20,10 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
 
-    companion object{
+    companion object {
         //Esta variable se puede modificar para que no salte error al usarla en los metodos del Dao quitandole el ? y metiendole un valor cualquiera
-        var currentUserId: Long? = null //no se pone public porque es redundante. Es var y no val porque su valor va a ser modificado de null a otra cosa.
+        var currentUserId: Long? =
+            null //no se pone public porque es redundante. Es var y no val porque su valor va a ser modificado de null a otra cosa.
 
     }
 
@@ -39,14 +42,14 @@ class LoginActivity : AppCompatActivity() {
         readSettings()
     }
 
-    private fun readSettings(){
+    private fun readSettings() {
         val preferences = PreferenceManager.getDefaultSharedPreferences(this).all
 
         val rememberme = preferences["preferences_autologin"] as Boolean? ?: false
         val username = preferences["preferences_username"] as String? ?: ""
         val password = preferences["preferences_password"] as String? ?: ""
 
-        if(rememberme) {
+        if (rememberme) {
             binding.editTextUsername.setText(username)
             binding.editTextPassword.setText(password)
             checkLogin()
@@ -68,22 +71,31 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkLogin(){
-        val check = CredentialCheck.login(binding.editTextUsername.text.toString(), binding.editTextPassword.text.toString())
-        if(!check.fail){
+    private fun checkLogin() {
+        val check = CredentialCheck.login(
+            binding.editTextUsername.text.toString(),
+            binding.editTextPassword.text.toString()
+        )
+        if (!check.fail) {
             lifecycleScope.launch {
                 val user = db.userDao().findUserByName(binding.editTextUsername.text.toString())
 
-                if(user != null){
-                    currentUserId = user.userId //obtiene el id de Room del usuario actual de la sesión.
+                if (user != null) {
+                    currentUserId =
+                        user.userId //obtiene el id de Room del usuario actual de la sesión.
 
-                    val passOkCheck = CredentialCheck.passwordOk(binding.editTextPassword.text.toString(), user.password)
-                    if(passOkCheck.fail)
-                        Toast.makeText(binding.root.context, passOkCheck.msg, Toast.LENGTH_SHORT).show()
+                    val passOkCheck = CredentialCheck.passwordOk(
+                        binding.editTextPassword.text.toString(),
+                        user.password
+                    )
+                    if (passOkCheck.fail)
+                        Toast.makeText(binding.root.context, passOkCheck.msg, Toast.LENGTH_SHORT)
+                            .show()
                     else
                         navigateToHomeActivity()
                 } else // si el usuario no existe
-                    Toast.makeText(binding.root.context, "Invalid username", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(binding.root.context, "Invalid username", Toast.LENGTH_SHORT)
+                        .show()
             }
         } else
             Toast.makeText(binding.root.context, check.msg, Toast.LENGTH_SHORT).show()
@@ -91,9 +103,34 @@ class LoginActivity : AppCompatActivity() {
 
     private fun navigateToHomeActivity() {
 
-        var fechaSistema=LocalDate.now()
+        var fechaSistema = LocalDate.now()
         lifecycleScope.launch {
-            db.dailyIntakeDao().deleteDailyfruits(currentUserId!!,fechaSistema)
+            //borra la tabla de frutas diarias del usuario (no toda la tabla)
+            db.dailyIntakeDao().deleteDailyfruits(currentUserId!!, fechaSistema)
+            //HASTA AQUI FUNCIONA TODO
+
+
+
+            // Obtén el número de semana del año actual utilizando WeekFields
+            val numeroSemanaActual =
+                fechaSistema.get(WeekFields.of(Locale.getDefault()).weekOfYear())
+
+            //obtiene el ultimo valor introducido en la tabla
+            val frutaEjemplo = db.weeklyIntakeDao().getOneWeeklyFruit(currentUserId!!)
+
+            if(frutaEjemplo!=null){
+                //se obtiene la semana de la fecha de frutaEjemplo
+                val semanaFrutaEjemplo =
+                    frutaEjemplo.additionDate.get(WeekFields.of(Locale.getDefault()).weekOfYear())
+
+                //si el numero de la semana actual es mayor que el mayor numero de la semana de la tabla del usuario, se borra.
+                //tambien, si la semana de comienzo de año es 0 porque empieza a mitad de semana, no se borra (dale vueltas)
+                if (numeroSemanaActual > semanaFrutaEjemplo && numeroSemanaActual > 0)
+                    db.weeklyIntakeDao().deleteWeeklyfruits(currentUserId!!)
+            }
+
+
+
         }
 
 
@@ -106,7 +143,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        Log.i("Valor de currentUserId","El valor de currentUserId es: $currentUserId")
+        Log.i("Valor de currentUserId", "El valor de currentUserId es: $currentUserId")
 
     }
 }

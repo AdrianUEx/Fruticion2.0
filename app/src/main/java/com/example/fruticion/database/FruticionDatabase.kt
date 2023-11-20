@@ -10,15 +10,17 @@ import com.example.fruticion.model.DailyIntake
 import com.example.fruticion.model.Favourite
 import com.example.fruticion.model.Fruit
 import com.example.fruticion.model.User
+import com.example.fruticion.model.WeeklyIntake
 
 //Esta clase actua como instancia de la base de datos. Solo debe haber una unica instancia de la base de datos, por lo que usa el patron Singleton.
-@Database(entities = [User::class, Fruit::class, Favourite::class, DailyIntake::class], version = 2)
+@Database(entities = [User::class, Fruit::class, Favourite::class, DailyIntake::class, WeeklyIntake::class], version = 2)
 @TypeConverters(LocalDateConverter::class)
 abstract class FruticionDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun fruitDao(): FruitDao
     abstract fun favouriteDao(): FavouriteDao
     abstract fun dailyIntakeDao(): DailyIntakeDao
+    abstract fun weeklyIntakeDao(): WeeklyIntakeDao
 
     // Esto esta dentro de un companion object (actua como static) para que sea invocable desde cualquier lugar de la aplicacion
     companion object {

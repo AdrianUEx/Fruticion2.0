@@ -14,6 +14,8 @@ import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.databinding.FragmentProfileBinding
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+import java.time.temporal.WeekFields
+import java.util.Locale
 
 class ProfileFragment : Fragment() {
 
@@ -74,8 +76,27 @@ class ProfileFragment : Fragment() {
 
         var fechaActual = LocalDate.now()
         Log.i("Fecha Actual","La fecha actual es $fechaActual")
-        var semanaSiguiente = fechaActual.plusWeeks(1)
+        var semanaSiguiente = fechaActual.plusWeeks(-1)
         Log.i("Semana siguiente", "La fecha actual mas una semana es $semanaSiguiente")
+        var numeroSemanaSiguiente = semanaSiguiente.get(WeekFields.of(Locale.getDefault()).weekOfYear())
+        Log.i("Numero de la semana siguiente de hoy","$numeroSemanaSiguiente")
+
+        // Obtén el número de semana del mes utilizando WeekFields
+        val numeroSemana = fechaActual.get(WeekFields.of(Locale.getDefault()).weekOfYear())
+        Log.i("Numero de la semana del ano","Numero de la semana del ano: $numeroSemana")
+
+        if(numeroSemana > numeroSemanaSiguiente)
+            Log.i("numeroSemana es mayor", "Es mayor")
+        else
+            Log.i("numeroSemana es menor","Es menor")
+
+
+
+        var fechaFalsa= LocalDate.of(fechaActual.year, 1, 1)
+        val numeroSemanaFechaFalsa = fechaFalsa.get(WeekFields.of(Locale.getDefault()).weekOfYear())
+        Log.i("numeroSemanaFechaFalsa","$numeroSemanaFechaFalsa")
+
+
     }
 
     //Este metodo sirve para que los campos estén actualizados al volver desde EditProfileFragment. No funciona usando onViewStateRestored()
