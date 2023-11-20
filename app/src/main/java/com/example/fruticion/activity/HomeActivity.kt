@@ -5,17 +5,25 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.fruticion.fragments.SearchFragment
 import com.example.fruticion.model.Fruit
 import com.example.fruticion.R
 import com.example.fruticion.databinding.ActivityHomeBinding
+import com.example.fruticion.fragments.InfoFragment
+import com.example.fruticion.fragments.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity(), SearchFragment.OnFruitsLoadedListener {
@@ -82,7 +90,7 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnFruitsLoadedListener 
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if ((destination.id == R.id.detailFragment) ||
-                (destination.id == R.id.settingsFragment)) {
+                (destination.id == R.id.settingsFragment) ) {
                 binding.toolbar.menu.clear()
                 binding.bottomNavigationView.visibility = View.GONE
             } else {
@@ -149,6 +157,25 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnFruitsLoadedListener 
         })
 
         return super.onCreateOptionsMenu(menu)
+    }
+
+    //Si se pulsa el icono de info se navega a InfoFragment
+    override fun onOptionsItemSelected(item: MenuItem) :Boolean /*= when (item.itemId)*/ {
+        /*R.id.action_info -> { // User chooses the "Settings" item. Show the app settings UI.
+            Toast.makeText(this, "Info de la app", Toast.LENGTH_SHORT).show()
+
+            navController.navigate(R.id.infoFragment)
+
+            true
+        }
+
+        else -> { // The user's action isn't recognized. // Invoke the superclass to handle it.
+            super.onOptionsItemSelected(item)
+        }*/
+
+        val navController = findNavController(R.id.nav_host_fragment)
+        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
+
     }
 
     override fun onFruitsLoaded(fruits: List<Fruit>) {

@@ -8,14 +8,14 @@
 
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/text_total_fats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="48dp"
-        android:text="TotalGrasas:"
-        app:layout_constraintStart_toStartOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        android:text="@string/text_total_fats"
+        app:layout_constraintStart_toStartOf="@+id/text_total_calories"
+        app:layout_constraintTop_toBottomOf="@+id/text_total_calories" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_fruit_weekly_list"
@@ -24,87 +24,88 @@
         android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/text_total_proteins"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/textView6"
-        android:layout_width="92dp"
+        android:id="@+id/text_total_calories"
+        android:layout_width="wrap_content"
         android:layout_height="16dp"
-        android:layout_marginStart="72dp"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="44dp"
-        android:text="TotalCalorias:"
+        android:text="@string/text_total_calories"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/text_total_carbo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:text="TotalHidratos:"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        android:layout_marginTop="48dp"
+        android:text="@string/text_total_carbo"
+        app:layout_constraintStart_toStartOf="@+id/text_total_fats"
+        app:layout_constraintTop_toBottomOf="@+id/text_total_fats" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/text_total_sugars"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:text="TotalAzucares:"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        android:layout_marginTop="48dp"
+        android:text="@string/text_total_sugars"
+        app:layout_constraintStart_toStartOf="@+id/text_total_carbo"
+        app:layout_constraintTop_toBottomOf="@+id/text_total_carbo" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/text_total_proteins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
         android:layout_marginBottom="400dp"
-        android:text="TotalProteinas:"
+        android:text="@string/text_total_proteins"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="@+id/text_total_sugars"
+        app:layout_constraintTop_toBottomOf="@+id/text_total_sugars"
         app:layout_constraintVertical_bias="0.952" />
 
     <TextView
         android:id="@+id/value_total_calories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="152dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView6" />
+        android:layout_marginStart="24dp"
+        android:text="@string/value_total_calories"
+        app:layout_constraintStart_toEndOf="@+id/text_total_calories"
+        app:layout_constraintTop_toTopOf="@+id/text_total_calories" />
 
     <TextView
         android:id="@+id/value_total_fats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/value_total_fats"
         app:layout_constraintStart_toStartOf="@+id/value_total_calories"
-        app:layout_constraintTop_toTopOf="@+id/textView2" />
+        app:layout_constraintTop_toTopOf="@+id/text_total_fats" />
 
     <TextView
         android:id="@+id/value_total_sugars"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/value_total_sugars"
         app:layout_constraintStart_toStartOf="@+id/value_total_carbo"
-        app:layout_constraintTop_toTopOf="@+id/textView4" />
+        app:layout_constraintTop_toTopOf="@+id/text_total_sugars" />
 
     <TextView
         android:id="@+id/value_total_carbo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/value_total_carbo"
         app:layout_constraintStart_toStartOf="@+id/value_total_fats"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
+        app:layout_constraintTop_toTopOf="@+id/text_total_carbo" />
 
     <TextView
         android:id="@+id/value_total_proteins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        android:text="@string/value_total_proteins"
+        app:layout_constraintBottom_toBottomOf="@+id/text_total_proteins"
         app:layout_constraintStart_toStartOf="@+id/value_total_sugars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

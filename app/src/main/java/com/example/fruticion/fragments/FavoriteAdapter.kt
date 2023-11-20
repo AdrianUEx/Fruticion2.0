@@ -9,7 +9,7 @@ import com.example.fruticion.model.Fruit
 class FavoriteAdapter(private var favFruitList: List<Fruit>, private val onClickListener: (Fruit)->Unit) : RecyclerView.Adapter<SearchViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return SearchViewHolder(layoutInflater.inflate(R.layout.favorite_item_list, parent, false))
+        return SearchViewHolder(layoutInflater.inflate(R.layout.search_item_list, parent, false))
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {

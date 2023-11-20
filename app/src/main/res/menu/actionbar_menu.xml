@@ -8,4 +8,9 @@
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
+    <item android:id="@+id/infoFragment"
+        android:title="@string/search_text"
+        android:icon="@drawable/baseline_info_24"
+        app:showAsAction="always"/>
+
 </menu>

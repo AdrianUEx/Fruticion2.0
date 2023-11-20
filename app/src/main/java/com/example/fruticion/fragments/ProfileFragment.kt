@@ -69,7 +69,7 @@ class ProfileFragment : Fragment() {
 
             //boton de Ajustes
             settingButton.setOnClickListener {
-                val action = SettingsFragmentDirections.settingButton()
+                val action = ProfileFragmentDirections.settingButton()
                 findNavController().navigate(action)
             }
         }

@@ -6,8 +6,8 @@
     app:startDestination="@id/searchFragment">
 
     <action
-        android:id="@+id/setting_button"
-        app:destination="@id/settingsFragment" />
+        android:id="@+id/action_info"
+        app:destination="@id/infoFragment" />
 
     <fragment
         android:id="@+id/searchFragment"
@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/setting_button"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -61,12 +64,17 @@
     <fragment
         android:id="@+id/dailyIntakeFragment"
         android:name="com.example.fruticion.fragments.DailyIntakeFragment"
-        android:label="Diario"
+        android:label="@string/bottom_daily"
         tools:layout="@layout/fragment_daily_intake" >
     </fragment>
     <fragment
         android:id="@+id/weeklyIntakeFragment"
         android:name="com.example.fruticion.fragments.WeeklyIntakeFragment"
-        android:label="fragment_weekly_intake"
+        android:label="@string/bottom_weekly"
         tools:layout="@layout/fragment_weekly_intake" />
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.example.fruticion.fragments.InfoFragment"
+        android:label="@string/info_title"
+        tools:layout="@layout/fragment_info" />
 </navigation>

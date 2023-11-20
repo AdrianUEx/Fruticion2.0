@@ -15,15 +15,15 @@
 
     <item
         android:id="@+id/dailyIntakeFragment"
-        android:title="Diario"
+        android:title="@string/bottom_daily"
         android:enabled="true"
         android:icon="@drawable/ic_ingesta_diaria" />
 
     <item
         android:id="@+id/weeklyIntakeFragment"
-        android:title="Semanal"
+        android:title="@string/bottom_weekly"
         android:enabled="true"
-        android:icon="@drawable/ic_ingesta_diaria" />
+        android:icon="@drawable/ic_ingesta_semanal" />
 
     <item
         android:id="@+id/profileFragment"

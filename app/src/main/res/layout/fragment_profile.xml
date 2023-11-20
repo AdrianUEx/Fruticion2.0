@@ -105,10 +105,12 @@
 
     <Button
         android:id="@+id/delete_user_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="BorrarUsuario"
-        tools:layout_editor_absoluteX="162dp"
-        tools:layout_editor_absoluteY="628dp" />
+        android:layout_marginTop="24dp"
+        android:text="@string/delete_user_button"
+        app:layout_constraintEnd_toEndOf="@+id/logout_button"
+        app:layout_constraintStart_toStartOf="@+id/logout_button"
+        app:layout_constraintTop_toBottomOf="@+id/logout_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,9 @@
     <string name="title_home">Inicio</string>
     <string name="bottom_fav">Favoritos</string>
     <string name="bottom_profile">Perfil</string>
+    <string name="bottom_daily">Diario</string>
+    <string name="bottom_weekly">Semanal</string>
+    <string name="info_title">Información</string>
     <!--Login y registro-->
     <string name="title_activity_login">LoginActivity</string>
     <string name="text_login_name">Nombre de usuario</string>
@@ -31,6 +34,7 @@
     <string name="value_profile_password">Contraseña</string>
     <string name="edit_profile_button">Editar perfil</string>
     <string name="logout_profile_button">Cerrar sesión</string>
+    <string name="delete_user_button">Eliminar cuenta</string>
     <!-- Detalles fruta -->
     <string name="title_detail">Detalles</string>
     <string name="text_detail_name">Nombre de la fruta</string>
@@ -53,6 +57,7 @@
     <string name="value_detail_protein">Proteínas</string>
     <string name="add_fav_mes">Fruta añadida a favoritos</string>
     <string name="remove_fav_mes">Fruta eliminada de favoritos</string>
+    <string name="bottom_ingest">Añadir a la ingesta</string>
     <!-- Editar perfil -->
     <string name="title_edit">Editar perfil</string>
     <string name="text_edit_username">Nuevo nombre de usuario</string>
@@ -67,6 +72,29 @@
     <string name="enable_sorting">Permitir ordenación</string>
     <string name="criteria">Criterio ordenación</string>
     <string name="settings_header">Ajustes</string>
+    <!-- Info -->
+    <string name="text_title_info">Información de la applicación</string>
+    <string name="text_title_what_info">¿Qué es Frutición?</string>
+    <string name="text_what_info">Frutición es una aplicación que está pensada para llevar un control sobre las frutas ingeridas semanalmenre y diariamente para controlar la nutrición. Además de esto, se pueden marcar las frutas más deliciosas o que gusten más como favoritas.</string>
+    <string name="text_title_who_info">¿Quienes somos?</string>
+    <string name="text_who_info">Frutición ha sido creada y desarrollada por unos esudiantes de Ingeniería Informática en Ingeniería del Software en la Escuela Politécnica de Cáceres. Ellos son:</string>
+    <string name="authors" translatable="false">
+        <li>Marcos Santos Muñoz</li>\n
+        <li>Adrian Barquilla Rodríguez</li>\n
+        <li>Jorge Campón Pastor</li>\n
+        <li>Arturo Mejías Velasco</li>
+    </string>
+    <!-- Ingesta -->
+    <string name="text_total_fats">Grasas totales:</string>
+    <string name="text_total_calories">Calorías totales:</string>
+    <string name="text_total_carbo">Hidratos totales:</string>
+    <string name="text_total_sugars">Azúcares totales:</string>
+    <string name="text_total_proteins">Proteínas totales:</string>
+    <string name="value_total_fats">Grasas totales</string>
+    <string name="value_total_calories">Calorías totales</string>
+    <string name="value_total_carbo">Hidratos totales</string>
+    <string name="value_total_sugars">Azúcares totales</string>
+    <string name="value_total_proteins">Proteínas totales</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Mensajes</string>

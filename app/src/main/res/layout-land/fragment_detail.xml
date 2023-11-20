@@ -29,9 +29,10 @@
                 android:src="@drawable/corazon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/divider3"
+                app:layout_constraintHorizontal_bias="0.125"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_detail_name"
-                app:layout_constraintVertical_bias="0.625" />
+                app:layout_constraintVertical_bias="0.611" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -247,6 +248,19 @@
                 android:background="?android:attr/listDivider"
                 app:layout_constraintStart_toEndOf="@+id/text_detail_name"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+            <Button
+                android:id="@+id/add_daily_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/bottom_ingest"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/divider3"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/add_favourite"
+                app:layout_constraintTop_toTopOf="@+id/add_favourite"
+                app:layout_constraintVertical_bias="0.245" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
