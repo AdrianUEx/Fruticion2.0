@@ -37,7 +37,7 @@
     <string name="delete_user_button">Eliminar cuenta</string>
     <!-- Detalles fruta -->
     <string name="title_detail">Detalles</string>
-    <string name="text_detail_name">Nombre de la fruta</string>
+    <string name="text_detail_name">Nombre fruta</string>
     <string name="text_detail_family">Familia</string>
     <string name="text_detail_genus">Género</string>
     <string name="text_detail_order">Orden</string>

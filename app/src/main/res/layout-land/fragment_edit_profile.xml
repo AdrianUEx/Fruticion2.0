@@ -7,32 +7,16 @@
     tools:context=".fragments.EditProfileFragment">
 
     <TextView
-        android:id="@+id/editarPerfilTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:contentDescription="Titulo de la pantalla Editar perfil"
-        android:ems="10"
-        android:text="@string/title_edit"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@color/black"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/editNameTextView"
         android:layout_width="303dp"
         android:layout_height="49dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="28dp"
         android:text="@string/value_edit_username"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editarPerfilTextView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/newUsernameEditText"
@@ -78,6 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
+        android:background="@drawable/formato_botones"
         android:text="@string/save_edit_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
@@ -89,6 +74,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
+        android:background="@drawable/formato_botones"
         android:text="@string/cancel_edit_button"
         app:layout_constraintEnd_toEndOf="@+id/button_save_changes"
         app:layout_constraintHorizontal_bias="0.473"

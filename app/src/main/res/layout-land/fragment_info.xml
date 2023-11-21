@@ -32,6 +32,7 @@
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/iconoeditarperfil"
                 tools:src="@tools:sample/avatars" />
 
             <TextView

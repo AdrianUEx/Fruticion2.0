@@ -118,6 +118,6 @@
         android:backgroundTint="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_arrow_back_24" />
+        app:srcCompat="@drawable/flecha_up" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
