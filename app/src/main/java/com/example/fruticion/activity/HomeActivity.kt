@@ -90,7 +90,8 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnFruitsLoadedListener 
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if ((destination.id == R.id.detailFragment) ||
-                (destination.id == R.id.settingsFragment) ) {
+                (destination.id == R.id.settingsFragment) ||
+                (destination.id == R.id.infoFragment) ) {
                 binding.toolbar.menu.clear()
                 binding.bottomNavigationView.visibility = View.GONE
             } else {

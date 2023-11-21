@@ -19,6 +19,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:alpha="1"
             android:backgroundTintMode="screen">
 
 
@@ -41,6 +42,7 @@
                 android:layout_marginTop="4dp"
                 android:text="@string/text_detail_name"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/text_detail_family"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/fruit_name"
                 app:layout_constraintTop_toBottomOf="@+id/fruit_name" />
@@ -60,6 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/text_detail_family"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/name"
                 app:layout_constraintTop_toBottomOf="@+id/name" />
@@ -70,6 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:text="@string/text_detail_order"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/fruit_family"
                 app:layout_constraintTop_toBottomOf="@+id/fruit_family" />
@@ -80,6 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:text="@string/text_detail_order"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/family"
                 app:layout_constraintTop_toBottomOf="@+id/family" />

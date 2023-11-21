@@ -14,6 +14,7 @@
         android:id="@+id/rv_fruit_list"
         android:layout_width="701dp"
         android:layout_height="397dp"
+        android:alpha="0.8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

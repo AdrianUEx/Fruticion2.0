@@ -14,15 +14,18 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="48dp"
         android:text="@string/text_total_fats"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/text_total_calories"
         app:layout_constraintTop_toBottomOf="@+id/text_total_calories" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_fruit_daily_list"
-        android:layout_width="414dp"
-        android:layout_height="368dp"
+        android:layout_width="409dp"
+        android:layout_height="337dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="4dp"
+        android:alpha="0.8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_total_proteins"
@@ -31,10 +34,12 @@
     <TextView
         android:id="@+id/text_total_calories"
         android:layout_width="wrap_content"
-        android:layout_height="16dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="44dp"
         android:text="@string/text_total_calories"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,6 +49,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:text="@string/text_total_carbo"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/text_total_fats"
         app:layout_constraintTop_toBottomOf="@+id/text_total_fats" />
 
@@ -53,6 +60,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:text="@string/text_total_sugars"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/text_total_carbo"
         app:layout_constraintTop_toBottomOf="@+id/text_total_carbo" />
 
@@ -62,6 +71,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:text="@string/text_total_proteins"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/text_total_sugars"
         app:layout_constraintTop_toBottomOf="@+id/text_total_sugars" />
 
@@ -71,6 +82,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:text="@string/value_total_calories"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/text_total_calories"
         app:layout_constraintTop_toTopOf="@+id/text_total_calories" />
 
@@ -79,6 +92,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/value_total_fats"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/value_total_calories"
         app:layout_constraintTop_toTopOf="@+id/text_total_fats" />
 
@@ -87,6 +102,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/value_total_sugars"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/value_total_carbo"
         app:layout_constraintTop_toTopOf="@+id/text_total_sugars" />
 
@@ -95,6 +112,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/value_total_carbo"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/value_total_fats"
         app:layout_constraintTop_toTopOf="@+id/text_total_carbo" />
 
@@ -103,6 +122,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/value_total_proteins"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/text_total_proteins"
         app:layout_constraintStart_toStartOf="@+id/value_total_sugars" />
 
