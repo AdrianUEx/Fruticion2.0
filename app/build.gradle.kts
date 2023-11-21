@@ -93,7 +93,7 @@ dependencies {
     implementation("androidx.preference:preference-ktx:1.2.0")
 
     // Jetpack Compose Integration
-    implementation("androidx.navigation:navigation-compose:$navVersion")
+    //implementation("androidx.navigation:navigation-compose:$navVersion")
 
     implementation("androidx.core:core-ktx:1.9.0")//Esta libreria no puede faltar (SharedPreferences y otras cosas)
     implementation("androidx.appcompat:appcompat:1.6.1")//Esta libreria es para proporcionar compatibilidad con las versiones anteriores de Android para la IU
@@ -102,5 +102,7 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test:runner:1.5.2")
+    androidTestImplementation("androidx.test:rules:1.5.0")
 
 }
