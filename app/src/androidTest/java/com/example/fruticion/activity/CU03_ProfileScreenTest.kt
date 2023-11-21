@@ -31,7 +31,7 @@ class CU03_ProfileScreenTest {
     fun cU03_ProfileScreenTest() {
         val appCompatButton = onView(
             allOf(
-                withId(R.id.buttonRegister), withText("Join"),
+                withId(R.id.buttonRegister), withText(R.string.button_login_join),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -100,7 +100,7 @@ class CU03_ProfileScreenTest {
 
         val appCompatButton2 = onView(
             allOf(
-                withId(R.id.buttonRegister), withText("Join"),
+                withId(R.id.buttonRegister), withText(R.string.button_join_join),
                 childAtPosition(
                     allOf(
                         withId(R.id.PlainTextRegistrate),
@@ -148,7 +148,7 @@ class CU03_ProfileScreenTest {
 
         val appCompatButton3 = onView(
             allOf(
-                withId(R.id.buttonLogin), withText("Login"),
+                withId(R.id.buttonLogin), withText(R.string.button_login_login),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -163,7 +163,7 @@ class CU03_ProfileScreenTest {
 
         val frameLayout = onView(
             allOf(
-                withId(R.id.searchFragment), withContentDescription("Home"),
+                withId(R.id.searchFragment), withContentDescription(R.string.title_home),
                 withParent(withParent(withId(R.id.bottomNavigationView))),
                 isDisplayed()
             )
@@ -172,7 +172,7 @@ class CU03_ProfileScreenTest {
 
         val bottomNavigationItemView = onView(
             allOf(
-                withId(R.id.profileFragment), withContentDescription("Profile"),
+                withId(R.id.profileFragment), withContentDescription(R.string.bottom_profile),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.bottomNavigationView),

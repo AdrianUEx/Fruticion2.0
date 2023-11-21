@@ -31,7 +31,7 @@ class CU08_CheckInfoAppTest {
     fun cU08_CheckInfoAppTest() {
         val appCompatButton = onView(
             allOf(
-                withId(R.id.buttonRegister), withText("Join"),
+                withId(R.id.buttonRegister), withText(R.string.button_login_join),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -100,7 +100,7 @@ class CU08_CheckInfoAppTest {
 
         val appCompatButton2 = onView(
             allOf(
-                withId(R.id.buttonRegister), withText("Join"),
+                withId(R.id.buttonRegister), withText(R.string.button_join_join),
                 childAtPosition(
                     allOf(
                         withId(R.id.PlainTextRegistrate),
@@ -148,7 +148,7 @@ class CU08_CheckInfoAppTest {
 
         val appCompatButton3 = onView(
             allOf(
-                withId(R.id.buttonLogin), withText("Login"),
+                withId(R.id.buttonLogin), withText(R.string.button_login_login),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -163,7 +163,7 @@ class CU08_CheckInfoAppTest {
 
         val button = onView(
             allOf(
-                withId(R.id.infoFragment), withContentDescription("Search for fruits"),
+                withId(R.id.infoFragment), withContentDescription(R.string.info_title),
                 withParent(withParent(withId(R.id.toolbar))),
                 isDisplayed()
             )
@@ -172,7 +172,7 @@ class CU08_CheckInfoAppTest {
 
         val actionMenuItemView = onView(
             allOf(
-                withId(R.id.infoFragment), withContentDescription("Search for fruits"),
+                withId(R.id.infoFragment), withContentDescription(R.string.info_title),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.toolbar),

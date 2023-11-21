@@ -32,7 +32,7 @@ class CU13_DailyIntakesTest {
     fun cU13_DailyIntakesTest() {
         val appCompatButton = onView(
             allOf(
-                withId(R.id.buttonRegister), withText("Join"),
+                withId(R.id.buttonRegister), withText(R.string.button_login_join),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -101,7 +101,7 @@ class CU13_DailyIntakesTest {
 
         val appCompatButton2 = onView(
             allOf(
-                withId(R.id.buttonRegister), withText("Join"),
+                withId(R.id.buttonRegister), withText(R.string.button_join_join),
                 childAtPosition(
                     allOf(
                         withId(R.id.PlainTextRegistrate),
@@ -149,7 +149,7 @@ class CU13_DailyIntakesTest {
 
         val appCompatButton3 = onView(
             allOf(
-                withId(R.id.buttonLogin), withText("Login"),
+                withId(R.id.buttonLogin), withText(R.string.button_login_login),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -183,7 +183,7 @@ class CU13_DailyIntakesTest {
 
         val button = onView(
             allOf(
-                withId(R.id.add_daily_button), withText("ADD TO INTAKE"),
+                withId(R.id.add_daily_button), withText(R.string.bottom_intake),
                 withParent(
                     allOf(
                         withId(R.id.detailFragment),
@@ -197,7 +197,7 @@ class CU13_DailyIntakesTest {
 
         val appCompatButton4 = onView(
             allOf(
-                withId(R.id.add_daily_button), withText("Add to intake"),
+                withId(R.id.add_daily_button), withText(R.string.bottom_intake),
                 childAtPosition(
                     allOf(
                         withId(R.id.detailFragment),
@@ -216,7 +216,9 @@ class CU13_DailyIntakesTest {
 
         val appCompatImageButton = onView(
             allOf(
-                withContentDescription("Navigate up"),
+                /*Esta descripción la genera de forma automatica android por lo que no se puede meter en un string y si el dispositivo
+                *se cambia de idioma no reconoce esa descipcion*/
+                //withContentDescription("Navigate up"),
                 childAtPosition(
                     allOf(
                         withId(R.id.toolbar),
@@ -234,7 +236,7 @@ class CU13_DailyIntakesTest {
 
         val bottomNavigationItemView = onView(
             allOf(
-                withId(R.id.dailyIntakeFragment), withContentDescription("Daily"),
+                withId(R.id.dailyIntakeFragment), withContentDescription(R.string.bottom_daily),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.bottomNavigationView),

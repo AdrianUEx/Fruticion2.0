@@ -31,7 +31,7 @@ class CU01_CreateUserTest {
     fun cU01_CreateUserTest() {
         val appCompatButton = onView(
             allOf(
-                withId(R.id.buttonRegister), withText("Join"),
+                withId(R.id.buttonRegister), withText(R.string.button_login_join),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -100,7 +100,7 @@ class CU01_CreateUserTest {
 
         val appCompatButton2 = onView(
             allOf(
-                withId(R.id.buttonRegister), withText("Join"),
+                withId(R.id.buttonRegister), withText(R.string.button_join_join),
                 childAtPosition(
                     allOf(
                         withId(R.id.PlainTextRegistrate),
@@ -157,7 +157,7 @@ class CU01_CreateUserTest {
 
         val appCompatButton3 = onView(
             allOf(
-                withId(R.id.buttonLogin), withText("Login"),
+                withId(R.id.buttonLogin), withText(R.string.button_login_login),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),

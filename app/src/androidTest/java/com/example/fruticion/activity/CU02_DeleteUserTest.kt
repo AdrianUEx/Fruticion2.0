@@ -31,7 +31,7 @@ class CU02_DeleteUserTest {
     fun loginActivityTest() {
         val appCompatButton = onView(
             allOf(
-                withId(R.id.buttonRegister), withText("Join"),
+                withId(R.id.buttonRegister), withText(R.string.button_login_join),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -100,7 +100,7 @@ class CU02_DeleteUserTest {
 
         val appCompatButton2 = onView(
             allOf(
-                withId(R.id.buttonRegister), withText("Join"),
+                withId(R.id.buttonRegister), withText(R.string.button_join_join),
                 childAtPosition(
                     allOf(
                         withId(R.id.PlainTextRegistrate),
@@ -148,7 +148,7 @@ class CU02_DeleteUserTest {
 
         val appCompatButton3 = onView(
             allOf(
-                withId(R.id.buttonLogin), withText("Login"),
+                withId(R.id.buttonLogin), withText(R.string.button_login_login),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -164,7 +164,7 @@ class CU02_DeleteUserTest {
 
         val bottomNavigationItemView = onView(
             allOf(
-                withId(R.id.profileFragment), withContentDescription("Profile"),
+                withId(R.id.profileFragment), withContentDescription(R.string.bottom_profile),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.bottomNavigationView),
@@ -194,7 +194,7 @@ class CU02_DeleteUserTest {
 
         val button = onView(
             allOf(
-                withId(R.id.delete_user_button), withText("DELETE ACCOUNT"),
+                withId(R.id.delete_user_button), withText(R.string.delete_user_button),
                 withParent(
                     allOf(
                         withId(R.id.profileFragment),
@@ -208,7 +208,7 @@ class CU02_DeleteUserTest {
 
         val appCompatButton4 = onView(
             allOf(
-                withId(R.id.delete_user_button), withText("Delete account"),
+                withId(R.id.delete_user_button), withText(R.string.delete_user_button),
                 childAtPosition(
                     allOf(
                         withId(R.id.profileFragment),
@@ -227,7 +227,7 @@ class CU02_DeleteUserTest {
 
         val appCompatButton5 = onView(
             allOf(
-                withId(R.id.buttonLogin), withText("Login"),
+                withId(R.id.buttonLogin), withText(R.string.button_login_login),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),

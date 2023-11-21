@@ -56,7 +56,9 @@
     <string name="value_detail_protein">Protein</string>
     <string name="add_fav_mes">Add fruit to favorites</string>
     <string name="remove_fav_mes">Remove fruit from favorites</string>
-    <string name="bottom_ingest">Add to intake</string>
+    <string name="bottom_intake">Add to intake</string>
+    <string name="add_favourite_description">Pink heart-shaped add to favorites button</string>
+    <string name="time_picker">Select hour</string>
     <!--Edit profile-->
     <string name="text_edit_username">New username</string>
     <string name="value_edit_username">New username</string>
@@ -105,6 +107,8 @@
     <string name="text_total_sugars">Total sugars:</string>
     <string name="text_total_proteins">Total proteins:</string>
     <string name="value_total_fats">Total fats</string>
+    <string name="new_username_description">Bar to insert the new username</string>
+    <string name="new_password_description">Field to enter the new password</string>
 
 
 </resources>

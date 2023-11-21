@@ -31,7 +31,7 @@ class CU10_LogoutUserTest {
     fun cU10_LogoutUserTest() {
         val appCompatButton = onView(
             allOf(
-                withId(R.id.buttonRegister), withText("Join"),
+                withId(R.id.buttonRegister), withText(R.string.button_login_join),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -100,7 +100,7 @@ class CU10_LogoutUserTest {
 
         val appCompatButton2 = onView(
             allOf(
-                withId(R.id.buttonRegister), withText("Join"),
+                withId(R.id.buttonRegister), withText(R.string.button_join_join),
                 childAtPosition(
                     allOf(
                         withId(R.id.PlainTextRegistrate),
@@ -148,7 +148,7 @@ class CU10_LogoutUserTest {
 
         val appCompatButton3 = onView(
             allOf(
-                withId(R.id.buttonLogin), withText("Login"),
+                withId(R.id.buttonLogin), withText(R.string.button_login_login),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -163,7 +163,7 @@ class CU10_LogoutUserTest {
 
         val bottomNavigationItemView = onView(
             allOf(
-                withId(R.id.profileFragment), withContentDescription("Profile"),
+                withId(R.id.profileFragment), withContentDescription(R.string.bottom_profile),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.bottomNavigationView),
@@ -179,7 +179,7 @@ class CU10_LogoutUserTest {
 
         val button = onView(
             allOf(
-                withId(R.id.logout_button), withText("LOGOUT"),
+                withId(R.id.logout_button), withText(R.string.logout_profile_button),
                 withParent(
                     allOf(
                         withId(R.id.profileFragment),
@@ -193,7 +193,7 @@ class CU10_LogoutUserTest {
 
         val appCompatButton4 = onView(
             allOf(
-                withId(R.id.logout_button), withText("Logout"),
+                withId(R.id.logout_button), withText(R.string.logout_profile_button),
                 childAtPosition(
                     allOf(
                         withId(R.id.profileFragment),
@@ -212,7 +212,7 @@ class CU10_LogoutUserTest {
 
         val button2 = onView(
             allOf(
-                withId(R.id.buttonLogin), withText("LOGIN"),
+                withId(R.id.buttonLogin), withText(R.string.button_login_login),
                 withParent(withParent(withId(android.R.id.content))),
                 isDisplayed()
             )

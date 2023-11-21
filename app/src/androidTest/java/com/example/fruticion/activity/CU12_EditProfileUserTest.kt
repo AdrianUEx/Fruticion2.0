@@ -31,7 +31,7 @@ class CU12_EditProfileUserTest {
     fun cU12_EditProfileUserTest() {
         val appCompatButton = onView(
             allOf(
-                withId(R.id.buttonRegister), withText("Join"),
+                withId(R.id.buttonRegister), withText(R.string.button_login_join),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -100,7 +100,7 @@ class CU12_EditProfileUserTest {
 
         val appCompatButton2 = onView(
             allOf(
-                withId(R.id.buttonRegister), withText("Join"),
+                withId(R.id.buttonRegister), withText(R.string.button_join_join),
                 childAtPosition(
                     allOf(
                         withId(R.id.PlainTextRegistrate),
@@ -148,7 +148,7 @@ class CU12_EditProfileUserTest {
 
         val appCompatButton3 = onView(
             allOf(
-                withId(R.id.buttonLogin), withText("Login"),
+                withId(R.id.buttonLogin), withText(R.string.button_login_login),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -163,7 +163,7 @@ class CU12_EditProfileUserTest {
 
         val frameLayout = onView(
             allOf(
-                withId(R.id.profileFragment), withContentDescription("Profile"),
+                withId(R.id.profileFragment), withContentDescription(R.string.bottom_profile),
                 withParent(withParent(withId(R.id.bottomNavigationView))),
                 isDisplayed()
             )
@@ -172,7 +172,7 @@ class CU12_EditProfileUserTest {
 
         val bottomNavigationItemView = onView(
             allOf(
-                withId(R.id.profileFragment), withContentDescription("Profile"),
+                withId(R.id.profileFragment), withContentDescription(R.string.bottom_profile),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.bottomNavigationView),
@@ -188,7 +188,7 @@ class CU12_EditProfileUserTest {
 
         val button = onView(
             allOf(
-                withId(R.id.edit_profile_button), withText("EDIT PROFILE"),
+                withId(R.id.edit_profile_button), withText(R.string.edit_profile_button),
                 withParent(
                     allOf(
                         withId(R.id.profileFragment),
@@ -202,7 +202,7 @@ class CU12_EditProfileUserTest {
 
         val appCompatButton4 = onView(
             allOf(
-                withId(R.id.edit_profile_button), withText("Edit Profile"),
+                withId(R.id.edit_profile_button), withText(R.string.edit_profile_button),
                 childAtPosition(
                     allOf(
                         withId(R.id.profileFragment),
@@ -222,7 +222,7 @@ class CU12_EditProfileUserTest {
         val appCompatEditText6 = onView(
             allOf(
                 withId(R.id.newUsernameEditText),
-                withContentDescription("Barra para insertar el nuevo nombre de usuario"),
+                withContentDescription(R.string.new_username_description),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.nav_host_fragment),
@@ -235,9 +235,25 @@ class CU12_EditProfileUserTest {
         )
         appCompatEditText6.perform(replaceText("admin"), closeSoftKeyboard())
 
+        val appCompatEditText7 = onView(
+            allOf(
+                withId(R.id.newPasswordEditText),
+                withContentDescription(R.string.new_password_description),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.nav_host_fragment),
+                        0
+                    ),
+                    4
+                ),
+                isDisplayed()
+            )
+        )
+        appCompatEditText7.perform(replaceText("admin"), closeSoftKeyboard())
+
         val appCompatButton5 = onView(
             allOf(
-                withId(R.id.button_save_changes), withText("Save changes"),
+                withId(R.id.button_save_changes), withText(R.string.save_edit_button),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.nav_host_fragment),
@@ -264,6 +280,20 @@ class CU12_EditProfileUserTest {
             )
         )
         textView.check(matches(withText("admin")))
+
+        val textView2 = onView(
+            allOf(
+                withId(R.id.value_profile_password), withText("admin"),
+                withParent(
+                    allOf(
+                        withId(R.id.profileFragment),
+                        withParent(withId(R.id.nav_host_fragment))
+                    )
+                ),
+                isDisplayed()
+            )
+        )
+        textView2.check(matches(withText("admin")))
     }
 
     private fun childAtPosition(

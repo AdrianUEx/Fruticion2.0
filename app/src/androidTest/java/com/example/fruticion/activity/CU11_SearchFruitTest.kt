@@ -31,7 +31,7 @@ class CU11_SearchFruitTest {
     fun cU11_SearchFruitTest() {
         val appCompatButton = onView(
             allOf(
-                withId(R.id.buttonRegister), withText("Join"),
+                withId(R.id.buttonRegister), withText(R.string.button_login_join),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -100,7 +100,7 @@ class CU11_SearchFruitTest {
 
         val appCompatButton2 = onView(
             allOf(
-                withId(R.id.buttonRegister), withText("Join"),
+                withId(R.id.buttonRegister), withText(R.string.button_join_join),
                 childAtPosition(
                     allOf(
                         withId(R.id.PlainTextRegistrate),
@@ -148,7 +148,7 @@ class CU11_SearchFruitTest {
 
         val appCompatButton3 = onView(
             allOf(
-                withId(R.id.buttonLogin), withText("Login"),
+                withId(R.id.buttonLogin), withText(R.string.button_login_login),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -163,7 +163,7 @@ class CU11_SearchFruitTest {
 
         val button = onView(
             allOf(
-                withId(R.id.action_search), withContentDescription("Search for fruits"),
+                withId(R.id.action_search), withContentDescription(R.string.search_text),
                 withParent(withParent(withId(R.id.toolbar))),
                 isDisplayed()
             )
@@ -172,7 +172,7 @@ class CU11_SearchFruitTest {
 
         val actionMenuItemView = onView(
             allOf(
-                withId(R.id.action_search), withContentDescription("Search for fruits"),
+                withId(R.id.action_search), withContentDescription(R.string.search_text),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.toolbar),

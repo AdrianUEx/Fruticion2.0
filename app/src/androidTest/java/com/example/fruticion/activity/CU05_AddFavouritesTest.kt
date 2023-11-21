@@ -32,7 +32,7 @@ class CU05_AddFavouritesTest {
     fun cU05_AddFavouritesTest() {
         val appCompatButton = onView(
             allOf(
-                withId(R.id.buttonRegister), withText("Join"),
+                withId(R.id.buttonRegister), withText(R.string.button_login_join),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -101,7 +101,7 @@ class CU05_AddFavouritesTest {
 
         val appCompatButton2 = onView(
             allOf(
-                withId(R.id.buttonRegister), withText("Join"),
+                withId(R.id.buttonRegister), withText(R.string.button_join_join),
                 childAtPosition(
                     allOf(
                         withId(R.id.PlainTextRegistrate),
@@ -149,7 +149,7 @@ class CU05_AddFavouritesTest {
 
         val appCompatButton3 = onView(
             allOf(
-                withId(R.id.buttonLogin), withText("Login"),
+                withId(R.id.buttonLogin), withText(R.string.button_login_login),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -184,7 +184,7 @@ class CU05_AddFavouritesTest {
         val appCompatImageButton = onView(
             allOf(
                 withId(R.id.add_favourite),
-                withContentDescription("Boton de anadir a favoritos con forma de corazon rosa"),
+                withContentDescription(R.string.add_favourite_description),
                 childAtPosition(
                     allOf(
                         withId(R.id.detailFragment),
@@ -203,7 +203,9 @@ class CU05_AddFavouritesTest {
 
         val appCompatImageButton2 = onView(
             allOf(
-                withContentDescription("Navigate up"),
+                /*Esta descripción la genera de forma automatica android por lo que no se puede meter en un string y si el dispositivo
+                *se cambia de idioma no reconoce esa descipcion*/
+                //withContentDescription("Navigate up"),
                 childAtPosition(
                     allOf(
                         withId(R.id.toolbar),
@@ -221,7 +223,7 @@ class CU05_AddFavouritesTest {
 
         val bottomNavigationItemView = onView(
             allOf(
-                withId(R.id.favoriteFragment), withContentDescription("Favorites"),
+                withId(R.id.favoriteFragment), withContentDescription(R.string.bottom_fav),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.bottomNavigationView),

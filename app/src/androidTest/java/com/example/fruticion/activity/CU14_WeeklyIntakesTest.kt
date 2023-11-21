@@ -32,7 +32,7 @@ class CU14_WeeklyIntakesTest {
     fun cU14_WeeklyIntakesTest() {
         val appCompatButton = onView(
             allOf(
-                withId(R.id.buttonRegister), withText("Join"),
+                withId(R.id.buttonRegister), withText(R.string.button_login_join),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -101,7 +101,7 @@ class CU14_WeeklyIntakesTest {
 
         val appCompatButton2 = onView(
             allOf(
-                withId(R.id.buttonRegister), withText("Join"),
+                withId(R.id.buttonRegister), withText(R.string.button_join_join),
                 childAtPosition(
                     allOf(
                         withId(R.id.PlainTextRegistrate),
@@ -149,7 +149,7 @@ class CU14_WeeklyIntakesTest {
 
         val appCompatButton3 = onView(
             allOf(
-                withId(R.id.buttonLogin), withText("Login"),
+                withId(R.id.buttonLogin), withText(R.string.button_login_login),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -183,7 +183,7 @@ class CU14_WeeklyIntakesTest {
 
         val appCompatButton4 = onView(
             allOf(
-                withId(R.id.add_daily_button), withText("Add to intake"),
+                withId(R.id.add_daily_button), withText(R.string.bottom_intake),
                 childAtPosition(
                     allOf(
                         withId(R.id.detailFragment),
@@ -201,7 +201,9 @@ class CU14_WeeklyIntakesTest {
 
         val appCompatImageButton = onView(
             allOf(
-                withContentDescription("Navigate up"),
+                /*Esta descripción la genera de forma automatica android por lo que no se puede meter en un string y si el dispositivo
+                *se cambia de idioma no reconoce esa descipcion*/
+                //withContentDescription("Navigate up"),
                 childAtPosition(
                     allOf(
                         withId(R.id.toolbar),
@@ -219,7 +221,7 @@ class CU14_WeeklyIntakesTest {
 
         val frameLayout = onView(
             allOf(
-                withId(R.id.weeklyIntakeFragment), withContentDescription("Weekly"),
+                withId(R.id.weeklyIntakeFragment), withContentDescription(R.string.bottom_weekly),
                 withParent(withParent(withId(R.id.bottomNavigationView))),
                 isDisplayed()
             )
@@ -228,7 +230,7 @@ class CU14_WeeklyIntakesTest {
 
         val bottomNavigationItemView = onView(
             allOf(
-                withId(R.id.weeklyIntakeFragment), withContentDescription("Weekly"),
+                withId(R.id.weeklyIntakeFragment), withContentDescription(R.string.bottom_weekly),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.bottomNavigationView),

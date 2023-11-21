@@ -32,7 +32,7 @@ class CU15_CreateAlarmUserTest {
     fun cU15_CreateAlarmUserTest() {
         val appCompatButton = onView(
             allOf(
-                withId(R.id.buttonRegister), withText("Join"),
+                withId(R.id.buttonRegister), withText(R.string.button_login_join),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -101,7 +101,7 @@ class CU15_CreateAlarmUserTest {
 
         val appCompatButton2 = onView(
             allOf(
-                withId(R.id.buttonRegister), withText("Join"),
+                withId(R.id.buttonRegister), withText(R.string.button_join_join),
                 childAtPosition(
                     allOf(
                         withId(R.id.PlainTextRegistrate),
@@ -149,7 +149,7 @@ class CU15_CreateAlarmUserTest {
 
         val appCompatButton3 = onView(
             allOf(
-                withId(R.id.buttonLogin), withText("Login"),
+                withId(R.id.buttonLogin), withText(R.string.button_login_login),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -183,7 +183,7 @@ class CU15_CreateAlarmUserTest {
 
         val button = onView(
             allOf(
-                withId(R.id.timePickerButton), withText("SELECCIONAR HORA"),
+                withId(R.id.timePickerButton), withText(R.string.time_picker),
                 withParent(
                     allOf(
                         withId(R.id.detailFragment),
@@ -197,7 +197,7 @@ class CU15_CreateAlarmUserTest {
 
         val appCompatButton4 = onView(
             allOf(
-                withId(R.id.timePickerButton), withText("Seleccionar Hora"),
+                withId(R.id.timePickerButton), withText(R.string.time_picker),
                 childAtPosition(
                     allOf(
                         withId(R.id.detailFragment),
@@ -216,7 +216,7 @@ class CU15_CreateAlarmUserTest {
 
         val appCompatButton5 = onView(
             allOf(
-                withId(android.R.id.button1), withText("OK"),
+                withId(android.R.id.button1), withText(android.R.string.ok),
                 childAtPosition(
                     childAtPosition(
                         withClassName(`is`("android.widget.ScrollView")),

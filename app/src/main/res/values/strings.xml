@@ -57,7 +57,9 @@
     <string name="value_detail_protein">Proteínas</string>
     <string name="add_fav_mes">Fruta añadida a favoritos</string>
     <string name="remove_fav_mes">Fruta eliminada de favoritos</string>
-    <string name="bottom_ingest">Añadir a la ingesta</string>
+    <string name="bottom_intake">Añadir a la ingesta</string>
+    <string name="add_favourite_description">Boton de anadir a favoritos con forma de corazon rosa</string>
+    <string name="time_picker">Seleccionar hora</string>
     <!-- Editar perfil -->
     <string name="title_edit">Editar perfil</string>
     <string name="text_edit_username">Nuevo nombre de usuario</string>
@@ -66,6 +68,8 @@
     <string name="value_edit_password">Nueva contraseña</string>
     <string name="save_edit_button">Guardar cambios</string>
     <string name="cancel_edit_button">Cancelar</string>
+    <string name="new_username_description">Barra para insertar el nuevo nombre de usuario</string>
+    <string name="new_password_description">Campo para introducir la nueva contraseña</string>
     <!-- Ajustes -->
     <string name="autologin">Autologin</string>
     <string name="sorting">Ordenación</string>
