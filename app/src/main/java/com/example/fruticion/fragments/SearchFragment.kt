@@ -22,19 +22,10 @@ import com.example.fruticion.model.Fruit
 import com.example.fruticion.databinding.FragmentSearchBinding
 import kotlinx.coroutines.launch
 
-/*
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-*/
-
-
-
 class SearchFragment : Fragment()   {
 
     private var _binding: FragmentSearchBinding? = null
-    private val binding get() = _binding!!
-
-    var homeActivity: HomeActivity? = null
+    private val binding get() = _binding!! //Esta linea la tenia Roberto hecha asi en el lab en los Fragment, y por eso lo hemos hecho asi.
 
     private lateinit var searchAdapter: SearchAdapter
     private var onFruitsLoadedListener: OnFruitsLoadedListener? = null
@@ -61,11 +52,11 @@ class SearchFragment : Fragment()   {
         lifecycleScope.launch{
             //obtenemos TODAS las frutas de la API (45 frutas)
             val fruits: List<SerializedFruit> = fetchAllFruits()
-            Log.i("Contenido de fetchAllFruits","$fruits")
 
 
             //Metemos en Room todas las frutas una a una. Si ya existen, no se insertan (gestionado por Room)
             for (fruit in fruits) {
+                //Se usa el mapper para mapear correctamente la fruta en el modelo serializado al modelo interno de la aplicacion.
                 val fruit2 = FruitMapper.mapFromSerializedFruit(fruit)
 
                 Log.i("Carga db de la API","$fruit2")
@@ -74,13 +65,12 @@ class SearchFragment : Fragment()   {
 
             //Recuperamos de Room todas las frutas para meterlas por el RecyclerView
             val dbFruits = db.fruitDao().getAll()
-            Log.i("Contenido de DBfruits","$dbFruits")
             onFruitsLoadedListener?.onFruitsLoaded(dbFruits)
             setUpRecyclerView(dbFruits)
         }
     }
 
-    //Este metodo solamente se encarga de llamar al getAllFruits de FruticionAPI.
+    //Este metodo solamente se encarga de llamar al getAllFruits() de FruticionAPI.
     private suspend fun fetchAllFruits(): List<SerializedFruit> {
         var fruitList = listOf<SerializedFruit>()
         try {

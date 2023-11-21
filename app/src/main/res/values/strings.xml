@@ -59,7 +59,7 @@
     <string name="remove_fav_mes">Fruta eliminada de favoritos</string>
     <string name="bottom_intake">Añadir a la ingesta</string>
     <string name="add_favourite_description">Boton de anadir a favoritos con forma de corazon rosa</string>
-    <string name="time_picker">Seleccionar hora</string>
+    <string name="time_picker">Recordatorio</string>
     <!-- Editar perfil -->
     <string name="title_edit">Editar perfil</string>
     <string name="text_edit_username">Nuevo nombre de usuario</string>

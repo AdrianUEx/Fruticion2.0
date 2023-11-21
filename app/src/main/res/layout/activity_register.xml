@@ -55,7 +55,12 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/formato_botones"
+        android:fontFamily="casual"
         android:text="@string/button_join_join"
+        android:textAllCaps="false"
+        android:textSize="28dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editTextConfirmPassword" />
@@ -65,7 +70,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="@drawable/formato_botones"
+        android:fontFamily="casual"
         android:text="@string/cancel_edit_button"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="28dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/buttonRegister"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/buttonRegister"
@@ -80,22 +90,25 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextText"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@mipmap/ic_launcher" />
 
-    <EditText
+    <TextView
         android:id="@+id/editTextText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="338dp"
+        android:layout_height="57dp"
         android:layout_marginStart="24dp"
         android:ems="10"
+        android:fontFamily="casual"
         android:inputType="text"
         android:text="@string/title_join"
-        android:textSize="30sp"
-        android:textStyle="bold"
+        android:textColor="#000000"
+        android:textSize="36dp"
         app:layout_constraintBottom_toBottomOf="@+id/buttonBackToLogin"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toEndOf="@+id/buttonBackToLogin"
-        app:layout_constraintTop_toTopOf="@+id/buttonBackToLogin" />
+        app:layout_constraintTop_toTopOf="@+id/buttonBackToLogin"
+        app:layout_constraintVertical_bias="0.571" />
 
     <ImageButton
         android:id="@+id/buttonBackToLogin"
