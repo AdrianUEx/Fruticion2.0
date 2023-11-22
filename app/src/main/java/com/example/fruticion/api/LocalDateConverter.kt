@@ -11,7 +11,6 @@ class LocalDateConverter {
         return LocalDate.parse(date,formatter); //Devuelve un LocalDate a partir de un String
     }
 
-
     @TypeConverter
     fun localDateToString(date:LocalDate):String{
         val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")

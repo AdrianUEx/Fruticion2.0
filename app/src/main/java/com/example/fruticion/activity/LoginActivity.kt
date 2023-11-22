@@ -103,7 +103,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun navigateToHomeActivity() {
 
-        var fechaSistema = LocalDate.now()
+        val fechaSistema = LocalDate.now()
         lifecycleScope.launch {
             //borra la tabla de frutas diarias del usuario (no toda la tabla)
             db.dailyIntakeDao().deleteDailyfruits(currentUserId!!, fechaSistema)

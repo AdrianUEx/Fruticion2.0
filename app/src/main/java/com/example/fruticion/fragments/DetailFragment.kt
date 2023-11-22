@@ -32,6 +32,7 @@ import com.example.fruticion.model.Fruit
 import com.example.fruticion.model.WeeklyIntake
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+import java.time.LocalTime
 import java.util.Calendar
 
 class DetailFragment : Fragment() {
@@ -129,14 +130,16 @@ class DetailFragment : Fragment() {
                         DailyIntake(
                         fruitId,
                         currentUserId!!,
-                        LocalDate.now()
+                        LocalDate.now(),
+                        LocalTime.now()
                     ))
 
                     db.weeklyIntakeDao().insertWeeklyFruit(
                         WeeklyIntake(
                             fruitId,
                             currentUserId!!,
-                            LocalDate.now()
+                            LocalDate.now(),
+                            LocalTime.now()
                         )
                     )
                 }

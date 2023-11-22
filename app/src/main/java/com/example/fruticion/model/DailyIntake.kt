@@ -4,9 +4,10 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import java.io.Serializable
 import java.time.LocalDate
+import java.time.LocalTime
 
 @Entity(
-    primaryKeys = ["userId", "fruitId"],
+    primaryKeys = ["userId", "fruitId", "additionTime"],
     foreignKeys = [
         ForeignKey(
             entity = User::class,
@@ -24,5 +25,6 @@ import java.time.LocalDate
 data class DailyIntake(
     var fruitId: Long,
     var userId: Long,
-    var additionDate: LocalDate
+    var additionDate: LocalDate,
+    var additionTime: LocalTime //este parametro es para que no pete Room al meter dos frutas iguales
 ): Serializable

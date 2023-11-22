@@ -7,10 +7,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -22,8 +19,6 @@ import com.example.fruticion.fragments.SearchFragment
 import com.example.fruticion.model.Fruit
 import com.example.fruticion.R
 import com.example.fruticion.databinding.ActivityHomeBinding
-import com.example.fruticion.fragments.InfoFragment
-import com.example.fruticion.fragments.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity(), SearchFragment.OnFruitsLoadedListener {
@@ -97,7 +92,7 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnFruitsLoadedListener 
             } else {
                 binding.toolbar.visibility = View.VISIBLE
                 binding.bottomNavigationView.visibility = View.VISIBLE
-               // setSupportActionBar(binding.toolbar)
+               setSupportActionBar(binding.toolbar)
             }
         }
     }
@@ -112,7 +107,7 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnFruitsLoadedListener 
     }*/
 
 
-    //Metodos ToolBar
+    //Metodos ToolBar------------------------------------------------------------------------------------------------------------------------
 
     //Este metodo controla la flecha Up que aparece cuando pinchas la lupa
     override fun onSupportNavigateUp(): Boolean {

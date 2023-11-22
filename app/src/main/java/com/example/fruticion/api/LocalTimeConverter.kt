@@ -1,0 +1,19 @@
+package com.example.fruticion.api
+
+import androidx.room.TypeConverter
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
+
+class LocalTimeConverter {
+    @TypeConverter
+    fun stringToLocalTime(date: String) : LocalTime{
+        return LocalTime.parse(date)
+
+    }
+
+    @TypeConverter
+    fun localTimeToString(date: LocalTime) : String{
+        val formatter = DateTimeFormatter.ofPattern("HH:mm:ss.SSS")
+        return date.format(formatter)
+    }
+}

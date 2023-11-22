@@ -63,12 +63,19 @@ class WeeklyIntakeFragment : Fragment() {
             totalCarbo += it.carbohydrates!!
             totalProtein += it.protein!!
         }
+        //Se formatean en String antes de pasarselo a los TextView para evitar el fallo de los 15 ceros
+        var formatCalories = String.format("%.2f", totalCalories)
+        val formatCarbo = String.format("%.2f", totalCarbo)
+        val formatFats = String.format("%.2f", totalFats)
+        val formatSugars = String.format("%.2f", totalSugars)
+        val formatProteins = String.format("%.2f", totalProtein)
+
         with(binding){
-            valueTotalCalories.text = totalCalories.toString()
-            valueTotalCarbo.text = totalCarbo.toString()
-            valueTotalFats.text = totalFats.toString()
-            valueTotalSugars.text= totalSugars.toString()
-            valueTotalProteins.text = totalProtein.toString()
+            valueTotalCalories.text = formatCalories
+            valueTotalCarbo.text = formatCarbo
+            valueTotalFats.text = formatFats
+            valueTotalSugars.text= formatSugars
+            valueTotalProteins.text = formatProteins
         }
 
     }
