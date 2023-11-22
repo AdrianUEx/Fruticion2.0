@@ -143,6 +143,7 @@ class DetailFragment : Fragment() {
                         )
                     )
                 }
+                Toast.makeText(requireContext(), R.string.add_intake_mes, Toast.LENGTH_SHORT).show()
                 //findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToDailyIntakeFragment(fruitId=fruitId))
             }
             timePickerButton?.setOnClickListener {

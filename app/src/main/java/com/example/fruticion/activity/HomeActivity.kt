@@ -61,6 +61,8 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnFruitsLoadedListener 
             setOf(
                 R.id.searchFragment,
                 R.id.favoriteFragment,
+                R.id.dailyIntakeFragment,
+                R.id.weeklyIntakeFragment,
                 R.id.profileFragment
             )
         )
@@ -80,8 +82,8 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnFruitsLoadedListener 
         }*/
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if ((destination.id == R.id.detailFragment) ||

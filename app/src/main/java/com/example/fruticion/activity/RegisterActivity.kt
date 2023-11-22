@@ -26,9 +26,10 @@ class RegisterActivity : AppCompatActivity() {
         }
 
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-         binding = ActivityRegisterBinding.inflate(layoutInflater)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //Inicializacion de la base de datos
@@ -41,20 +42,37 @@ class RegisterActivity : AppCompatActivity() {
         with(binding) {
 
             buttonRegister.setOnClickListener {
-                val check = CredentialCheck.join(editTextRegisterUsername.text.toString(), editTextRegisterPassword.text.toString(), editTextConfirmPassword.text.toString())
-                if(check.fail)
-                    Toast.makeText(binding.root.context, check.msg, Toast.LENGTH_SHORT).show()
-                else {
-                    lifecycleScope.launch {
-                        val user = User (null, editTextRegisterUsername.text.toString(), editTextRegisterPassword.text.toString())
+                lifecycleScope.launch {
+                    if (db.userDao()
+                            .getUserByUsername(editTextRegisterUsername.text.toString()) == null
+                    ) {
+                        val check = CredentialCheck.join(
+                            editTextRegisterUsername.text.toString(),
+                            editTextRegisterPassword.text.toString(),
+                            editTextConfirmPassword.text.toString()
+                        )
+                        if (check.fail)
+                            Toast.makeText(binding.root.context, check.msg, Toast.LENGTH_SHORT)
+                                .show()
+                        else {
 
-                        db.userDao().insertUser(user)
+                            val user = User(
+                                null,
+                                editTextRegisterUsername.text.toString(),
+                                editTextRegisterPassword.text.toString()
+                            )
 
-                        Toast.makeText(binding.root.context, check.msg, Toast.LENGTH_SHORT).show()
-                        finish()
+                            db.userDao().insertUser(user)
+
+                            Toast.makeText(binding.root.context, check.msg, Toast.LENGTH_SHORT)
+                                .show()
+                            finish()
+
+                        }
+
                     }
-
-
+                    else
+                        Toast.makeText(binding.root.context, "Nombre de ususario ocupado", Toast.LENGTH_SHORT).show()
                 }
 
             }

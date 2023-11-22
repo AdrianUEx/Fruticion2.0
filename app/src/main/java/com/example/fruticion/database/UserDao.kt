@@ -18,6 +18,9 @@ interface UserDao {
         @Query("SELECT * FROM user WHERE userId LIKE :userId LIMIT 1")
         suspend fun getUserById(userId: Long?): User
 
+        @Query("SELECT * FROM user WHERE username LIKE :username LIMIT 1")
+        suspend fun getUserByUsername(username: String): User
+
         //Devuelve el id del usuario si la insercion ocurrió correctamente
         @Insert
         suspend fun insertUser(user: User): Long

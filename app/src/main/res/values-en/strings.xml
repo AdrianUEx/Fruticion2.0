@@ -57,6 +57,7 @@
     <string name="add_fav_mes">Add fruit to favorites</string>
     <string name="remove_fav_mes">Remove fruit from favorites</string>
     <string name="bottom_intake">Add to intake</string>
+    <string name="add_intake_mes">Add fruit to intake</string>
     <string name="add_favourite_description">Pink heart-shaped add to favorites button</string>
     <string name="time_picker">Select hour</string>
     <!--Edit profile-->
@@ -67,6 +68,7 @@
     <string name="title_edit">Edit profile</string>
     <string name="save_edit_button">Save changes</string>
     <string name="cancel_edit_button">Cancel</string>
+    <string name="username_chosen">Username chosen</string>
     <!-- Preferences -->
     <string name="autologin">Autologin</string>
     <string name="sorting">Sorting</string>
@@ -109,6 +111,7 @@
     <string name="value_total_fats">Total fats</string>
     <string name="new_username_description">Bar to insert the new username</string>
     <string name="new_password_description">Field to enter the new password</string>
+
 
 
 </resources>

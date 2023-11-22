@@ -58,6 +58,7 @@
     <string name="add_fav_mes">Fruta añadida a favoritos</string>
     <string name="remove_fav_mes">Fruta eliminada de favoritos</string>
     <string name="bottom_intake">Añadir a la ingesta</string>
+    <string name="add_intake_mes">Fruta añadida a la ingesta</string>
     <string name="add_favourite_description">Boton de anadir a favoritos con forma de corazon rosa</string>
     <string name="time_picker">Recordatorio</string>
     <!-- Editar perfil -->
@@ -70,6 +71,7 @@
     <string name="cancel_edit_button">Cancelar</string>
     <string name="new_username_description">Barra para insertar el nuevo nombre de usuario</string>
     <string name="new_password_description">Campo para introducir la nueva contraseña</string>
+    <string name="username_chosen">Nombre de ususario ocupado</string>
     <!-- Ajustes -->
     <string name="autologin">Autologin</string>
     <string name="sorting">Ordenación</string>
