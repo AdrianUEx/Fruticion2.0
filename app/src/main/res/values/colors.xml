@@ -9,5 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorGris">#808080</color>
     <color name="rosita">#ED37F4</color>
-    <color name="verde">#FF86B64E</color>
+    <color name="verde">#98f59f</color>
+    <color name="azul_aciano">#636ea8</color>
+    <color name="rosa_suave">#f8bfcd</color>
+    <color name="beige">#FFE3DDCF</color>
+    <color name="marron_oscuro">#645248</color>
 </resources>
