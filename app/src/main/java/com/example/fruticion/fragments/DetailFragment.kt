@@ -1,6 +1,5 @@
 package com.example.fruticion.fragments
 
-import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -17,9 +16,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.example.fruticion.R
 import com.example.fruticion.activity.LoginActivity.Companion.currentUserId
 import com.example.fruticion.alarmReceiver.AlarmReceiver
@@ -30,9 +29,12 @@ import com.example.fruticion.model.DailyIntake
 import com.example.fruticion.model.Favourite
 import com.example.fruticion.model.Fruit
 import com.example.fruticion.model.WeeklyIntake
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.LocalDate
 import java.time.LocalTime
+import java.time.ZoneId
 import java.util.Calendar
 
 class DetailFragment : Fragment() {
@@ -67,6 +69,7 @@ class DetailFragment : Fragment() {
         val fruitId = args.fruitId
         setUpUI(fruitId)
         setUpListeners(fruitId)
+
         createChannel()
 
     }
@@ -80,6 +83,8 @@ class DetailFragment : Fragment() {
             fruit = db.fruitDao().getFruitById(fruitId)
 
             with(binding) {//Recordar que with es para no poner binding delante de todas las lineas que tiene with dentro
+                setUpFruitImage(fruit?.order.toString())
+
                 textDetailName.text = fruit?.name
 
                 //Familia, genero y orden
@@ -94,12 +99,98 @@ class DetailFragment : Fragment() {
                 valueDetailProtein.text = fruit?.protein.toString()
             }
 
-            if(db.favouriteDao().geFavFruitByUser(currentUserId!!, fruitId).isEmpty())
-                removeFavFruit()
+            if (db.favouriteDao().geFavFruitByUser(currentUserId!!, fruitId).isEmpty())
+                removeFavFruitIcon()
             else
-                addFavFruit()
+                addFavFruitIcon()
 
         }
+    }
+
+    private fun setUpFruitImage(order: String) {
+        //un when() con distintas opciones según la fruta. No es necesario usar Glide porque son pocas imágenes(al parecer Glide es mas eficiente con muchas imagenes).
+
+        with(binding.imagenDetalleFruta!!) {
+            when (order) {
+
+                "Rosales" -> {
+                    setImageResource(R.drawable.rosales)
+                }
+
+                "Zingiberales" -> {
+                    setImageResource(R.drawable.zingiberales)
+                }
+
+                "Solanales" -> {
+                    setImageResource(R.drawable.solanales)
+                }
+
+                "Malvales" -> {
+                    setImageResource(R.drawable.malvales)
+                }
+
+                "Ericales" -> {
+                    setImageResource(R.drawable.ericales)
+                }
+
+                "Sapindales" -> {
+                    setImageResource(R.drawable.sapindales)
+                }
+
+                "Poales" -> {
+                    setImageResource(R.drawable.poales)
+                }
+
+                "Saxifragales" -> {
+                    setImageResource(R.drawable.saxifragales)
+                }
+
+                "Malpighiales" -> {
+                    setImageResource(R.drawable.malpighiales)
+                }
+
+                "Cucurbitales" -> {
+                    setImageResource(R.drawable.cucurbitales)
+                }
+
+                "Myrtales" -> {
+                    setImageResource(R.drawable.myrtales)
+                }
+
+                "Caricacea" -> {
+                    setImageResource(R.drawable.caricacea)
+                }
+
+                "Cucurbitaceae" -> {
+                    setImageResource(R.drawable.cucurbitaceae)
+                }
+
+                "Caryophyllales" -> {
+                    setImageResource(R.drawable.caryophyllales)
+                }
+
+                "Vitales" -> {
+                    setImageResource(R.drawable.vitales)
+                }
+
+                "Myrtoideae" -> {
+                    setImageResource(R.drawable.myrtoideae)
+                }
+
+                "Laurales" -> {
+                    setImageResource(R.drawable.laurales)
+                }
+
+                "Fagales" -> {
+                    setImageResource(R.drawable.fagales)
+                }
+
+                else -> {
+                    setImageResource(R.mipmap.ic_launcher_foreground)
+                }
+            }
+        }
+
     }
 
     private fun setUpListeners(fruitId: Long) {
@@ -107,32 +198,32 @@ class DetailFragment : Fragment() {
             addFavourite.setOnClickListener {
 
                 lifecycleScope.launch {
-                    if(db.favouriteDao().geFavFruitByUser(currentUserId!!, fruitId).isEmpty()) {
+                    if (db.favouriteDao().geFavFruitByUser(currentUserId!!, fruitId).isEmpty()) {
                         db.favouriteDao().addFavFruit(Favourite(currentUserId!!, fruitId))
 
-                        addFavFruit()//cambia el aspecto del boton
+                        addFavFruitIcon()//cambia el aspecto del boton
                         val message = getString(R.string.add_fav_mes)
                         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-                    }
-                    else {
+                    } else {
                         db.favouriteDao().deleteFavById(currentUserId!!, fruitId)
-                        removeFavFruit()//cambia el aspecto del boton
+                        removeFavFruitIcon()//cambia el aspecto del boton
                         val message = getString(R.string.remove_fav_mes)
                         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
 
-            addDailyButton?.setOnClickListener{
+            addDailyButton?.setOnClickListener {
 
                 lifecycleScope.launch {
                     db.dailyIntakeDao().insertDailyFruit(
                         DailyIntake(
-                        fruitId,
-                        currentUserId!!,
-                        LocalDate.now(),
-                        LocalTime.now()
-                    ))
+                            fruitId,
+                            currentUserId!!,
+                            LocalDate.now(),
+                            LocalTime.now()
+                        )
+                    )
 
                     db.weeklyIntakeDao().insertWeeklyFruit(
                         WeeklyIntake(
@@ -156,7 +247,11 @@ class DetailFragment : Fragment() {
                     TimePickerDialog.OnTimeSetListener { _, selectedHour, selectedMinute ->
                         // Aquí puedes manejar la hora seleccionada
                         val selectedTime = "$selectedHour:$selectedMinute"
-                        Toast.makeText(requireContext(), "Hora seleccionada: $selectedTime", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Hora seleccionada: $selectedTime",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
                         // Lanza la notificación a la hora seleccionada
                         scheduleNotification(fruitId, selectedHour, selectedMinute)
@@ -171,6 +266,7 @@ class DetailFragment : Fragment() {
         }
     }
 
+    //--METODOS RECORDATORIO CON BROADCAST RECEIVER-------------------------------------------------------------------------------------------------
     private fun scheduleNotification(fruitId: Long, selectedHour: Int, selectedMinute: Int) {
         Log.d("DetailFragment", "Estamos dentro del scheduleNotification: ")
 
@@ -179,12 +275,15 @@ class DetailFragment : Fragment() {
         calendar.set(Calendar.HOUR_OF_DAY, selectedHour)
         calendar.set(Calendar.MINUTE, selectedMinute)
         calendar.set(Calendar.SECOND, 0)
-        var fruit : Fruit?
+        var fruit: Fruit?
 
         lifecycleScope.launch {
             fruit = db.fruitDao().getFruitById(fruitId)
 
-            val intent = Intent(requireActivity().applicationContext, AlarmReceiver::class.java).putExtra("FRUIT_NAME", fruit!!.name)
+            val intent = Intent(
+                requireActivity().applicationContext,
+                AlarmReceiver::class.java
+            ).putExtra("FRUIT_NAME", fruit!!.name)
             val pendingIntent = PendingIntent.getBroadcast(
                 requireActivity().applicationContext,
                 NOTIFICATION_ID,
@@ -192,7 +291,8 @@ class DetailFragment : Fragment() {
                 PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
             )
 
-            val alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val alarmManager =
+                requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
         }
     }
@@ -204,7 +304,7 @@ class DetailFragment : Fragment() {
                 "MySuperChannel",
                 NotificationManager.IMPORTANCE_DEFAULT
             ).apply {
-                description = "SUSCRIBETE"
+                description = "Canal para el recordatorio"
             }
 
             val notificationManager: NotificationManager =
@@ -214,13 +314,14 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private fun addFavFruit(){
-        val drawable = ContextCompat.getDrawable( requireContext(), R.drawable.corazon)
+    //--METODOS CAMBIO ICONO FAVORITOS-----------------------------------------------------------------------------------------------
+    private fun addFavFruitIcon() {
+        val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.corazon)
         binding.addFavourite.setImageDrawable(drawable)
     }
 
-    private fun removeFavFruit(){
-        val drawable = ContextCompat.getDrawable( requireContext(), R.drawable.sin_fav_corazon)
+    private fun removeFavFruitIcon() {
+        val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.corazon_sin_fav)
         binding.addFavourite.setImageDrawable(drawable)
     }
 
