@@ -122,6 +122,8 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnFruitsLoadedListener 
         val searchItem = menu?.findItem(R.id.action_search)
         val searchView = searchItem?.actionView as SearchView
 
+        searchView.queryHint = getString(R.string.search_text)
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 // Realiza la acción cuando se envía la búsqueda (por ejemplo, inicia la búsqueda)

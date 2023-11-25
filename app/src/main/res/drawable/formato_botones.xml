@@ -4,3 +4,4 @@
     <corners android:radius="20dp" /> <!-- Puedes ajustar el radio según tus preferencias -->
     <solid android:color="@color/beige" /> <!-- Puedes ajustar el color de fondo -->
 </shape>
+
