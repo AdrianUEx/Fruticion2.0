@@ -10,14 +10,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fruticion.activity.HomeActivity
 import com.example.fruticion.api.APIError
 import com.example.fruticion.api.FruitMapper
-import com.example.fruticion.api.Nutrition
 import com.example.fruticion.api.SerializedFruit
 import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
-//import com.example.fruticion.dummy.dummyFruit
 import com.example.fruticion.model.Fruit
 import com.example.fruticion.databinding.FragmentSearchBinding
 import kotlinx.coroutines.launch

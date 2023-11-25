@@ -54,7 +54,7 @@ class ProfileFragment : Fragment() {
                 logout()
             }
             //boton de borrar Usuario
-            deleteUserButton?.setOnClickListener{
+            deleteUserButton.setOnClickListener{
                 lifecycleScope.launch {
                     db.userDao().deleteUserById(currentUserId!!)
 

@@ -33,12 +33,12 @@ class AlarmReceiver : BroadcastReceiver() {
         val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, flag)
 
         val notification = NotificationCompat.Builder(context, DetailFragment.MY_CHANNEL_ID)
-            .setSmallIcon(R.drawable.corazon)
+            .setSmallIcon(R.mipmap.ic_launcher_round)
             .setContentTitle("Frutición")
             .setContentText("Recordatorio de consumición")
             .setStyle(
                 NotificationCompat.BigTextStyle()
-                    .bigText("¡Ya es la hora! come tu $fruitName !")
+                    .bigText("¡Ya es la hora! ¡Come tu $fruitName!")
             )
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
