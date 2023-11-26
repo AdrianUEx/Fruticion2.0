@@ -3,10 +3,8 @@ package com.example.fruticion.database
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.fruticion.model.DailyIntake
 import com.example.fruticion.model.Fruit
 import com.example.fruticion.model.WeeklyIntake
-import java.time.LocalDate
 
 @Dao
 interface WeeklyIntakeDao {
@@ -21,7 +19,7 @@ interface WeeklyIntakeDao {
     @Query("SELECT * FROM weeklyintake INNER JOIN Fruit ON weeklyintake.fruitId = Fruit.roomId WHERE weeklyintake.userId=:userId")
     suspend fun getAllWeeklyFruitsByUser(userId: Long) : List<Fruit>
 
-    //TODO: cambiar el delete
+
     @Query("DELETE FROM weeklyintake WHERE userId = :userId")
     suspend fun deleteWeeklyfruits(userId: Long)
 }

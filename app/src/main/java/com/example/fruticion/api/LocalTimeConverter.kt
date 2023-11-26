@@ -11,6 +11,7 @@ class LocalTimeConverter {
 
     }
 
+    //En el formato se llega hasta los milisegundos por si el usuario machaca el boton
     @TypeConverter
     fun localTimeToString(date: LocalTime) : String{
         val formatter = DateTimeFormatter.ofPattern("HH:mm:ss.SSS")

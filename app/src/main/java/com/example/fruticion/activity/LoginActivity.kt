@@ -61,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
             buttonLogin.setOnClickListener {
                 //comprobar credenciales
                 checkLogin()
-                //TODO: descomentar cuando se quieran hacer pruebas de otros componentes en lugar de estar haciendo el login todo el rato
+                //descomentar cuando se quieran hacer pruebas de otros componentes en lugar de estar haciendo el login todo el rato
                 //navigateToHomeActivity()
             }
 
@@ -107,11 +107,8 @@ class LoginActivity : AppCompatActivity() {
         lifecycleScope.launch {
             //borra la tabla de frutas diarias del usuario (no toda la tabla)
             db.dailyIntakeDao().deleteDailyfruits(currentUserId!!, fechaSistema)
-            //HASTA AQUI FUNCIONA TODO
 
-
-
-            // Obtén el número de semana del año actual utilizando WeekFields
+            // Obtiene el número de semana del año actual utilizando WeekFields
             val numeroSemanaActual =
                 fechaSistema.get(WeekFields.of(Locale.getDefault()).weekOfYear())
 
@@ -128,22 +125,11 @@ class LoginActivity : AppCompatActivity() {
                 if (numeroSemanaActual > semanaFrutaEjemplo && numeroSemanaActual > 0)
                     db.weeklyIntakeDao().deleteWeeklyfruits(currentUserId!!)
             }
-
-
-
         }
-
-
         HomeActivity.start(this)
     }
 
     private fun navigateToRegister() {
         RegisterActivity.start(this)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.i("Valor de currentUserId", "El valor de currentUserId es: $currentUserId")
-
     }
 }

@@ -42,7 +42,7 @@ class SearchFragment : Fragment()   {
         return binding.root
     }
 
-    //Este metodo actua despues de que el Fragment ya se ha creado, para añadir cosas extra al Fragment
+    //Este metodo actua despues de que el Fragment ya se ha creado
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -51,17 +51,7 @@ class SearchFragment : Fragment()   {
             //obtenemos TODAS las frutas de la API (45 frutas)
             val fruits: List<SerializedFruit> = fetchAllFruits()
 
-/*
-            //Metemos en Room todas las frutas una a una. Si ya existen, no se insertan (gestionado por Room)
-            for (fruit in fruits) {
-                //Se usa el mapper para mapear correctamente la fruta en el modelo serializado al modelo interno de la aplicacion.
-                val fruit2 = FruitMapper.mapFromSerializedFruit(fruit)
-
-                Log.i("Carga db de la API","$fruit2")
-                db.fruitDao().addFruit(fruit2)
-            }
-*/
-            //Invocacion de prueba alternativa //TODO: borrar si la prueba no funciona y restablecer el codigo anterior
+            //Se usa el mapper para mapear correctamente las frutas en el modelo serializado al modelo interno de la aplicacion.
             val readyFruitList = FruitMapper.mapFromSerializedFruitList(fruits)
             db.fruitDao().addFruitList(readyFruitList)
 
@@ -104,16 +94,9 @@ class SearchFragment : Fragment()   {
         recyclerView.adapter = searchAdapter
     }
 
-    //Este metodo obtiene la Activity a la que pertenece el Fragment e invoca al startActivity() para mandarle la fruta pinchada con una Intent.
+    //Este metodo usa la action definida en el grafo de navegación para viajar al detalle de la fruta seleccionada
     private fun onItemSelected(fruitId: Long) {
         findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment(fruitId=fruitId))
-
-        //(requireActivity() as OnShowClickListener).onShowClick(fruit)//En esta linea se esta recuperando la Activity a la que pertenece este Fragment para invocar al override de onShowClick() alli definido
-        //requireActivity() obtiene la Activity de este Fragment. Hace un Casting de OnShowClickListener, por tanto, se "asume" que la HomeActivity debe implementar OnShowClickListener o si no, lanzara una excepcion
-    }
-
-    interface OnShowClickListener {
-        fun onShowClick(fruit: Fruit)//Esta funcion es overrideada en HomeActivity para lanzar una Intent para viajar a la pantalla de detalle de la fruta pinchada
     }
 
     interface OnFruitsLoadedListener {

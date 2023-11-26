@@ -41,6 +41,7 @@ class DailyIntakeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launch {
+
             val dbFruit = db.dailyIntakeDao().getAllDailyFruitsByUser(LoginActivity.currentUserId!!)
 
             onDailyFruitsLoadedListener?.onDailyFruitsLoaded(dbFruit)
@@ -48,7 +49,6 @@ class DailyIntakeFragment : Fragment() {
 
             obtainDailyNutritions(dbFruit)
         }
-
     }
 
     private fun obtainDailyNutritions(dbFruit: List<Fruit>) {
@@ -72,14 +72,13 @@ class DailyIntakeFragment : Fragment() {
         val formatSugars = String.format("%.2f", totalSugars)
         val formatProteins = String.format("%.2f", totalProtein)
 
-        with(binding){
+        with(binding) {
             valueTotalCalories.text = formatCalories
             valueTotalCarbo.text = formatCarbo
             valueTotalFats.text = formatFats
-            valueTotalSugars.text= formatSugars
+            valueTotalSugars.text = formatSugars
             valueTotalProteins.text = formatProteins
         }
-
     }
 
     override fun onDestroyView() {
@@ -99,7 +98,7 @@ class DailyIntakeFragment : Fragment() {
     }
 
     private fun onItemSelected(fruitId: Long) {
-        //TODO: insertar codigo del recordatorio
+        // insertar codigo del recordatorio si se quiere poner aqui dicha funcion
     }
 
     interface OnDailyFruitsLoadedListener {

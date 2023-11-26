@@ -29,12 +29,9 @@ import com.example.fruticion.model.DailyIntake
 import com.example.fruticion.model.Favourite
 import com.example.fruticion.model.Fruit
 import com.example.fruticion.model.WeeklyIntake
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.time.LocalDate
 import java.time.LocalTime
-import java.time.ZoneId
 import java.util.Calendar
 
 class DetailFragment : Fragment() {
@@ -235,7 +232,6 @@ class DetailFragment : Fragment() {
                     )
                 }
                 Toast.makeText(requireContext(), R.string.add_intake_mes, Toast.LENGTH_SHORT).show()
-                //findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToDailyIntakeFragment(fruitId=fruitId))
             }
             timePickerButton?.setOnClickListener {
                 val calendar = Calendar.getInstance()

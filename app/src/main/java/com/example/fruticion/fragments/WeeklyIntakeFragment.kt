@@ -97,7 +97,7 @@ class WeeklyIntakeFragment : Fragment() {
     }
 
     private fun onItemSelected(fruitId: Long) {
-        //TODO: insertar codigo del recordatorio
+        //insertar codigo del recordatorio si se quiere poner aqui dicha funcion
     }
 
     interface OnWeeklyFruitsLoadedListener {

@@ -53,7 +53,8 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnFruitsLoadedListener 
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
 
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         binding.bottomNavigationView.setupWithNavController(navHostFragment.navController)
 
         //codigo del lab de toolbar
@@ -68,18 +69,6 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnFruitsLoadedListener 
         )
         setSupportActionBar(binding.toolbar)
         setupActionBarWithNavController(navController, appBarConfiguration)
-
-        // Hide toolbar and bottom navigation when in detail fragment. (CODIGO LAB03 PREFERENCES)
-       /* navController.addOnDestinationChangedListener { _, destination, _ ->
-            if ((destination.id == R.id.detailFragment) ||
-                    (destination.id == R.id.settingsFragment)) {
-                binding.toolbar.menu.clear()
-                binding.bottomNavigationView.visibility = View.GONE
-            } else {
-                binding.toolbar.visibility = View.VISIBLE
-                binding.bottomNavigationView.visibility = View.VISIBLE
-            }
-        }*/
     }
 
     override fun onResume() {
@@ -88,25 +77,17 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnFruitsLoadedListener 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if ((destination.id == R.id.detailFragment) ||
                 (destination.id == R.id.settingsFragment) ||
-                (destination.id == R.id.infoFragment) ) {
+                (destination.id == R.id.infoFragment)
+            ) {
                 binding.toolbar.menu.clear()
                 binding.bottomNavigationView.visibility = View.GONE
             } else {
                 binding.toolbar.visibility = View.VISIBLE
                 binding.bottomNavigationView.visibility = View.VISIBLE
-               setSupportActionBar(binding.toolbar)
+                setSupportActionBar(binding.toolbar)
             }
         }
     }
-
-
-    //Este metodo se encarga de viajar a la actividad de detalles de la fruta pinchada
-    /*override fun onShowClick(fruit: Fruit) {
-        // Aquí puedes manejar la navegación a la actividad de Detalles o cualquier otra acción que desees realizar.
-        val intent = Intent(this, DetailActivity::class.java)
-        intent.putExtra("fruit", fruit)
-        startActivity(intent)
-    }*/
 
 
     //Metodos ToolBar------------------------------------------------------------------------------------------------------------------------
@@ -132,8 +113,10 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnFruitsLoadedListener 
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 val query = newText.orEmpty().trim()
-                val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-                val searchFragment = navHostFragment.childFragmentManager.fragments.firstOrNull { it is SearchFragment } as SearchFragment?
+                val navHostFragment =
+                    supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+                val searchFragment =
+                    navHostFragment.childFragmentManager.fragments.firstOrNull { it is SearchFragment } as SearchFragment?
 
                 if (searchFragment != null) {
                     if (query.isNotEmpty()) {
@@ -159,29 +142,16 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnFruitsLoadedListener 
         return super.onCreateOptionsMenu(menu)
     }
 
-    //Si se pulsa el icono de info se navega a InfoFragment
-    override fun onOptionsItemSelected(item: MenuItem) :Boolean /*= when (item.itemId)*/ {
-        /*R.id.action_info -> { // User chooses the "Settings" item. Show the app settings UI.
-            Toast.makeText(this, "Info de la app", Toast.LENGTH_SHORT).show()
-
-            navController.navigate(R.id.infoFragment)
-
-            true
-        }
-
-        else -> { // The user's action isn't recognized. // Invoke the superclass to handle it.
-            super.onOptionsItemSelected(item)
-        }*/
-
+    //Si se pulsa el icono de info se navega a InfoFragment. Roberto nos dijo que este metodo esta bien aunque no lo hagamos como el dice en el video (porque no nos salía)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
-
     }
 
+    //Este metodo tiene que ver con el RecyclerView
     override fun onFruitsLoaded(fruits: List<Fruit>) {
         // Llamado cuando los datos de frutas se cargan en SearchFragment
         originalFruitList = fruits
-
     }
 
 
