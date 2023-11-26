@@ -7,14 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fruticion.R
 import com.example.fruticion.activity.LoginActivity
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.databinding.FragmentDailyIntakeBinding
-import com.example.fruticion.databinding.FragmentFavoriteBinding
+import com.example.fruticion.fragments.adapters.DailyIntakeAdapter
 import com.example.fruticion.model.Fruit
 import kotlinx.coroutines.launch
 
@@ -85,6 +82,10 @@ class DailyIntakeFragment : Fragment() {
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     //METODOS RECYCLER VIEW-----------------------------------------------------------------------------------------------------------------------------------
     private fun setUpRecyclerView(dbFruit: List<Fruit>) {

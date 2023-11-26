@@ -1,28 +1,28 @@
-package com.example.fruticion.fragments
+package com.example.fruticion.fragments.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fruticion.R
 import com.example.fruticion.model.Fruit
+import com.example.fruticion.R
 
-class DailyIntakeAdapter(private var dailyFruitList: List<Fruit>, private val onClickListener: (Fruit)->Unit) : RecyclerView.Adapter<SearchViewHolder>() {
+class SearchAdapter(private var fruitList: List<Fruit>, private val onClickListener: (Fruit)->Unit) : RecyclerView.Adapter<SearchViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return SearchViewHolder(layoutInflater.inflate(R.layout.search_item_list, parent, false))
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        val item = dailyFruitList[position]
+        val item = fruitList[position]
         holder.render(item, onClickListener)
     }
 
     override fun getItemCount(): Int {
-        return  dailyFruitList.size
+        return fruitList.size
     }
 
-    fun updateList(fruits : List<Fruit>){
-        this.dailyFruitList = fruits
+    fun updateList(fruits: List<Fruit>) {
+        this.fruitList = fruits
         notifyDataSetChanged()
     }
 }

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fruticion.activity.LoginActivity
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.databinding.FragmentWeeklyIntakeBinding
+import com.example.fruticion.fragments.adapters.WeeklyIntakeAdapter
 import com.example.fruticion.model.Fruit
 import kotlinx.coroutines.launch
 
@@ -80,6 +81,10 @@ class WeeklyIntakeFragment : Fragment() {
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
     //METODOS RECYCLER VIEW-----------------------------------------------------------------------------------------------------------------------------------
     private fun setUpRecyclerView(dbFruit: List<Fruit>) {
         val recyclerView = binding.rvFruitWeeklyList

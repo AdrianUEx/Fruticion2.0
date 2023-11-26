@@ -96,11 +96,11 @@
     <string name="text_total_carbo">Hidratos totales:</string>
     <string name="text_total_sugars">Azúcares totales:</string>
     <string name="text_total_proteins">Proteínas totales:</string>
-    <string name="value_total_fats">Grasas totales</string>
-    <string name="value_total_calories">Calorías totales</string>
-    <string name="value_total_carbo">Hidratos totales</string>
-    <string name="value_total_sugars">Azúcares totales</string>
-    <string name="value_total_proteins">Proteínas totales</string>
+    <string name="value_total_fats">0,00</string>
+    <string name="value_total_calories">0,00</string>
+    <string name="value_total_carbo">0,00</string>
+    <string name="value_total_sugars">0,00</string>
+    <string name="value_total_proteins">0,00</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Mensajes</string>

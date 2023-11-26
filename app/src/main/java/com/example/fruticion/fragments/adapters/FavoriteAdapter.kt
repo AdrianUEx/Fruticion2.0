@@ -1,4 +1,4 @@
-package com.example.fruticion.fragments
+package com.example.fruticion.fragments.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -2,10 +2,7 @@ package com.example.fruticion.database
 
 import androidx.room.Dao
 import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.OnConflictStrategy.Companion.ABORT
 import androidx.room.OnConflictStrategy.Companion.IGNORE
-import androidx.room.OnConflictStrategy.Companion.REPLACE
 import androidx.room.Query
 import com.example.fruticion.model.Fruit
 
@@ -23,4 +20,7 @@ interface FruitDao {
 
     @Insert(onConflict = IGNORE)
     suspend fun addFruit(fruit: Fruit)
+
+    @Insert(onConflict = IGNORE)
+    suspend fun addFruitList(fruitList: List<Fruit>)
 }

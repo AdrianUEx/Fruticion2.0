@@ -17,6 +17,7 @@ import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.model.Fruit
 import com.example.fruticion.databinding.FragmentSearchBinding
+import com.example.fruticion.fragments.adapters.SearchAdapter
 import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment()   {
@@ -50,7 +51,7 @@ class SearchFragment : Fragment()   {
             //obtenemos TODAS las frutas de la API (45 frutas)
             val fruits: List<SerializedFruit> = fetchAllFruits()
 
-
+/*
             //Metemos en Room todas las frutas una a una. Si ya existen, no se insertan (gestionado por Room)
             for (fruit in fruits) {
                 //Se usa el mapper para mapear correctamente la fruta en el modelo serializado al modelo interno de la aplicacion.
@@ -59,6 +60,11 @@ class SearchFragment : Fragment()   {
                 Log.i("Carga db de la API","$fruit2")
                 db.fruitDao().addFruit(fruit2)
             }
+*/
+            //Invocacion de prueba alternativa //TODO: borrar si la prueba no funciona y restablecer el codigo anterior
+            val readyFruitList = FruitMapper.mapFromSerializedFruitList(fruits)
+            db.fruitDao().addFruitList(readyFruitList)
+
 
             //Recuperamos de Room todas las frutas para meterlas por el RecyclerView
             val dbFruits = db.fruitDao().getAll()

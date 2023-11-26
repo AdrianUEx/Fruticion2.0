@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fruticion.activity.LoginActivity.Companion.currentUserId
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.databinding.FragmentFavoriteBinding
+import com.example.fruticion.fragments.adapters.FavoriteAdapter
 import com.example.fruticion.model.Fruit
 import kotlinx.coroutines.launch
 
@@ -49,7 +50,7 @@ class FavoriteFragment : Fragment() {
         _binding = null
     }
 
-
+//--METODOS RECYCLERVIEW---------------------------------------------------------------------------------------------
     private fun setUpRecyclerView(dbFruit: List<Fruit>) {
         val recyclerView = binding.rvFruitFavList
         recyclerView.layoutManager = LinearLayoutManager(context)
