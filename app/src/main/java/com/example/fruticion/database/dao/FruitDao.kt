@@ -1,4 +1,4 @@
-package com.example.fruticion.database
+package com.example.fruticion.database.dao
 
 import androidx.room.Dao
 import androidx.room.Insert

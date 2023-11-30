@@ -1,4 +1,4 @@
-package com.example.fruticion.alarmReceiver
+package com.example.fruticion.broadcastReceiver
 
 import android.app.NotificationManager
 import android.app.PendingIntent

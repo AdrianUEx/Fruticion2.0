@@ -1,4 +1,4 @@
-package com.example.fruticion.api
+package com.example.fruticion.api.typeconverters
 
 import androidx.room.TypeConverter
 import java.time.LocalDate

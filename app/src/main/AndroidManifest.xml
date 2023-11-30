@@ -21,7 +21,7 @@
         android:theme="@style/Theme.Fruticion"
         tools:targetApi="34">
 
-        <receiver android:name=".alarmReceiver.AlarmReceiver" />
+        <receiver android:name=".broadcastReceiver.AlarmReceiver" />
 
         <activity
             android:name=".activity.HomeActivity"

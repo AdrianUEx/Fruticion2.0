@@ -18,15 +18,16 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
 import com.example.fruticion.R
 import com.example.fruticion.activity.LoginActivity.Companion.currentUserId
-import com.example.fruticion.alarmReceiver.AlarmReceiver
-import com.example.fruticion.alarmReceiver.AlarmReceiver.Companion.NOTIFICATION_ID
+import com.example.fruticion.activity.LoginActivity.Companion.fruitImagesMap
+import com.example.fruticion.broadcastReceiver.AlarmReceiver
+import com.example.fruticion.broadcastReceiver.AlarmReceiver.Companion.NOTIFICATION_ID
+import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
+import com.example.fruticion.database.Repository
 import com.example.fruticion.databinding.FragmentDetailBinding
 import com.example.fruticion.model.DailyIntake
-import com.example.fruticion.model.Favourite
 import com.example.fruticion.model.Fruit
 import com.example.fruticion.model.WeeklyIntake
 import kotlinx.coroutines.launch
@@ -39,6 +40,7 @@ class DetailFragment : Fragment() {
     private val binding get() = _binding!!//Esto es de Roberto
 
     private lateinit var db: FruticionDatabase
+    private lateinit var repository: Repository
 
     private val args: DetailFragmentArgs by navArgs()//Esto tiene que ser val porque si no, peta
 
@@ -54,6 +56,7 @@ class DetailFragment : Fragment() {
 
         //Se obtiene la instancia de la BD
         db = FruticionDatabase.getInstance(requireActivity().applicationContext)!!
+        repository = Repository.getInstance(getNetworkService(), db)
 
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
@@ -67,6 +70,8 @@ class DetailFragment : Fragment() {
         setUpUI(fruitId)
         setUpListeners(fruitId)
 
+
+
         createChannel()
 
     }
@@ -77,7 +82,7 @@ class DetailFragment : Fragment() {
 
         //llamada la a bd
         lifecycleScope.launch {
-            fruit = db.fruitDao().getFruitById(fruitId)
+            fruit = repository.getFruitById(fruitId)
 
             with(binding) {//Recordar que with es para no poner binding delante de todas las lineas que tiene with dentro
                 setUpFruitImage(fruit?.order.toString())
@@ -96,7 +101,7 @@ class DetailFragment : Fragment() {
                 valueDetailProtein.text = fruit?.protein.toString()
             }
 
-            if (db.favouriteDao().geFavFruitByUser(currentUserId!!, fruitId).isEmpty())
+            if (db.favouriteDao().getFavFruitByUser(currentUserId!!, fruitId) == null)
                 removeFavFruitIcon()
             else
                 addFavFruitIcon()
@@ -105,104 +110,30 @@ class DetailFragment : Fragment() {
     }
 
     private fun setUpFruitImage(order: String) {
-        //un when() con distintas opciones según la fruta. No es necesario usar Glide porque son pocas imágenes(al parecer Glide es mas eficiente con muchas imagenes).
 
-        with(binding.imagenDetalleFruta!!) {
-            when (order) {
-
-                "Rosales" -> {
-                    setImageResource(R.drawable.rosales)
-                }
-
-                "Zingiberales" -> {
-                    setImageResource(R.drawable.zingiberales)
-                }
-
-                "Solanales" -> {
-                    setImageResource(R.drawable.solanales)
-                }
-
-                "Malvales" -> {
-                    setImageResource(R.drawable.malvales)
-                }
-
-                "Ericales" -> {
-                    setImageResource(R.drawable.ericales)
-                }
-
-                "Sapindales" -> {
-                    setImageResource(R.drawable.sapindales)
-                }
-
-                "Poales" -> {
-                    setImageResource(R.drawable.poales)
-                }
-
-                "Saxifragales" -> {
-                    setImageResource(R.drawable.saxifragales)
-                }
-
-                "Malpighiales" -> {
-                    setImageResource(R.drawable.malpighiales)
-                }
-
-                "Cucurbitales" -> {
-                    setImageResource(R.drawable.cucurbitales)
-                }
-
-                "Myrtales" -> {
-                    setImageResource(R.drawable.myrtales)
-                }
-
-                "Caricacea" -> {
-                    setImageResource(R.drawable.caricacea)
-                }
-
-                "Cucurbitaceae" -> {
-                    setImageResource(R.drawable.cucurbitaceae)
-                }
-
-                "Caryophyllales" -> {
-                    setImageResource(R.drawable.caryophyllales)
-                }
-
-                "Vitales" -> {
-                    setImageResource(R.drawable.vitales)
-                }
-
-                "Myrtoideae" -> {
-                    setImageResource(R.drawable.myrtoideae)
-                }
-
-                "Laurales" -> {
-                    setImageResource(R.drawable.laurales)
-                }
-
-                "Fagales" -> {
-                    setImageResource(R.drawable.fagales)
-                }
-
-                else -> {
-                    setImageResource(R.mipmap.ic_launcher_foreground)
-                }
-            }
-        }
+        if (fruitImagesMap.contieneClave(order))
+            binding.imagenDetalleFruta.setImageResource(
+                fruitImagesMap.obtenerValor(order)!!)
+        else
+            binding.imagenDetalleFruta.setImageResource(R.mipmap.ic_launcher_foreground)
 
     }
 
     private fun setUpListeners(fruitId: Long) {
         with(binding) {
-            addFavourite.setOnClickListener {
 
+            addFavourite.setOnClickListener {
                 lifecycleScope.launch {
-                    if (db.favouriteDao().geFavFruitByUser(currentUserId!!, fruitId).isEmpty()) {
-                        db.favouriteDao().addFavFruit(Favourite(currentUserId!!, fruitId))
+                    if (repository.checkFruitIsFav(fruitId)) {
+                        repository.addFavFruit(fruitId)
+
 
                         addFavFruitIcon()//cambia el aspecto del boton
                         val message = getString(R.string.add_fav_mes)
                         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                     } else {
-                        db.favouriteDao().deleteFavById(currentUserId!!, fruitId)
+                        repository.deleteFavFruit(fruitId)
+
                         removeFavFruitIcon()//cambia el aspecto del boton
                         val message = getString(R.string.remove_fav_mes)
                         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
@@ -274,7 +205,7 @@ class DetailFragment : Fragment() {
         var fruit: Fruit?
 
         lifecycleScope.launch {
-            fruit = db.fruitDao().getFruitById(fruitId)
+            fruit = repository.getFruitById(fruitId)
 
             val intent = Intent(
                 requireActivity().applicationContext,

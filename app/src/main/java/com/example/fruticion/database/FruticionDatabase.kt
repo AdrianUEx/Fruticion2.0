@@ -5,8 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.fruticion.api.LocalDateConverter
-import com.example.fruticion.api.LocalTimeConverter
+import com.example.fruticion.api.typeconverters.LocalDateConverter
+import com.example.fruticion.api.typeconverters.LocalTimeConverter
+import com.example.fruticion.database.dao.DailyIntakeDao
+import com.example.fruticion.database.dao.FavouriteDao
+import com.example.fruticion.database.dao.FruitDao
+import com.example.fruticion.database.dao.UserDao
+import com.example.fruticion.database.dao.WeeklyIntakeDao
 import com.example.fruticion.model.DailyIntake
 import com.example.fruticion.model.Favourite
 import com.example.fruticion.model.Fruit

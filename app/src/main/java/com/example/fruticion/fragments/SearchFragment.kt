@@ -15,12 +15,13 @@ import com.example.fruticion.api.FruitMapper
 import com.example.fruticion.api.SerializedFruit
 import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
+import com.example.fruticion.database.Repository
 import com.example.fruticion.model.Fruit
 import com.example.fruticion.databinding.FragmentSearchBinding
 import com.example.fruticion.fragments.adapters.SearchAdapter
 import kotlinx.coroutines.launch
 
-class SearchFragment : Fragment()   {
+class SearchFragment : Fragment() {
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!! //Esta linea la tenia Roberto hecha asi en el lab en los Fragment, y por eso lo hemos hecho asi.
@@ -29,6 +30,7 @@ class SearchFragment : Fragment()   {
     private var onFruitsLoadedListener: OnFruitsLoadedListener? = null
 
     private lateinit var db: FruticionDatabase
+    private lateinit var repository: Repository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +41,8 @@ class SearchFragment : Fragment()   {
         //Se obtiene la instancia de la BD
         db = FruticionDatabase.getInstance(requireActivity().applicationContext)!!
 
+        repository = Repository.getInstance(getNetworkService(), db)
+
         return binding.root
     }
 
@@ -47,31 +51,13 @@ class SearchFragment : Fragment()   {
         super.onViewCreated(view, savedInstanceState)
 
         //Se invoca a la API para cargar el fragment con las frutas al principio
-        lifecycleScope.launch{
-            //obtenemos TODAS las frutas de la API (45 frutas)
-            val fruits: List<SerializedFruit> = fetchAllFruits()
+        lifecycleScope.launch {
+            val fruits = repository.getFruits()
 
-            //Se usa el mapper para mapear correctamente las frutas en el modelo serializado al modelo interno de la aplicacion.
-            val readyFruitList = FruitMapper.mapFromSerializedFruitList(fruits)
-            db.fruitDao().addFruitList(readyFruitList)
+            onFruitsLoadedListener?.onFruitsLoaded(fruits)
+            setUpRecyclerView(fruits)
 
-
-            //Recuperamos de Room todas las frutas para meterlas por el RecyclerView
-            val dbFruits = db.fruitDao().getAll()
-            onFruitsLoadedListener?.onFruitsLoaded(dbFruits)
-            setUpRecyclerView(dbFruits)
         }
-    }
-
-    //Este metodo solamente se encarga de llamar al getAllFruits() de FruticionAPI.
-    private suspend fun fetchAllFruits(): List<SerializedFruit> {
-        var fruitList = listOf<SerializedFruit>()
-        try {
-                fruitList = getNetworkService().getAllFruits()
-        } catch (cause: Throwable) {
-            throw APIError("Unable to fetch data from API", cause)
-        }
-        return fruitList
     }
 
     //Este metodo es SOLO para evitar posibles fugas de memoria del Fragment.
@@ -81,11 +67,12 @@ class SearchFragment : Fragment()   {
     }
 
 
-
-//-----METODOS RECYCLER VIEW---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----METODOS RECYCLER VIEW---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     private fun setUpRecyclerView(fruits: List<Fruit>) {
-        val recyclerView = binding.rvFruitList // Linkea la RecyclerView del layout con ViewBinding en esta variable
-        recyclerView.layoutManager = LinearLayoutManager(context) // Configura el layoutManager de la RecyclerView para que adopte una configuración vertical en lugar de en grid
+        val recyclerView =
+            binding.rvFruitList // Linkea la RecyclerView del layout con ViewBinding en esta variable
+        recyclerView.layoutManager =
+            LinearLayoutManager(context) // Configura el layoutManager de la RecyclerView para que adopte una configuración vertical en lugar de en grid
 
         // Inicializa searchAdapter con la lista de frutas
         searchAdapter = SearchAdapter(fruits) { fruit -> onItemSelected(fruit.roomId!!) }
@@ -96,13 +83,18 @@ class SearchFragment : Fragment()   {
 
     //Este metodo usa la action definida en el grafo de navegación para viajar al detalle de la fruta seleccionada
     private fun onItemSelected(fruitId: Long) {
-        findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment(fruitId=fruitId))
+        findNavController().navigate(
+            SearchFragmentDirections.actionSearchFragmentToDetailFragment(
+                fruitId = fruitId
+            )
+        )
     }
 
     interface OnFruitsLoadedListener {
         fun onFruitsLoaded(fruits: List<Fruit>)
     }
 
+    // esto es para poder filtrar la lista con la lupa de la toolbar
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnFruitsLoadedListener) {

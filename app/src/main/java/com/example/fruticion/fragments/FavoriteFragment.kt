@@ -10,7 +10,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fruticion.activity.LoginActivity.Companion.currentUserId
+import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
+import com.example.fruticion.database.Repository
 import com.example.fruticion.databinding.FragmentFavoriteBinding
 import com.example.fruticion.fragments.adapters.FavoriteAdapter
 import com.example.fruticion.model.Fruit
@@ -25,17 +27,24 @@ class FavoriteFragment : Fragment() {
     private var onFavFruitsLoadedListener: OnFavFruitsLoadedListener? = null
 
     private lateinit var db: FruticionDatabase
+    private lateinit var repository : Repository
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
 
         db = FruticionDatabase.getInstance(requireActivity().applicationContext)!!
+        repository = Repository.getInstance(getNetworkService(), db)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        /*
+        repository.favFruitsInList?.observe(viewLifecycleOwner){
+            favFruitsInList -> setUpRecyclerView(favFruitsInList); onFavFruitsLoadedListener?.onFavFruitsLoaded(favFruitsInList)
+        }*/
 
         lifecycleScope.launch {
             val dbFruit = db.favouriteDao().getAllFavFruitsByUser(currentUserId!!)
@@ -51,6 +60,7 @@ class FavoriteFragment : Fragment() {
     }
 
 //--METODOS RECYCLERVIEW---------------------------------------------------------------------------------------------
+
     private fun setUpRecyclerView(dbFruit: List<Fruit>) {
         val recyclerView = binding.rvFruitFavList
         recyclerView.layoutManager = LinearLayoutManager(context)
