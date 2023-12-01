@@ -1,4 +1,4 @@
-package com.example.fruticion.activity
+package com.example.fruticion.view.activity
 
 import android.content.Context
 import android.content.Intent

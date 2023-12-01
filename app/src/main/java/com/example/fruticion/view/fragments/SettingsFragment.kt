@@ -1,4 +1,4 @@
-package com.example.fruticion.fragments
+package com.example.fruticion.view.fragments
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat

@@ -1,4 +1,4 @@
-package com.example.fruticion.fragments
+package com.example.fruticion.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,12 +9,10 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.fruticion.R
-import com.example.fruticion.activity.LoginActivity
 import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.database.Repository
 import com.example.fruticion.databinding.FragmentEditProfileBinding
-import com.example.fruticion.model.User
 import kotlinx.coroutines.launch
 
 class EditProfileFragment : Fragment() {

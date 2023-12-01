@@ -1,4 +1,4 @@
-package com.example.fruticion.fragments
+package com.example.fruticion.view.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -9,12 +9,12 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fruticion.activity.LoginActivity.Companion.currentUserId
+import com.example.fruticion.view.activity.LoginActivity.Companion.currentUserId
 import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.database.Repository
 import com.example.fruticion.databinding.FragmentFavoriteBinding
-import com.example.fruticion.fragments.adapters.FavoriteAdapter
+import com.example.fruticion.view.adapters.FavoriteAdapter
 import com.example.fruticion.model.Fruit
 import kotlinx.coroutines.launch
 

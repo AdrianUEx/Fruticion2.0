@@ -1,4 +1,4 @@
-package com.example.fruticion.activity
+package com.example.fruticion.view.activity
 
 import android.content.Context
 import android.content.Intent
@@ -15,7 +15,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.fruticion.fragments.SearchFragment
+import com.example.fruticion.view.fragments.SearchFragment
 import com.example.fruticion.model.Fruit
 import com.example.fruticion.R
 import com.example.fruticion.databinding.ActivityHomeBinding

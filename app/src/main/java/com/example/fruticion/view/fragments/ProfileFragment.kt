@@ -1,4 +1,4 @@
-package com.example.fruticion.fragments
+package com.example.fruticion.view.fragments
 
 import android.os.Bundle
 
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.fruticion.activity.LoginActivity.Companion.currentUserId
+import com.example.fruticion.view.activity.LoginActivity.Companion.currentUserId
 import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.database.Repository

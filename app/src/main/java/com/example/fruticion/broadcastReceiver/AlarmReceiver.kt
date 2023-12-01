@@ -9,8 +9,8 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.fruticion.R
-import com.example.fruticion.activity.HomeActivity
-import com.example.fruticion.fragments.DetailFragment
+import com.example.fruticion.view.activity.HomeActivity
+import com.example.fruticion.view.fragments.DetailFragment
 
 
 class AlarmReceiver : BroadcastReceiver() {

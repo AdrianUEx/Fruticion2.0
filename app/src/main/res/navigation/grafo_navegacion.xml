@@ -11,7 +11,7 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.fruticion.fragments.SearchFragment"
+        android:name="com.example.fruticion.view.fragments.SearchFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_search" >
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.example.fruticion.fragments.FavoriteFragment"
+        android:name="com.example.fruticion.view.fragments.FavoriteFragment"
         android:label="@string/title_fav"
         tools:layout="@layout/fragment_favorite" >
         <action
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.fruticion.fragments.ProfileFragment"
+        android:name="com.example.fruticion.view.fragments.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" >
         <action
@@ -41,11 +41,11 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.fruticion.fragments.SettingsFragment"
+        android:name="com.example.fruticion.view.fragments.SettingsFragment"
         android:label="@string/settings_header" />
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.fruticion.fragments.DetailFragment"
+        android:name="com.example.fruticion.view.fragments.DetailFragment"
         android:label="@string/title_detail"
         tools:layout="@layout/fragment_detail" >
         <argument
@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
-        android:name="com.example.fruticion.fragments.EditProfileFragment"
+        android:name="com.example.fruticion.view.fragments.EditProfileFragment"
         android:label="@string/title_edit"
         tools:layout="@layout/fragment_edit_profile" >
         <action
@@ -63,18 +63,18 @@
     </fragment>
     <fragment
         android:id="@+id/dailyIntakeFragment"
-        android:name="com.example.fruticion.fragments.DailyIntakeFragment"
+        android:name="com.example.fruticion.view.fragments.DailyIntakeFragment"
         android:label="@string/bottom_daily"
         tools:layout="@layout/fragment_daily_intake" >
     </fragment>
     <fragment
         android:id="@+id/weeklyIntakeFragment"
-        android:name="com.example.fruticion.fragments.WeeklyIntakeFragment"
+        android:name="com.example.fruticion.view.fragments.WeeklyIntakeFragment"
         android:label="@string/bottom_weekly"
         tools:layout="@layout/fragment_weekly_intake" />
     <fragment
         android:id="@+id/infoFragment"
-        android:name="com.example.fruticion.fragments.InfoFragment"
+        android:name="com.example.fruticion.view.fragments.InfoFragment"
         android:label="@string/info_title"
         tools:layout="@layout/fragment_info" />
 </navigation>

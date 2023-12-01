@@ -24,14 +24,14 @@
         <receiver android:name=".broadcastReceiver.AlarmReceiver" />
 
         <activity
-            android:name=".activity.HomeActivity"
+            android:name=".view.activity.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.RegisterActivity"
+            android:name=".view.activity.RegisterActivity"
             android:exported="false"
             android:label="RegisterActivity" />
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".view.activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

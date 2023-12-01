@@ -1,4 +1,4 @@
-package com.example.fruticion.dummy
+package com.example.fruticion.util.dummy
 
 import com.example.fruticion.model.Fruit
 

@@ -1,9 +1,7 @@
 package com.example.fruticion.database
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.switchMap
-import com.example.fruticion.activity.LoginActivity
+import com.example.fruticion.view.activity.LoginActivity
 import com.example.fruticion.api.APIError
 import com.example.fruticion.api.FruitMapper
 import com.example.fruticion.api.FruticionAPI

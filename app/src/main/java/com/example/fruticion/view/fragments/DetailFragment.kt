@@ -1,4 +1,4 @@
-package com.example.fruticion.fragments
+package com.example.fruticion.view.fragments
 
 import android.app.AlarmManager
 import android.app.NotificationChannel
@@ -19,20 +19,15 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.fruticion.R
-import com.example.fruticion.activity.LoginActivity.Companion.currentUserId
-import com.example.fruticion.activity.LoginActivity.Companion.fruitImagesMap
+import com.example.fruticion.view.activity.LoginActivity.Companion.fruitImagesMap
 import com.example.fruticion.broadcastReceiver.AlarmReceiver
 import com.example.fruticion.broadcastReceiver.AlarmReceiver.Companion.NOTIFICATION_ID
 import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.database.Repository
 import com.example.fruticion.databinding.FragmentDetailBinding
-import com.example.fruticion.model.DailyIntake
 import com.example.fruticion.model.Fruit
-import com.example.fruticion.model.WeeklyIntake
 import kotlinx.coroutines.launch
-import java.time.LocalDate
-import java.time.LocalTime
 import java.util.Calendar
 
 class DetailFragment : Fragment() {

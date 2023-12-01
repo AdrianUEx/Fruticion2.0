@@ -1,4 +1,4 @@
-package com.example.fruticion.fragments
+package com.example.fruticion.view.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -10,15 +10,12 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fruticion.api.APIError
-import com.example.fruticion.api.FruitMapper
-import com.example.fruticion.api.SerializedFruit
 import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.database.Repository
 import com.example.fruticion.model.Fruit
 import com.example.fruticion.databinding.FragmentSearchBinding
-import com.example.fruticion.fragments.adapters.SearchAdapter
+import com.example.fruticion.view.adapters.SearchAdapter
 import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment() {
