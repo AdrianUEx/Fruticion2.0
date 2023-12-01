@@ -7,11 +7,13 @@ import com.example.fruticion.activity.LoginActivity
 import com.example.fruticion.api.APIError
 import com.example.fruticion.api.FruitMapper
 import com.example.fruticion.api.FruticionAPI
+import com.example.fruticion.model.DailyIntake
 import com.example.fruticion.model.Favourite
 import com.example.fruticion.model.Fruit
 import com.example.fruticion.model.User
 import com.example.fruticion.model.WeeklyIntake
 import java.time.LocalDate
+import java.time.LocalTime
 
 
 // Repository.k
@@ -51,6 +53,10 @@ class Repository private constructor (private val api: FruticionAPI, private val
         return db.favouriteDao().getAllLDFavFruitsByUser(LoginActivity.currentUserId!!)
     }
 
+    suspend fun getFavFruitByUser(fruitId: Long): Fruit{
+        return db.favouriteDao().getFavFruitByUser(LoginActivity.currentUserId!!, fruitId)
+    }
+
     suspend fun addFavFruit(fruitId: Long) {
         db.favouriteDao().addFavFruit(Favourite(LoginActivity.currentUserId!!, fruitId))
     }
@@ -64,6 +70,15 @@ class Repository private constructor (private val api: FruticionAPI, private val
         db.userDao().insertUser(user)
     }
 
+    suspend fun updateUser(newName: String, newPassword: String){
+        db.userDao().updateUser(
+            User(
+            LoginActivity.currentUserId,
+            newName,
+            newPassword
+        ))
+    }
+
     suspend fun checkUserByUsername(username: String): Boolean {
         return db.userDao().getUserByUsername(username) == null
     }
@@ -72,8 +87,38 @@ class Repository private constructor (private val api: FruticionAPI, private val
         return db.userDao().getUserByUsername(username)
     }
 
+    suspend fun getUserById(): User{
+        return db.userDao().getUserById(LoginActivity.currentUserId)
+    }
+
+    suspend fun deleteUserById(){
+        db.userDao().deleteUserById(LoginActivity.currentUserId!!)
+    }
+
+    suspend fun insertDailyFruit(fruitId: Long){
+        db.dailyIntakeDao().insertDailyFruit(
+            DailyIntake(
+                fruitId,
+                LoginActivity.currentUserId!!,
+                LocalDate.now(),
+                LocalTime.now()
+            )
+        )
+    }
+
     suspend fun deleteDailyFruits(fechaSistema: LocalDate) {
         db.dailyIntakeDao().deleteDailyfruits(LoginActivity.currentUserId!!, fechaSistema)
+    }
+
+    suspend fun insertWeeklyFruit(fruitId: Long){
+        db.weeklyIntakeDao().insertWeeklyFruit(
+            WeeklyIntake(
+                fruitId,
+                LoginActivity.currentUserId!!,
+                LocalDate.now(),
+                LocalTime.now()
+            )
+        )
     }
 
     suspend fun deleteWeeklyFruits() {

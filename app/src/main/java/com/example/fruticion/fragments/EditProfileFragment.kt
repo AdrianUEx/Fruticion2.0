@@ -10,7 +10,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.fruticion.R
 import com.example.fruticion.activity.LoginActivity
+import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
+import com.example.fruticion.database.Repository
 import com.example.fruticion.databinding.FragmentEditProfileBinding
 import com.example.fruticion.model.User
 import kotlinx.coroutines.launch
@@ -19,6 +21,8 @@ class EditProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentEditProfileBinding
     private lateinit var db: FruticionDatabase
+
+    private lateinit var repository: Repository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +35,8 @@ class EditProfileFragment : Fragment() {
 
         // Se obtiene la instancia de la base de datos. La sintaxis siempre debe ser asi.
         db = FruticionDatabase.getInstance(requireContext().applicationContext)!!
+
+        repository = Repository.getInstance(getNetworkService(), db)
 
         setUpListeners()
 
@@ -49,29 +55,24 @@ class EditProfileFragment : Fragment() {
 
                 //corrutina obligatoria para hacer operaciones con la BD o con la API (tareas pesadas)
                 lifecycleScope.launch {
-                    val userDB = db.userDao().getUserById(LoginActivity.currentUserId!!)
+                    val userDB = repository.getUserById()
                     val userEdit =
-                        db.userDao().getUserByUsername(newUsernameEditText.text.toString())
+                        repository.getUserByUsername(newUsernameEditText.text.toString())
 
                     if(userDB == userEdit){
                          newName = ""
                     }
 
-                    if (db.userDao().getUserByUsername(newName) == null) {
+                    if (repository.getUserByUsername(newName) == null) {
 
                         if (newName.isEmpty())
-                            newName = db.userDao().getUserById(LoginActivity.currentUserId).username
+                            newName = repository.getUserById().username
                         if (newPassword.isEmpty())
                             newPassword =
-                                db.userDao().getUserById(LoginActivity.currentUserId).password
+                                repository.getUserById().password
 
-                        db.userDao().updateUser(
-                            User(
-                                LoginActivity.currentUserId, //este es un companion object que viene cargado desde el login
-                                newName,
-                                newPassword
-                            )
-                        )
+                        repository.updateUser(newName, newPassword)
+
                         //Tras pulsar Guardar Cambios se vuelve a ProfileFragment
                         val action = EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment()
                         findNavController().navigate(action)

@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fruticion.activity.LoginActivity
+import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
+import com.example.fruticion.database.Repository
 import com.example.fruticion.databinding.FragmentDailyIntakeBinding
 import com.example.fruticion.fragments.adapters.DailyIntakeAdapter
 import com.example.fruticion.model.Fruit
@@ -25,6 +27,8 @@ class DailyIntakeFragment : Fragment() {
 
     private lateinit var db: FruticionDatabase
 
+    private lateinit var repository: Repository
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +37,8 @@ class DailyIntakeFragment : Fragment() {
         _binding = FragmentDailyIntakeBinding.inflate(inflater, container, false)
 
         db = FruticionDatabase.getInstance(requireActivity().applicationContext)!!
+
+        repository = Repository.getInstance(getNetworkService(), db)
         return binding.root
     }
 

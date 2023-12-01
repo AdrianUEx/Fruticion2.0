@@ -101,7 +101,7 @@ class DetailFragment : Fragment() {
                 valueDetailProtein.text = fruit?.protein.toString()
             }
 
-            if (db.favouriteDao().getFavFruitByUser(currentUserId!!, fruitId) == null)
+            if (repository.getFavFruitByUser(fruitId) == null)
                 removeFavFruitIcon()
             else
                 addFavFruitIcon()
@@ -144,23 +144,9 @@ class DetailFragment : Fragment() {
             addDailyButton?.setOnClickListener {
 
                 lifecycleScope.launch {
-                    db.dailyIntakeDao().insertDailyFruit(
-                        DailyIntake(
-                            fruitId,
-                            currentUserId!!,
-                            LocalDate.now(),
-                            LocalTime.now()
-                        )
-                    )
+                    repository.insertDailyFruit(fruitId)
 
-                    db.weeklyIntakeDao().insertWeeklyFruit(
-                        WeeklyIntake(
-                            fruitId,
-                            currentUserId!!,
-                            LocalDate.now(),
-                            LocalTime.now()
-                        )
-                    )
+                    repository.insertWeeklyFruit(fruitId)
                 }
                 Toast.makeText(requireContext(), R.string.add_intake_mes, Toast.LENGTH_SHORT).show()
             }

@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.fruticion.activity.LoginActivity.Companion.currentUserId
+import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
+import com.example.fruticion.database.Repository
 import com.example.fruticion.databinding.FragmentProfileBinding
 import kotlinx.coroutines.launch
 
@@ -19,6 +21,8 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var db: FruticionDatabase
 
+    private lateinit var repository: Repository
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,6 +30,8 @@ class ProfileFragment : Fragment() {
 
         // Se obtiene la instancia de la BD
         db = FruticionDatabase.getInstance(requireContext())!!
+
+        repository = Repository.getInstance(getNetworkService(), db)
 
         // Inflate the layout for this fragment
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
@@ -38,7 +44,7 @@ class ProfileFragment : Fragment() {
         with(binding){
             //se recupera el nombre y la contraseña del usuario desde la BD por primera vez
             lifecycleScope.launch {
-                val user = db.userDao().getUserById(currentUserId)
+                val user = repository.getUserById()
                 valueProfileName.text = user.username
                 valueProfilePassword.text = user.password
             }
@@ -56,7 +62,7 @@ class ProfileFragment : Fragment() {
             //boton de borrar Usuario
             deleteUserButton.setOnClickListener{
                 lifecycleScope.launch {
-                    db.userDao().deleteUserById(currentUserId!!)
+                    repository.deleteUserById()
 
                     logout()
                 }
@@ -76,7 +82,7 @@ class ProfileFragment : Fragment() {
         super.onStart()
         //se recupera el nombre y la contraseña del usuario desde la BD
         lifecycleScope.launch {
-            val user = db.userDao().getUserById(currentUserId)
+            val user = repository.getUserById()
             binding.valueProfileName.text = user.username
             binding.valueProfilePassword.text = user.password
         }
