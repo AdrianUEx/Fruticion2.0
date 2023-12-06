@@ -12,19 +12,15 @@ import com.example.fruticion.model.User
 import com.example.fruticion.model.WeeklyIntake
 import java.time.LocalDate
 import java.time.LocalTime
-
+import android.util.Log
 
 // Repository.k
 class Repository private constructor (private val api: FruticionAPI, private val db: FruticionDatabase) {
 
-    /*
-    val favFruitsInList = LoginActivity.currentUserId?.let {
-        db.favouriteDao().getAllFavFruitsByUser(
-            it
-        )
-    }*/
-
-
+    val favFruitsInList = LoginActivity.currentUserId?.let { userId ->
+        Log.i("Valor id usuario antes de obtener los favs", "$userId")
+        db.favouriteDao().getAllLDFavFruitsByUser(userId)
+    }
 
 
     //Este metodo es para SearchFragment. Obtiene las frutas de la API, las mapea, las inserta en Room y las devuelve para meterlas en el Adapter del RecyclerView.
@@ -34,7 +30,7 @@ class Repository private constructor (private val api: FruticionAPI, private val
             val serializedFruits = api.getAllFruits()
             //se mapean las frutas de la API
             val readyFruitList = FruitMapper.mapFromSerializedFruitList(serializedFruits)
-            //se añaden las frutas a la BD
+            //se aÃ±aden las frutas a la BD
             db.fruitDao().addFruitList(readyFruitList)
 
             //se devuelven todas las frutas de la BD
@@ -47,8 +43,12 @@ class Repository private constructor (private val api: FruticionAPI, private val
 
 
     // FavouriteFragment
-     fun getAllFavFruits(): LiveData<List<Fruit>> {
+    fun getAllFavFruits(): LiveData<List<Fruit>> {
         return db.favouriteDao().getAllLDFavFruitsByUser(LoginActivity.currentUserId!!)
+    }
+
+    suspend fun getAllFavFruitslist(): List<Fruit> {
+        return db.favouriteDao().getAllFavFruitsByUser(LoginActivity.currentUserId!!)
     }
 
     suspend fun getFavFruitByUser(fruitId: Long): Fruit{
@@ -71,10 +71,10 @@ class Repository private constructor (private val api: FruticionAPI, private val
     suspend fun updateUser(newName: String, newPassword: String){
         db.userDao().updateUser(
             User(
-            LoginActivity.currentUserId,
-            newName,
-            newPassword
-        ))
+                LoginActivity.currentUserId,
+                newName,
+                newPassword
+            ))
     }
 
     suspend fun checkUserByUsername(username: String): Boolean {
@@ -148,4 +148,3 @@ class Repository private constructor (private val api: FruticionAPI, private val
         }
     }
 }
-

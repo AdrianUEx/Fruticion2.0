@@ -2,6 +2,7 @@ package com.example.fruticion.view.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -41,16 +42,23 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*
-        repository.favFruitsInList?.observe(viewLifecycleOwner){
-            favFruitsInList -> setUpRecyclerView(favFruitsInList); onFavFruitsLoadedListener?.onFavFruitsLoaded(favFruitsInList)
-        }*/
-
+        Log.d("Antes de llegar a lambda","MarcoXupala")
         lifecycleScope.launch {
-            val dbFruit = db.favouriteDao().getAllFavFruitsByUser(currentUserId!!)
+            val dbFruit = repository.getAllFavFruitslist()
             onFavFruitsLoadedListener?.onFavFruitsLoaded(dbFruit)
             setUpRecyclerView(dbFruit)
         }
+
+        repository.favFruitsInList?.observe(viewLifecycleOwner) { favFruitsInList ->
+            Log.i("Valor lista frutas fav", "$favFruitsInList")
+            updateRecyclerView(favFruitsInList)
+        }
+
+        /*lifecycleScope.launch {
+            val dbFruit = db.favouriteDao().getAllFavFruitsByUser(currentUserId!!)
+            onFavFruitsLoadedListener?.onFavFruitsLoaded(dbFruit)
+            setUpRecyclerView(dbFruit)
+        }*/
 
     }
 
@@ -62,6 +70,7 @@ class FavoriteFragment : Fragment() {
 //--METODOS RECYCLERVIEW---------------------------------------------------------------------------------------------
 
     private fun setUpRecyclerView(dbFruit: List<Fruit>) {
+        Log.i("Valor lista frutas fav", "$dbFruit")
         val recyclerView = binding.rvFruitFavList
         recyclerView.layoutManager = LinearLayoutManager(context)
 
