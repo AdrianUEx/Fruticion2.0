@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.fruticion.FruticionApplication
 import com.example.fruticion.R
 import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
@@ -18,7 +19,7 @@ import kotlinx.coroutines.launch
 class EditProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentEditProfileBinding
-    private lateinit var db: FruticionDatabase
+    //private lateinit var db: FruticionDatabase
 
     private lateinit var repository: Repository
 
@@ -27,14 +28,17 @@ class EditProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        val appContainer = (this.activity?.application as FruticionApplication).appContainer
+        repository = appContainer.repository
+
 
         binding = FragmentEditProfileBinding.inflate(layoutInflater)
 
 
         // Se obtiene la instancia de la base de datos. La sintaxis siempre debe ser asi.
-        db = FruticionDatabase.getInstance(requireContext().applicationContext)!!
+        //db = FruticionDatabase.getInstance(requireContext().applicationContext)!!
 
-        repository = Repository.getInstance(getNetworkService(), db)
+        //repository = Repository.getInstance(getNetworkService(), db)
 
         setUpListeners()
 

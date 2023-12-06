@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.fruticion.FruticionApplication
 import com.example.fruticion.view.activity.LoginActivity.Companion.currentUserId
 import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
@@ -19,7 +20,7 @@ class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-    private lateinit var db: FruticionDatabase
+    //private lateinit var db: FruticionDatabase
 
     private lateinit var repository: Repository
 
@@ -29,9 +30,9 @@ class ProfileFragment : Fragment() {
     ): View? {
 
         // Se obtiene la instancia de la BD
-        db = FruticionDatabase.getInstance(requireContext())!!
+        /*db = FruticionDatabase.getInstance(requireContext())!!
 
-        repository = Repository.getInstance(getNetworkService(), db)
+        repository = Repository.getInstance(getNetworkService(), db)*/
 
         // Inflate the layout for this fragment
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
@@ -40,6 +41,9 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val appContainer = (this.activity?.application as FruticionApplication).appContainer
+        repository = appContainer.repository
 
         with(binding){
             //se recupera el nombre y la contraseña del usuario desde la BD por primera vez

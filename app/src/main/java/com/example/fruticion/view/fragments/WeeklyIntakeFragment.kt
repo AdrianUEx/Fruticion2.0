@@ -2,12 +2,14 @@ package com.example.fruticion.view.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fruticion.FruticionApplication
 import com.example.fruticion.view.activity.LoginActivity
 import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
@@ -26,7 +28,7 @@ class WeeklyIntakeFragment : Fragment() {
     private lateinit var weeklyIntakeAdapter: WeeklyIntakeAdapter
     private var onWeeklyFruitsLoadedListener: OnWeeklyFruitsLoadedListener? = null
 
-    private lateinit var db: FruticionDatabase
+    //private lateinit var db: FruticionDatabase
 
     private lateinit var repository: Repository
 
@@ -36,22 +38,30 @@ class WeeklyIntakeFragment : Fragment() {
     ): View? {
         _binding = FragmentWeeklyIntakeBinding.inflate(inflater, container, false)
 
-        db = FruticionDatabase.getInstance(requireActivity().applicationContext)!!
+        /*db = FruticionDatabase.getInstance(requireActivity().applicationContext)!!
 
-        repository = Repository.getInstance(getNetworkService(), db)
+        repository = Repository.getInstance(getNetworkService(), db)*/
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val appContainer = (this.activity?.application as FruticionApplication).appContainer
+        repository = appContainer.repository
+
         lifecycleScope.launch {
-            val dbFruit = db.weeklyIntakeDao().getAllWeeklyFruitsByUser(LoginActivity.currentUserId!!)
+            val dbFruit = repository.getAllWeeklyFruitsList()
 
             onWeeklyFruitsLoadedListener?.onWeeklyFruitsLoaded(dbFruit)
             setUpRecyclerView(dbFruit)
 
             obtainWeeklyNutritions(dbFruit)
+        }
+
+        repository.weeklyFruitsInList?.observe(viewLifecycleOwner) { weeklyFruitsInList ->
+            Log.i("Valor lista frutas semanal", "$weeklyFruitsInList")
+            updateRecyclerView(weeklyFruitsInList)
         }
 
     }

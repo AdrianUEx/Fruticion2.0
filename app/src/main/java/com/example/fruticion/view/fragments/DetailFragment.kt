@@ -18,6 +18,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.example.fruticion.FruticionApplication
 import com.example.fruticion.R
 import com.example.fruticion.view.activity.LoginActivity.Companion.fruitImagesMap
 import com.example.fruticion.broadcastReceiver.AlarmReceiver
@@ -34,7 +35,7 @@ class   DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!//Esto es de Roberto
 
-    private lateinit var db: FruticionDatabase
+    //private lateinit var db: FruticionDatabase
     private lateinit var repository: Repository
 
     private val args: DetailFragmentArgs by navArgs()//Esto tiene que ser val porque si no, peta
@@ -50,8 +51,8 @@ class   DetailFragment : Fragment() {
     ): View? {
 
         //Se obtiene la instancia de la BD
-        db = FruticionDatabase.getInstance(requireActivity().applicationContext)!!
-        repository = Repository.getInstance(getNetworkService(), db)
+        //db = FruticionDatabase.getInstance(requireActivity().applicationContext)!!
+        //repository = Repository.getInstance(getNetworkService(), db)
 
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
@@ -60,6 +61,8 @@ class   DetailFragment : Fragment() {
     //El codigo de este metodo podria estar en onCreateView() pero es tecnicamente mas correcto si esta en onViewCreated()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val appContainer = (this.activity?.application as FruticionApplication).appContainer
+        repository = appContainer.repository
 
         val fruitId = args.fruitId
         setUpUI(fruitId)

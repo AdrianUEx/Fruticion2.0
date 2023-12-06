@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fruticion.FruticionApplication
 import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.database.Repository
@@ -26,8 +27,8 @@ class SearchFragment : Fragment() {
     private lateinit var searchAdapter: SearchAdapter
     private var onFruitsLoadedListener: OnFruitsLoadedListener? = null
 
-    private lateinit var db: FruticionDatabase
-    private lateinit var repository: Repository
+    private lateinit var repository : Repository
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,17 +36,15 @@ class SearchFragment : Fragment() {
     ): View? {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
 
-        //Se obtiene la instancia de la BD
-        db = FruticionDatabase.getInstance(requireActivity().applicationContext)!!
-
-        repository = Repository.getInstance(getNetworkService(), db)
-
         return binding.root
     }
 
     //Este metodo actua despues de que el Fragment ya se ha creado
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val appContainer = (this.activity?.application as FruticionApplication).appContainer
+        repository = appContainer.repository
 
         //Se invoca a la API para cargar el fragment con las frutas al principio
         lifecycleScope.launch {

@@ -1,5 +1,6 @@
 package com.example.fruticion.database.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -16,6 +17,9 @@ interface DailyIntakeDao {
 
     @Query("SELECT * FROM dailyintake INNER JOIN Fruit ON dailyintake.fruitId = Fruit.roomId WHERE dailyintake.userId=:userId")
     suspend fun getAllDailyFruitsByUser(userId: Long) : List<Fruit>
+
+    @Query("SELECT * FROM dailyintake INNER JOIN Fruit ON dailyintake.fruitId = Fruit.roomId WHERE dailyintake.userId=:userId")
+    fun getAllLDDailyFruitsByUser(userId: Long) : LiveData<List<Fruit>>
 
 
     @Query("DELETE FROM dailyintake WHERE userId = :userId AND additionDate < :deleteDate ")

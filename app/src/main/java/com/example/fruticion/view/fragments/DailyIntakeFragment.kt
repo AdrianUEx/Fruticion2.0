@@ -2,12 +2,14 @@ package com.example.fruticion.view.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fruticion.FruticionApplication
 import com.example.fruticion.view.activity.LoginActivity
 import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
@@ -25,7 +27,7 @@ class DailyIntakeFragment : Fragment() {
     private lateinit var dailyIntakeAdapter: DailyIntakeAdapter
     private var onDailyFruitsLoadedListener: OnDailyFruitsLoadedListener? = null
 
-    private lateinit var db: FruticionDatabase
+    //private lateinit var db: FruticionDatabase
 
     private lateinit var repository: Repository
 
@@ -36,9 +38,9 @@ class DailyIntakeFragment : Fragment() {
     ): View? {
         _binding = FragmentDailyIntakeBinding.inflate(inflater, container, false)
 
-        db = FruticionDatabase.getInstance(requireActivity().applicationContext)!!
+        //db = FruticionDatabase.getInstance(requireActivity().applicationContext)!!
 
-        repository = Repository.getInstance(getNetworkService(), db)
+        //repository = Repository.getInstance(getNetworkService(), db)
         return binding.root
     }
 
@@ -46,14 +48,22 @@ class DailyIntakeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val appContainer = (this.activity?.application as FruticionApplication).appContainer
+        repository = appContainer.repository
+
         lifecycleScope.launch {
 
-            val dbFruit = db.dailyIntakeDao().getAllDailyFruitsByUser(LoginActivity.currentUserId!!)
+            val dbFruit = repository.getAllDailyFruitsList()
 
             onDailyFruitsLoadedListener?.onDailyFruitsLoaded(dbFruit)
             setUpRecyclerView(dbFruit)
 
             obtainDailyNutritions(dbFruit)
+        }
+
+        repository.dailyFruitsInList?.observe(viewLifecycleOwner) { dailyFruitsInList ->
+            Log.i("Valor lista frutas diaria", "$dailyFruitsInList")
+            updateRecyclerView(dailyFruitsInList)
         }
     }
 

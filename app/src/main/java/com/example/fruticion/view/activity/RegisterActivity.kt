@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import com.example.fruticion.FruticionApplication
 import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.database.Repository
@@ -16,7 +17,7 @@ import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
 
-    private lateinit var db: FruticionDatabase
+    //private lateinit var db: FruticionDatabase
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var repository: Repository
     companion object {
@@ -31,13 +32,16 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val appContainer = (this.application as FruticionApplication).appContainer
+        repository = appContainer.repository
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //Inicializacion de la base de datos
-        db = FruticionDatabase.getInstance(applicationContext)!!
+        /*db = FruticionDatabase.getInstance(applicationContext)!!
 
-        repository = Repository.getInstance(getNetworkService(), db)
+        repository = Repository.getInstance(getNetworkService(), db)*/
 
 setUpListeners()
     }

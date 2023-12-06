@@ -15,11 +15,21 @@ import java.time.LocalTime
 import android.util.Log
 
 // Repository.k
-class Repository private constructor (private val api: FruticionAPI, private val db: FruticionDatabase) {
+class Repository (private val api: FruticionAPI, private val db: FruticionDatabase) {
 
     val favFruitsInList = LoginActivity.currentUserId?.let { userId ->
         Log.i("Valor id usuario antes de obtener los favs", "$userId")
         db.favouriteDao().getAllLDFavFruitsByUser(userId)
+    }
+
+    val dailyFruitsInList = LoginActivity.currentUserId?.let { userId ->
+        Log.i("Valor id usuario antes de obtener los favs", "$userId")
+        db.dailyIntakeDao().getAllLDDailyFruitsByUser(userId)
+    }
+
+    val weeklyFruitsInList = LoginActivity.currentUserId?.let { userId ->
+        Log.i("Valor id usuario antes de obtener los favs", "$userId")
+        db.weeklyIntakeDao().getAllLDWeeklyFruitsByUser(userId)
     }
 
 
@@ -47,8 +57,16 @@ class Repository private constructor (private val api: FruticionAPI, private val
         return db.favouriteDao().getAllLDFavFruitsByUser(LoginActivity.currentUserId!!)
     }
 
-    suspend fun getAllFavFruitslist(): List<Fruit> {
+    suspend fun getAllFavFruitsList(): List<Fruit> {
         return db.favouriteDao().getAllFavFruitsByUser(LoginActivity.currentUserId!!)
+    }
+
+    suspend fun getAllDailyFruitsList(): List<Fruit> {
+        return db.dailyIntakeDao().getAllDailyFruitsByUser(LoginActivity.currentUserId!!)
+    }
+
+    suspend fun getAllWeeklyFruitsList(): List<Fruit> {
+        return db.weeklyIntakeDao().getAllWeeklyFruitsByUser(LoginActivity.currentUserId!!)
     }
 
     suspend fun getFavFruitByUser(fruitId: Long): Fruit{

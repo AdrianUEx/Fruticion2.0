@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fruticion.FruticionApplication
 import com.example.fruticion.view.activity.LoginActivity.Companion.currentUserId
 import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
@@ -27,24 +28,26 @@ class FavoriteFragment : Fragment() {
     private lateinit var favoriteAdapter: FavoriteAdapter
     private var onFavFruitsLoadedListener: OnFavFruitsLoadedListener? = null
 
-    private lateinit var db: FruticionDatabase
+    //private lateinit var db: FruticionDatabase
     private lateinit var repository : Repository
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
 
-        db = FruticionDatabase.getInstance(requireActivity().applicationContext)!!
-        repository = Repository.getInstance(getNetworkService(), db)
+        /*db = FruticionDatabase.getInstance(requireActivity().applicationContext)!!
+        repository = Repository.getInstance(getNetworkService(), db)*/
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d("Antes de llegar a lambda","MarcoXupala")
+        val appContainer = (this.activity?.application as FruticionApplication).appContainer
+        repository = appContainer.repository
+
         lifecycleScope.launch {
-            val dbFruit = repository.getAllFavFruitslist()
+            val dbFruit = repository.getAllFavFruitsList()
             onFavFruitsLoadedListener?.onFavFruitsLoaded(dbFruit)
             setUpRecyclerView(dbFruit)
         }
@@ -53,12 +56,6 @@ class FavoriteFragment : Fragment() {
             Log.i("Valor lista frutas fav", "$favFruitsInList")
             updateRecyclerView(favFruitsInList)
         }
-
-        /*lifecycleScope.launch {
-            val dbFruit = db.favouriteDao().getAllFavFruitsByUser(currentUserId!!)
-            onFavFruitsLoadedListener?.onFavFruitsLoaded(dbFruit)
-            setUpRecyclerView(dbFruit)
-        }*/
 
     }
 
