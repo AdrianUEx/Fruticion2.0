@@ -7,6 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +21,7 @@ import com.example.fruticion.database.Repository
 import com.example.fruticion.model.Fruit
 import com.example.fruticion.databinding.FragmentSearchBinding
 import com.example.fruticion.view.adapters.SearchAdapter
+import com.example.fruticion.view.viewModel.SearchViewModel
 import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment() {
@@ -27,7 +32,9 @@ class SearchFragment : Fragment() {
     private lateinit var searchAdapter: SearchAdapter
     private var onFruitsLoadedListener: OnFruitsLoadedListener? = null
 
-    private lateinit var repository : Repository
+    private lateinit var repository: Repository
+
+    private val searchViewModel : SearchViewModel by viewModels()
 
 
     override fun onCreateView(
@@ -47,13 +54,34 @@ class SearchFragment : Fragment() {
         repository = appContainer.repository
 
         //Se invoca a la API para cargar el fragment con las frutas al principio
-        lifecycleScope.launch {
-            val fruits = repository.getFruits()
 
-            onFruitsLoadedListener?.onFruitsLoaded(fruits)
-            setUpRecyclerView(fruits)
 
-        }
+            var fruits = listOf <Fruit>()
+
+            if(searchViewModel.fruits.value == null){
+                lifecycleScope.launch {
+                    fruits = repository.getFruits()
+
+                    searchViewModel.update(fruits)
+                    onFruitsLoadedListener?.onFruitsLoaded(fruits)
+                    setUpRecyclerView(fruits)
+                }
+                Log.d("dentro del if","porfa funciona")
+            }
+            else{
+                fruits = searchViewModel.fruits.value!!
+
+                onFruitsLoadedListener?.onFruitsLoaded(fruits)
+                setUpRecyclerView(fruits)
+
+                Log.d("dentro del else"," funciona porfa")
+            }
+
+
+            searchViewModel.fruits.observe(viewLifecycleOwner, Observer {
+                searchViewModel.update(fruits)
+            })
+
     }
 
     //Este metodo es SOLO para evitar posibles fugas de memoria del Fragment.

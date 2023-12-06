@@ -7,13 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fruticion.FruticionApplication
-import com.example.fruticion.view.activity.LoginActivity.Companion.currentUserId
-import com.example.fruticion.api.getNetworkService
-import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.database.Repository
 import com.example.fruticion.databinding.FragmentFavoriteBinding
 import com.example.fruticion.view.adapters.FavoriteAdapter
@@ -31,6 +29,7 @@ class FavoriteFragment : Fragment() {
     //private lateinit var db: FruticionDatabase
     private lateinit var repository : Repository
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
@@ -46,16 +45,23 @@ class FavoriteFragment : Fragment() {
         val appContainer = (this.activity?.application as FruticionApplication).appContainer
         repository = appContainer.repository
 
-        lifecycleScope.launch {
-            val dbFruit = repository.getAllFavFruitsList()
-            onFavFruitsLoadedListener?.onFavFruitsLoaded(dbFruit)
-            setUpRecyclerView(dbFruit)
-        }
+            lifecycleScope.launch {
+                val dbFruit = repository.getAllFavFruitsList()
+                onFavFruitsLoadedListener?.onFavFruitsLoaded(dbFruit)
+                setUpRecyclerView(dbFruit)
+            }
+            Log.d("dentro del if","Favorito")
+
 
         repository.favFruitsInList?.observe(viewLifecycleOwner) { favFruitsInList ->
             Log.i("Valor lista frutas fav", "$favFruitsInList")
             updateRecyclerView(favFruitsInList)
         }
+
+        /*favoriteViewModel.favFruits.observe(viewLifecycleOwner, Observer {
+            favoriteViewModel.update(dbFruit)
+            updateRecyclerView(dbFruit)
+        })*/
 
     }
 
