@@ -62,8 +62,7 @@ class HomeActivity : AppCompatActivity(), SearchFragment.OnFruitsLoadedListener 
             setOf(
                 R.id.searchFragment,
                 R.id.favoriteFragment,
-                R.id.dailyIntakeFragment,
-                R.id.weeklyIntakeFragment,
+                R.id.intakeFragment,
                 R.id.profileFragment
             )
         )

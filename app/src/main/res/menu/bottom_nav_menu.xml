@@ -14,6 +14,12 @@
         android:icon="@drawable/ic_fav" />
 
     <item
+        android:id="@+id/intakeFragment"
+        android:title="Ingesta"
+        android:enabled="true"
+        android:icon="@drawable/ic_ingesta_diaria" />
+
+    <!--<item
         android:id="@+id/dailyIntakeFragment"
         android:title="@string/bottom_daily"
         android:enabled="true"
@@ -23,7 +29,7 @@
         android:id="@+id/weeklyIntakeFragment"
         android:title="@string/bottom_weekly"
         android:enabled="true"
-        android:icon="@drawable/ic_ingesta_semanal" />
+        android:icon="@drawable/ic_ingesta_semanal" />-->
 
     <item
         android:id="@+id/profileFragment"

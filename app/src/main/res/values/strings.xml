@@ -5,6 +5,7 @@
     <string name="title_home">Inicio</string>
     <string name="bottom_fav">Favoritos</string>
     <string name="bottom_profile">Perfil</string>
+    <string name="bottom_bar_intake">Ingesta</string>
     <string name="bottom_daily">Diario</string>
     <string name="bottom_weekly">Semanal</string>
     <string name="info_title">Información</string>

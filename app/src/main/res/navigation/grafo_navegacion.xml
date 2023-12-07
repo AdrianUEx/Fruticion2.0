@@ -77,4 +77,8 @@
         android:name="com.example.fruticion.view.fragments.InfoFragment"
         android:label="@string/info_title"
         tools:layout="@layout/fragment_info" />
+    <fragment
+        android:id="@+id/intakeFragment"
+        android:name="com.example.fruticion.view.fragments.IntakeFragment"
+        android:label="@string/bottom_bar_intake" />
 </navigation>
