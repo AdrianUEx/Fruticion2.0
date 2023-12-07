@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.fruticion.FruticionApplication
@@ -14,6 +15,10 @@ import com.example.fruticion.api.getNetworkService
 import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.database.Repository
 import com.example.fruticion.databinding.FragmentProfileBinding
+import com.example.fruticion.view.viewModel.ProfileViewModel
+import com.example.fruticion.view.viewModel.SearchViewModel
+import com.example.fruticion.model.User
+import android.util.Log
 import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
@@ -23,6 +28,7 @@ class ProfileFragment : Fragment() {
     //private lateinit var db: FruticionDatabase
 
     private lateinit var repository: Repository
+    private val profileViewModel : ProfileViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,12 +52,24 @@ class ProfileFragment : Fragment() {
         repository = appContainer.repository
 
         with(binding){
-            //se recupera el nombre y la contraseña del usuario desde la BD por primera vez
-            lifecycleScope.launch {
-                val user = repository.getUserById()
-                valueProfileName.text = user.username
-                valueProfilePassword.text = user.password
+            //TODO: PREGUNTAR ROBERTO POR QUE AL HACER EL VIEWMODEL EN ONVIEWCREATED Y ONSTART NO FUNCIONA BIEN EL CICLO DE VIDA DE NADA, PERO SI SE DEJA EL ONSTART FUNCIONA LA IU PERO NO EL CICLO DE VIDA
+            /*//se recupera el nombre y la contraseña del usuario desde la BD por primera vez
+            var user : User? = profileViewModel.user.value
+
+            if(profileViewModel.user.value==null) {
+                lifecycleScope.launch {
+                    user = repository.getUserById()
+                    profileViewModel.update(user!!)
+                    Log.i("if de profileFragment onStart()","pito")
+                }
             }
+            else{
+                Log.i("else de profileFragment onStart()","${profileViewModel.user.value!!}")
+                user=profileViewModel.user.value!!
+            }
+
+            valueProfileName.text = user?.username
+            valueProfilePassword.text = user?.password*/
 
             //boton de Editar Perfil
             editProfileButton.setOnClickListener {
@@ -85,11 +103,37 @@ class ProfileFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         //se recupera el nombre y la contraseña del usuario desde la BD
-        lifecycleScope.launch {
+        var user : User? = profileViewModel.user.value
+        Log.i("onStart() user", "$user")
+        if(profileViewModel.user.value==null) {
+            lifecycleScope.launch {
+                user = repository.getUserById()
+                profileViewModel.update(user!!)
+                Log.i("if de onStart()","$user")
+                binding.valueProfileName.text = user?.username
+                binding.valueProfilePassword.text = user?.password
+                Log.i("onStart() nombre usuario", "${user?.username}")
+            }
+        }
+        else{
+            Log.i("else de onStart()","roberto chupala")
+            user=profileViewModel.user.value!!
+            binding.valueProfileName.text = user?.username
+            binding.valueProfilePassword.text = user?.password
+        }
+
+
+
+       /* lifecycleScope.launch {
             val user = repository.getUserById()
             binding.valueProfileName.text = user.username
             binding.valueProfilePassword.text = user.password
-        }
+        }*/
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("onDestroy() de onStart()","profile destruido")
     }
 
     // finaliza la Activity de la que cuelga este Fragment (invoca por detras a onDestroy())

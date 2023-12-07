@@ -27,11 +27,13 @@ class FavoriteFragment : Fragment() {
     private var onFavFruitsLoadedListener: OnFavFruitsLoadedListener? = null
 
     //private lateinit var db: FruticionDatabase
-    private lateinit var repository : Repository
+    private lateinit var repository: Repository
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
 
         /*db = FruticionDatabase.getInstance(requireActivity().applicationContext)!!
@@ -45,12 +47,12 @@ class FavoriteFragment : Fragment() {
         val appContainer = (this.activity?.application as FruticionApplication).appContainer
         repository = appContainer.repository
 
-            lifecycleScope.launch {
-                val dbFruit = repository.getAllFavFruitsList()
-                onFavFruitsLoadedListener?.onFavFruitsLoaded(dbFruit)
-                setUpRecyclerView(dbFruit)
-            }
-            Log.d("dentro del if","Favorito")
+        lifecycleScope.launch {
+            val dbFruit = repository.getAllFavFruitsList()
+            onFavFruitsLoadedListener?.onFavFruitsLoaded(dbFruit)
+            setUpRecyclerView(dbFruit)
+        }
+        Log.d("dentro del if", "Favorito")
 
 
         repository.favFruitsInList?.observe(viewLifecycleOwner) { favFruitsInList ->
@@ -77,22 +79,27 @@ class FavoriteFragment : Fragment() {
         val recyclerView = binding.rvFruitFavList
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        favoriteAdapter = FavoriteAdapter(dbFruit) { fruitList -> onItemSelected(fruitList.roomId!!)}
+        favoriteAdapter =
+            FavoriteAdapter(dbFruit) { fruitList -> onItemSelected(fruitList.roomId!!) }
 
         recyclerView.adapter = favoriteAdapter
     }
 
-    private fun onItemSelected(fruitId : Long) {
-        findNavController().navigate(FavoriteFragmentDirections.actionFavoriteFragmentToDetailFragment(fruitId=fruitId))
+    private fun onItemSelected(fruitId: Long) {
+        findNavController().navigate(
+            FavoriteFragmentDirections.actionFavoriteFragmentToDetailFragment(
+                fruitId = fruitId
+            )
+        )
     }
 
     interface OnFavFruitsLoadedListener {
-        fun onFavFruitsLoaded(fruit : List<Fruit>)
+        fun onFavFruitsLoaded(fruit: List<Fruit>)
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if(context is OnFavFruitsLoadedListener){
+        if (context is OnFavFruitsLoadedListener) {
             onFavFruitsLoadedListener = context
         }
     }
@@ -100,6 +107,6 @@ class FavoriteFragment : Fragment() {
     fun updateRecyclerView(newData: List<Fruit>) {
         val modifiedData = ArrayList(newData)
         favoriteAdapter.updateList(modifiedData)
-       }
+    }
 
 }

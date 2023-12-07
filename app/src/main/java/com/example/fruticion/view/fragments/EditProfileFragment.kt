@@ -85,11 +85,10 @@ class EditProfileFragment : Fragment() {
                         Toast.makeText(binding.root.context, R.string.username_chosen, Toast.LENGTH_SHORT).show()
                 }
             }
-            // Al pulsar el boton Cancelar, se vuelve al ProfileFragment
+            // Al pulsar el boton Cancelar, se vuelve al ProfileFragment tal y como estaba
             buttonCancelChanges.setOnClickListener {
-                val action =
-                    EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment()
-                findNavController().navigate(action)
+                //val action = EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment()
+                findNavController().popBackStack()//.navigate(action)
             }
         }
     }
