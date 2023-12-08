@@ -16,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.fruticion.FruticionApplication
@@ -28,17 +29,21 @@ import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.database.Repository
 import com.example.fruticion.databinding.FragmentDetailBinding
 import com.example.fruticion.model.Fruit
+import com.example.fruticion.view.viewModel.DetailViewModel
+import com.example.fruticion.view.viewModel.SearchViewModel
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
 class   DetailFragment : Fragment() {
+
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!//Esto es de Roberto
 
-    //private lateinit var db: FruticionDatabase
     private lateinit var repository: Repository
 
     private val args: DetailFragmentArgs by navArgs()//Esto tiene que ser val porque si no, peta
+
+    private val detailViewModel : DetailViewModel by viewModels()
 
     companion object {
         const val MY_CHANNEL_ID = "myChannel"
@@ -50,10 +55,6 @@ class   DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        //Se obtiene la instancia de la BD
-        //db = FruticionDatabase.getInstance(requireActivity().applicationContext)!!
-        //repository = Repository.getInstance(getNetworkService(), db)
-
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -61,14 +62,13 @@ class   DetailFragment : Fragment() {
     //El codigo de este metodo podria estar en onCreateView() pero es tecnicamente mas correcto si esta en onViewCreated()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val appContainer = (this.activity?.application as FruticionApplication).appContainer
         repository = appContainer.repository
 
         val fruitId = args.fruitId
         setUpUI(fruitId)
         setUpListeners(fruitId)
-
-
 
         createChannel()
 
@@ -78,10 +78,38 @@ class   DetailFragment : Fragment() {
 
         var fruit: Fruit?
 
-        //llamada la a bd
-        lifecycleScope.launch {
-            fruit = repository.getFruitById(fruitId)
+        if(detailViewModel.detailFruit.value == null) {
+            //llamada la a bd
+            lifecycleScope.launch {
+                fruit = repository.getFruitById(fruitId)
+                detailViewModel.update(fruit!!)
+                with(binding) {//Recordar que with es para no poner binding delante de todas las lineas que tiene with dentro
+                    setUpFruitImage(fruit?.order.toString())
 
+                    textDetailName.text = fruit?.name
+
+                    //Familia, genero y orden
+                    valueDetailFamily.text = fruit?.family
+                    valueDetailOrder.text = fruit?.order
+                    valueDetailGenus.text = fruit?.genus
+                    //Informacion nutricional
+                    valueDetailCalories.text = fruit?.calories.toString()
+                    valueDetailFat.text = fruit?.fat.toString()
+                    valueDetailSugar.text = fruit?.sugar.toString()
+                    valueDetailCarbo.text = fruit?.carbohydrates.toString()
+                    valueDetailProtein.text = fruit?.protein.toString()
+                    Log.d("dentro del IF", "Details")
+                }
+
+                if (repository.getFavFruitByUser(fruitId) == null)
+                    removeFavFruitIcon()
+                else
+                    addFavFruitIcon()
+
+            }
+        }
+        else {
+            fruit = detailViewModel.detailFruit.value!!
             with(binding) {//Recordar que with es para no poner binding delante de todas las lineas que tiene with dentro
                 setUpFruitImage(fruit?.order.toString())
 
@@ -97,13 +125,13 @@ class   DetailFragment : Fragment() {
                 valueDetailSugar.text = fruit?.sugar.toString()
                 valueDetailCarbo.text = fruit?.carbohydrates.toString()
                 valueDetailProtein.text = fruit?.protein.toString()
+                Log.d("dentro del ELSE", "Details")
             }
 
-            if (repository.getFavFruitByUser(fruitId) == null)
+            if (!detailViewModel.isFavorite)
                 removeFavFruitIcon()
             else
                 addFavFruitIcon()
-
         }
     }
 
@@ -229,11 +257,13 @@ class   DetailFragment : Fragment() {
     private fun addFavFruitIcon() {
         val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.corazon)
         binding.addFavourite.setImageDrawable(drawable)
+        detailViewModel.isFavorite = true
     }
 
     private fun removeFavFruitIcon() {
         val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.corazon_sin_fav)
         binding.addFavourite.setImageDrawable(drawable)
+        detailViewModel.isFavorite = false
     }
 
     //Este metodo es SOLO para evitar posibles fugas de memoria.
