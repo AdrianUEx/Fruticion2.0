@@ -3,21 +3,16 @@ package com.example.fruticion.view.fragments
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fruticion.FruticionApplication
-import com.example.fruticion.view.activity.LoginActivity
-import com.example.fruticion.api.getNetworkService
-import com.example.fruticion.database.FruticionDatabase
-import com.example.fruticion.database.Repository
 import com.example.fruticion.databinding.FragmentDailyIntakeBinding
-import com.example.fruticion.view.adapters.DailyIntakeAdapter
 import com.example.fruticion.model.Fruit
-import kotlinx.coroutines.launch
+import com.example.fruticion.view.adapters.DailyIntakeAdapter
+import com.example.fruticion.view.viewModel.DailyIntakeViewModel
 
 
 class DailyIntakeFragment : Fragment() {
@@ -27,10 +22,7 @@ class DailyIntakeFragment : Fragment() {
     private lateinit var dailyIntakeAdapter: DailyIntakeAdapter
     private var onDailyFruitsLoadedListener: OnDailyFruitsLoadedListener? = null
 
-    //private lateinit var db: FruticionDatabase
-
-    private lateinit var repository: Repository
-
+    private val dailyIntakeViewModel: DailyIntakeViewModel by viewModels { DailyIntakeViewModel.Factory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,9 +30,6 @@ class DailyIntakeFragment : Fragment() {
     ): View? {
         _binding = FragmentDailyIntakeBinding.inflate(inflater, container, false)
 
-        //db = FruticionDatabase.getInstance(requireActivity().applicationContext)!!
-
-        //repository = Repository.getInstance(getNetworkService(), db)
         return binding.root
     }
 
@@ -48,21 +37,16 @@ class DailyIntakeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val appContainer = (this.activity?.application as FruticionApplication).appContainer
-        repository = appContainer.repository
+        dailyIntakeViewModel.update()
 
-        lifecycleScope.launch {
+        val dbFruit = listOf<Fruit>()
+        setUpRecyclerView(dbFruit)
 
-            val dbFruit = repository.getAllDailyFruitsList()
-
-            onDailyFruitsLoadedListener?.onDailyFruitsLoaded(dbFruit)
-            setUpRecyclerView(dbFruit)
-
-            obtainDailyNutritions(dbFruit)
-        }
-
-        repository.dailyFruitsInList?.observe(viewLifecycleOwner) { dailyFruitsInList ->
+        dailyIntakeViewModel.fruits.observe(viewLifecycleOwner) { dailyFruitsInList ->
             Log.i("Valor lista frutas diaria", "$dailyFruitsInList")
+            onDailyFruitsLoadedListener?.onDailyFruitsLoaded(dailyFruitsInList)
+
+            obtainDailyNutritions(dailyFruitsInList)
             updateRecyclerView(dailyFruitsInList)
         }
     }

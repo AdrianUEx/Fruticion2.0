@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fruticion.FruticionApplication
@@ -17,6 +18,8 @@ import com.example.fruticion.database.Repository
 import com.example.fruticion.databinding.FragmentWeeklyIntakeBinding
 import com.example.fruticion.view.adapters.WeeklyIntakeAdapter
 import com.example.fruticion.model.Fruit
+import com.example.fruticion.view.viewModel.DailyIntakeViewModel
+import com.example.fruticion.view.viewModel.WeeklyIntakeViewModel
 import kotlinx.coroutines.launch
 
 
@@ -28,9 +31,7 @@ class WeeklyIntakeFragment : Fragment() {
     private lateinit var weeklyIntakeAdapter: WeeklyIntakeAdapter
     private var onWeeklyFruitsLoadedListener: OnWeeklyFruitsLoadedListener? = null
 
-    //private lateinit var db: FruticionDatabase
-
-    private lateinit var repository: Repository
+    private val weeklyIntakeViewModel: WeeklyIntakeViewModel by viewModels { WeeklyIntakeViewModel.Factory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,29 +39,23 @@ class WeeklyIntakeFragment : Fragment() {
     ): View? {
         _binding = FragmentWeeklyIntakeBinding.inflate(inflater, container, false)
 
-        /*db = FruticionDatabase.getInstance(requireActivity().applicationContext)!!
-
-        repository = Repository.getInstance(getNetworkService(), db)*/
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val appContainer = (this.activity?.application as FruticionApplication).appContainer
-        repository = appContainer.repository
+        weeklyIntakeViewModel.update()
 
-        lifecycleScope.launch {
-            val dbFruit = repository.getAllWeeklyFruitsList()
+        val dbFruit = listOf<Fruit>()
+        setUpRecyclerView(dbFruit)
 
-            onWeeklyFruitsLoadedListener?.onWeeklyFruitsLoaded(dbFruit)
-            setUpRecyclerView(dbFruit)
-
-            obtainWeeklyNutritions(dbFruit)
-        }
-
-        repository.weeklyFruitsInList?.observe(viewLifecycleOwner) { weeklyFruitsInList ->
+        weeklyIntakeViewModel.fruits.observe(viewLifecycleOwner) { weeklyFruitsInList ->
             Log.i("Valor lista frutas semanal", "$weeklyFruitsInList")
+            onWeeklyFruitsLoadedListener?.onWeeklyFruitsLoaded(weeklyFruitsInList)
+
+
+            obtainWeeklyNutritions(weeklyFruitsInList)
             updateRecyclerView(weeklyFruitsInList)
         }
 

@@ -16,6 +16,8 @@ import com.example.fruticion.database.Repository
 import com.example.fruticion.databinding.FragmentFavoriteBinding
 import com.example.fruticion.view.adapters.FavoriteAdapter
 import com.example.fruticion.model.Fruit
+import com.example.fruticion.view.viewModel.DailyIntakeViewModel
+import com.example.fruticion.view.viewModel.FavoriteViewModel
 import kotlinx.coroutines.launch
 
 class FavoriteFragment : Fragment() {
@@ -26,8 +28,7 @@ class FavoriteFragment : Fragment() {
     private lateinit var favoriteAdapter: FavoriteAdapter
     private var onFavFruitsLoadedListener: OnFavFruitsLoadedListener? = null
 
-    //private lateinit var db: FruticionDatabase
-    private lateinit var repository: Repository
+    private val favoriteViewModel: FavoriteViewModel by viewModels { FavoriteViewModel.Factory }
 
 
     override fun onCreateView(
@@ -36,27 +37,20 @@ class FavoriteFragment : Fragment() {
     ): View? {
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
 
-        /*db = FruticionDatabase.getInstance(requireActivity().applicationContext)!!
-        repository = Repository.getInstance(getNetworkService(), db)*/
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val appContainer = (this.activity?.application as FruticionApplication).appContainer
-        repository = appContainer.repository
+        favoriteViewModel.update()
 
-        lifecycleScope.launch {
-            val dbFruit = repository.getAllFavFruitsList()
-            onFavFruitsLoadedListener?.onFavFruitsLoaded(dbFruit)
-            setUpRecyclerView(dbFruit)
-        }
-        Log.d("dentro del if", "Favorito")
+        val dbFruit = listOf<Fruit>()
+        setUpRecyclerView(dbFruit)
 
-
-        repository.favFruitsInList?.observe(viewLifecycleOwner) { favFruitsInList ->
+        favoriteViewModel.fruits.observe(viewLifecycleOwner) { favFruitsInList ->
             Log.i("Valor lista frutas fav", "$favFruitsInList")
+            onFavFruitsLoadedListener?.onFavFruitsLoaded(favFruitsInList)
             updateRecyclerView(favFruitsInList)
         }
 
