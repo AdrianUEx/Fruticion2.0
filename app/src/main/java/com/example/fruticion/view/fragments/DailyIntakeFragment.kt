@@ -97,6 +97,11 @@ class DailyIntakeFragment : Fragment() {
         recyclerView.adapter = dailyIntakeAdapter
     }
 
+    fun updateRecyclerView(newData: List<Fruit>) {
+        val modifiedData = ArrayList(newData)
+        dailyIntakeAdapter.updateList(modifiedData)
+    }
+
     private fun onItemSelected(fruitId: Long) {
         // insertar codigo del recordatorio si se quiere poner aqui dicha funcion
     }
@@ -112,8 +117,5 @@ class DailyIntakeFragment : Fragment() {
         }
     }
 
-    fun updateRecyclerView(newData: List<Fruit>) {
-        val modifiedData = ArrayList(newData)
-        dailyIntakeAdapter.updateList(modifiedData)
-    }
+
 }

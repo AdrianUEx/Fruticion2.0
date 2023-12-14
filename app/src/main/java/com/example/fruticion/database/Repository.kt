@@ -44,7 +44,7 @@ class Repository (private val api: FruticionAPI, private val db: FruticionDataba
             db.fruitDao().addFruitList(readyFruitList)
 
             //se devuelven todas las frutas de la BD
-            return db.fruitDao().getAll()
+            return db.fruitDao().getAllFruitsForList()
 
         } catch (cause: Throwable) {
             throw APIError("Unable to fetch data from API", cause)
@@ -57,16 +57,12 @@ class Repository (private val api: FruticionAPI, private val db: FruticionDataba
         return db.favouriteDao().getAllLDFavFruitsByUser(LoginActivity.currentUserId!!)
     }
 
-    suspend fun getAllFavFruitsList(): List<Fruit> {
+    suspend fun getAllFavFruitsByUser(): List<Fruit> {
         return db.favouriteDao().getAllFavFruitsByUser(LoginActivity.currentUserId!!)
     }
 
-    suspend fun getAllDailyFruitsList(): List<Fruit> {
-        return db.dailyIntakeDao().getAllDailyFruitsByUser(LoginActivity.currentUserId!!)
-    }
-
-    suspend fun getAllWeeklyFruitsList(): List<Fruit> {
-        return db.weeklyIntakeDao().getAllWeeklyFruitsByUser(LoginActivity.currentUserId!!)
+    suspend fun getAllFavFruitsByUserForList(): List<Fruit> {
+        return db.favouriteDao().getAllFavFruitsByUserForList(LoginActivity.currentUserId!!)
     }
 
     suspend fun getFavFruitByUser(fruitId: Long): Fruit{
@@ -81,7 +77,7 @@ class Repository (private val api: FruticionAPI, private val db: FruticionDataba
         db.favouriteDao().deleteFavById(LoginActivity.currentUserId!!, fruitId)
     }
 
-    //Register activity y Login Activity
+    //Register Activity y Login Activity
     suspend fun insertUser(user: User) {
         db.userDao().insertUser(user)
     }
@@ -111,6 +107,7 @@ class Repository (private val api: FruticionAPI, private val db: FruticionDataba
         db.userDao().deleteUserById(LoginActivity.currentUserId!!)
     }
 
+    //DailyIntakeFragment
     suspend fun insertDailyFruit(fruitId: Long){
         db.dailyIntakeDao().insertDailyFruit(
             DailyIntake(
@@ -126,6 +123,15 @@ class Repository (private val api: FruticionAPI, private val db: FruticionDataba
         db.dailyIntakeDao().deleteDailyfruits(LoginActivity.currentUserId!!, fechaSistema)
     }
 
+    suspend fun getAllDailyFruitsByUser(): List<Fruit> {
+        return db.dailyIntakeDao().getAllDailyFruitsByUser(LoginActivity.currentUserId!!)
+    }
+
+    suspend fun getAllDailyFruitsByUserForList(): List<Fruit> {
+        return db.dailyIntakeDao().getAllDailyFruitsByUserForList(LoginActivity.currentUserId!!)
+    }
+
+    //WeeklyIntakeFragment
     suspend fun insertWeeklyFruit(fruitId: Long){
         db.weeklyIntakeDao().insertWeeklyFruit(
             WeeklyIntake(
@@ -143,6 +149,14 @@ class Repository (private val api: FruticionAPI, private val db: FruticionDataba
 
     suspend fun getOneWeeklyFruit(): WeeklyIntake {
         return db.weeklyIntakeDao().getOneWeeklyFruit(LoginActivity.currentUserId!!)
+    }
+
+    suspend fun getAllWeeklyFruitsByUser(): List<Fruit> {
+        return db.weeklyIntakeDao().getAllWeeklyFruitsByUser(LoginActivity.currentUserId!!)
+    }
+
+    suspend fun getAllWeeklyFruitsByUserForList(): List<Fruit> {
+        return db.weeklyIntakeDao().getAllWeeklyFruitsByUserForList(LoginActivity.currentUserId!!)
     }
 
     //DetailFragment

@@ -15,6 +15,10 @@ interface FavouriteDao {
     @Query("SELECT * FROM Favourite INNER JOIN Fruit ON Favourite.fruitId = Fruit.roomId WHERE Favourite.userId=:userId")
     fun getAllLDFavFruitsByUser(userId: Long): LiveData<List<Fruit>>
 
+    //Esta consulta recupera solo los datos obligatorios para la lista de Favoritos. Es mas eficiente porque solo recupera los datos estrictamente necesarios.
+    @Query("SELECT roomId, name, family, `order` FROM Favourite INNER JOIN Fruit ON Favourite.fruitId = Fruit.roomId WHERE Favourite.userId=:userId")
+    suspend fun getAllFavFruitsByUserForList(userId: Long) : List<Fruit>
+
     @Query("SELECT * FROM Favourite INNER JOIN Fruit ON Favourite.fruitId = Fruit.roomId WHERE Favourite.userId=:userId AND Favourite.fruitId=:fruitId")
     suspend fun getFavFruitByUser(userId: Long, fruitId: Long): Fruit
 

@@ -17,7 +17,7 @@ class DailyIntakeViewModel(private val repository: Repository) : ViewModel() {
     fun update() {
         viewModelScope.launch {
 
-            val dbFruit = repository.getAllDailyFruitsList()
+            val dbFruit = repository.getAllDailyFruitsByUser()
             fruits.value=dbFruit
         }
     }

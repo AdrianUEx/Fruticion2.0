@@ -17,7 +17,7 @@ class FavoriteViewModel(private val repository: Repository) : ViewModel() {
     fun update() {
         viewModelScope.launch {
 
-            val dbFruit = repository.getAllFavFruitsList()
+            val dbFruit = repository.getAllFavFruitsByUserForList()
             fruits.value=dbFruit
         }
     }

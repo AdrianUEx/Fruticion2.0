@@ -18,7 +18,7 @@ class WeeklyIntakeViewModel(private val repository: Repository) : ViewModel() {
     fun update() {
         viewModelScope.launch {
 
-            val dbFruit = repository.getAllWeeklyFruitsList()
+            val dbFruit = repository.getAllWeeklyFruitsByUser()
             fruits.value=dbFruit
         }
     }

@@ -23,6 +23,9 @@ interface WeeklyIntakeDao {
     @Query("SELECT * FROM weeklyintake INNER JOIN Fruit ON weeklyintake.fruitId = Fruit.roomId WHERE weeklyintake.userId=:userId")
     fun getAllLDWeeklyFruitsByUser(userId: Long) : LiveData<List<Fruit>>
 
+    //Esta consulta recupera los campos estrictamente necesarios para mostrar la lista. Al recuperar menos datos es mas eficiente.
+    @Query("SELECT roomId, name, family, `order` FROM weeklyintake INNER JOIN Fruit ON weeklyintake.fruitId = Fruit.roomId WHERE weeklyintake.userId=:userId")
+    suspend fun getAllWeeklyFruitsByUserForList(userId: Long) : List<Fruit>
 
     @Query("DELETE FROM weeklyintake WHERE userId = :userId")
     suspend fun deleteWeeklyfruits(userId: Long)

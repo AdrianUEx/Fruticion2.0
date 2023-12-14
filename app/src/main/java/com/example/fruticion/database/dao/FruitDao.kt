@@ -12,6 +12,10 @@ interface FruitDao {
     @Query("SELECT * FROM Fruit")
     suspend fun getAll(): List<Fruit>
 
+    //Esta consulta recupera los datos justos necesarios para las listas de frutas. Al recuperar menos datos, es más rapido y eficiente
+    @Query("SELECT roomId, name, family, `order` FROM Fruit")
+    suspend fun getAllFruitsForList():List<Fruit>
+
     @Query("SELECT * FROM Fruit WHERE name =  :fruitName ")
     suspend fun getFruitByName(fruitName: String): Fruit
 
