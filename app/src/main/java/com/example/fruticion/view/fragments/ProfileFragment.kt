@@ -25,10 +25,8 @@ class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-    //private lateinit var db: FruticionDatabase
 
-    private lateinit var repository: Repository
-    private val profileViewModel : ProfileViewModel by viewModels()
+    private val profileViewModel: ProfileViewModel by viewModels { ProfileViewModel.Factory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,10 +46,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val appContainer = (this.activity?.application as FruticionApplication).appContainer
-        repository = appContainer.repository
-
-        with(binding){
+        with(binding) {
             //TODO: PREGUNTAR ROBERTO POR QUE AL HACER EL VIEWMODEL EN ONVIEWCREATED Y ONSTART NO FUNCIONA BIEN EL CICLO DE VIDA DE NADA, PERO SI SE DEJA EL ONSTART FUNCIONA LA IU PERO NO EL CICLO DE VIDA
             /*//se recupera el nombre y la contraseña del usuario desde la BD por primera vez
             var user : User? = profileViewModel.user.value
@@ -82,12 +77,11 @@ class ProfileFragment : Fragment() {
                 logout()
             }
             //boton de borrar Usuario
-            deleteUserButton.setOnClickListener{
-                lifecycleScope.launch {
-                    repository.deleteUserById()
+            deleteUserButton.setOnClickListener {
+                profileViewModel.onDeleteUserButtonClick()
 
-                    logout()
-                }
+                logout()
+
             }
 
 
@@ -102,8 +96,18 @@ class ProfileFragment : Fragment() {
     //Este metodo sirve para que los campos estén actualizados al volver desde EditProfileFragment. No funciona usando onViewStateRestored()
     override fun onStart() {
         super.onStart()
+
+
+
+        profileViewModel.user.observe(viewLifecycleOwner) { user ->
+            binding.valueProfileName.text = user?.username
+            binding.valueProfilePassword.text = user?.password
+        }
+
+        profileViewModel.update()
+
         //se recupera el nombre y la contraseña del usuario desde la BD
-        var user : User? = profileViewModel.user.value
+        /*var user : User? = profileViewModel.user.value
         Log.i("onStart() user", "$user")
         if(profileViewModel.user.value==null) {
             lifecycleScope.launch {
@@ -116,24 +120,22 @@ class ProfileFragment : Fragment() {
             }
         }
         else{
-            Log.i("else de onStart()","roberto chupala")
             user=profileViewModel.user.value!!
             binding.valueProfileName.text = user?.username
             binding.valueProfilePassword.text = user?.password
-        }
-
-
-
-       /* lifecycleScope.launch {
-            val user = repository.getUserById()
-            binding.valueProfileName.text = user.username
-            binding.valueProfilePassword.text = user.password
         }*/
+
+
+        /* lifecycleScope.launch {
+             val user = repository.getUserById()
+             binding.valueProfileName.text = user.username
+             binding.valueProfilePassword.text = user.password
+         }*/
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.i("onDestroy() de onStart()","profile destruido")
+        Log.i("onDestroy() de onStart()", "profile destruido")
     }
 
     // finaliza la Activity de la que cuelga este Fragment (invoca por detras a onDestroy())

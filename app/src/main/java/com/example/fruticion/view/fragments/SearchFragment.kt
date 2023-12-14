@@ -32,9 +32,7 @@ class SearchFragment : Fragment() {
     private lateinit var searchAdapter: SearchAdapter
     private var onFruitsLoadedListener: OnFruitsLoadedListener? = null
 
-    private lateinit var repository: Repository
-
-    private val searchViewModel : SearchViewModel by viewModels()
+    private val searchViewModel: SearchViewModel by viewModels{SearchViewModel.Factory}
 
 
     override fun onCreateView(
@@ -50,38 +48,16 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val appContainer = (this.activity?.application as FruticionApplication).appContainer
-        repository = appContainer.repository
+        searchViewModel.update()
 
-        //Se invoca a la API para cargar el fragment con las frutas al principio
-
-
-            var fruits = listOf <Fruit>()
-
-            if(searchViewModel.fruits.value == null){
-                lifecycleScope.launch {
-                    fruits = repository.getFruits()
-
-                    searchViewModel.update(fruits)
-                    onFruitsLoadedListener?.onFruitsLoaded(fruits)
-                    setUpRecyclerView(fruits)
-                }
-                Log.d("dentro del if","porfa funciona")
-            }
-            else{
-                fruits = searchViewModel.fruits.value!!
-
-                onFruitsLoadedListener?.onFruitsLoaded(fruits)
-                setUpRecyclerView(fruits)
-
-                Log.d("dentro del else"," funciona porfa")
-            }
+        val fruits = listOf<Fruit>()
+        setUpRecyclerView(fruits)
 
 
-            searchViewModel.fruits.observe(viewLifecycleOwner, Observer {
-                searchViewModel.update(fruits)
-            })
-
+        searchViewModel.fruits.observe(viewLifecycleOwner) { fruits ->
+            onFruitsLoadedListener?.onFruitsLoaded(fruits)
+            updateRecyclerView(fruits)
+        }
     }
 
     //Este metodo es SOLO para evitar posibles fugas de memoria del Fragment.

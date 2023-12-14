@@ -34,16 +34,14 @@ import com.example.fruticion.view.viewModel.SearchViewModel
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
-class   DetailFragment : Fragment() {
+class DetailFragment : Fragment() {
 
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!//Esto es de Roberto
 
-    private lateinit var repository: Repository
-
     private val args: DetailFragmentArgs by navArgs()//Esto tiene que ser val porque si no, peta
 
-    private val detailViewModel : DetailViewModel by viewModels()
+    private val detailViewModel: DetailViewModel by viewModels { DetailViewModel.Factory }
 
     companion object {
         const val MY_CHANNEL_ID = "myChannel"
@@ -63,9 +61,6 @@ class   DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val appContainer = (this.activity?.application as FruticionApplication).appContainer
-        repository = appContainer.repository
-
         val fruitId = args.fruitId
         setUpUI(fruitId)
         setUpListeners(fruitId)
@@ -76,40 +71,11 @@ class   DetailFragment : Fragment() {
 
     private fun setUpUI(fruitId: Long) {
 
-        var fruit: Fruit?
+        detailViewModel.update(fruitId)
 
-        if(detailViewModel.detailFruit.value == null) {
-            //llamada la a bd
-            lifecycleScope.launch {
-                fruit = repository.getFruitById(fruitId)
-                detailViewModel.update(fruit!!)
-                with(binding) {//Recordar que with es para no poner binding delante de todas las lineas que tiene with dentro
-                    setUpFruitImage(fruit?.order.toString())
+        detailViewModel.detailFruit.observe(viewLifecycleOwner) { fruit ->
 
-                    textDetailName.text = fruit?.name
 
-                    //Familia, genero y orden
-                    valueDetailFamily.text = fruit?.family
-                    valueDetailOrder.text = fruit?.order
-                    valueDetailGenus.text = fruit?.genus
-                    //Informacion nutricional
-                    valueDetailCalories.text = fruit?.calories.toString()
-                    valueDetailFat.text = fruit?.fat.toString()
-                    valueDetailSugar.text = fruit?.sugar.toString()
-                    valueDetailCarbo.text = fruit?.carbohydrates.toString()
-                    valueDetailProtein.text = fruit?.protein.toString()
-                    Log.d("dentro del IF", "Details")
-                }
-
-                if (repository.getFavFruitByUser(fruitId) == null)
-                    removeFavFruitIcon()
-                else
-                    addFavFruitIcon()
-
-            }
-        }
-        else {
-            fruit = detailViewModel.detailFruit.value!!
             with(binding) {//Recordar que with es para no poner binding delante de todas las lineas que tiene with dentro
                 setUpFruitImage(fruit?.order.toString())
 
@@ -125,21 +91,24 @@ class   DetailFragment : Fragment() {
                 valueDetailSugar.text = fruit?.sugar.toString()
                 valueDetailCarbo.text = fruit?.carbohydrates.toString()
                 valueDetailProtein.text = fruit?.protein.toString()
-                Log.d("dentro del ELSE", "Details")
+                Log.d("dentro del IF", "Details")
             }
 
+            Log.i("detailFragmetn condicion corazon", "${detailViewModel.isFavorite}")
             if (!detailViewModel.isFavorite)
                 removeFavFruitIcon()
             else
                 addFavFruitIcon()
         }
+
     }
 
     private fun setUpFruitImage(order: String) {
 
         if (fruitImagesMap.contieneClave(order))
             binding.imagenDetalleFruta.setImageResource(
-                fruitImagesMap.obtenerValor(order)!!)
+                fruitImagesMap.obtenerValor(order)!!
+            )
         else
             binding.imagenDetalleFruta.setImageResource(R.mipmap.ic_launcher_foreground)
 
@@ -149,33 +118,25 @@ class   DetailFragment : Fragment() {
         with(binding) {
 
             addFavourite.setOnClickListener {
-                lifecycleScope.launch {
-                    if (repository.checkFruitIsFav(fruitId)) {
-                        repository.addFavFruit(fruitId)
+                detailViewModel.onFavoriteButtonClick(fruitId)
 
+                if (!detailViewModel.isFavorite) {
+                    addFavFruitIcon()//cambia el aspecto del boton
 
-                        addFavFruitIcon()//cambia el aspecto del boton
-                        val message = getString(R.string.add_fav_mes)
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-                    } else {
-                        repository.deleteFavFruit(fruitId)
-
-                        removeFavFruitIcon()//cambia el aspecto del boton
-                        val message = getString(R.string.remove_fav_mes)
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-                    }
+                } else {
+                    removeFavFruitIcon()//cambia el aspecto del boton
+                    val message = getString(R.string.remove_fav_mes)
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 }
+
             }
 
             addDailyButton?.setOnClickListener {
+                detailViewModel.onAddDailyButtonClick(fruitId)
 
-                lifecycleScope.launch {
-                    repository.insertDailyFruit(fruitId)
-
-                    repository.insertWeeklyFruit(fruitId)
-                }
                 Toast.makeText(requireContext(), R.string.add_intake_mes, Toast.LENGTH_SHORT).show()
             }
+
             timePickerButton?.setOnClickListener {
                 val calendar = Calendar.getInstance()
                 val hour = calendar.get(Calendar.HOUR_OF_DAY)
@@ -214,10 +175,9 @@ class   DetailFragment : Fragment() {
         calendar.set(Calendar.HOUR_OF_DAY, selectedHour)
         calendar.set(Calendar.MINUTE, selectedMinute)
         calendar.set(Calendar.SECOND, 0)
-        var fruit: Fruit?
 
-        lifecycleScope.launch {
-            fruit = repository.getFruitById(fruitId)
+
+            val fruit = detailViewModel.getDetailFruit().value
 
             val intent = Intent(
                 requireActivity().applicationContext,
@@ -233,7 +193,7 @@ class   DetailFragment : Fragment() {
             val alarmManager =
                 requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
-        }
+
     }
 
     private fun createChannel() {
