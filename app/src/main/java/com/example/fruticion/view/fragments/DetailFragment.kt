@@ -91,10 +91,8 @@ class DetailFragment : Fragment() {
                 valueDetailSugar.text = fruit?.sugar.toString()
                 valueDetailCarbo.text = fruit?.carbohydrates.toString()
                 valueDetailProtein.text = fruit?.protein.toString()
-                Log.d("dentro del IF", "Details")
             }
 
-            Log.i("detailFragmetn condicion corazon", "${detailViewModel.isFavorite}")
             if (!detailViewModel.isFavorite)
                 removeFavFruitIcon()
             else
@@ -122,6 +120,8 @@ class DetailFragment : Fragment() {
 
                 if (!detailViewModel.isFavorite) {
                     addFavFruitIcon()//cambia el aspecto del boton
+                    val message = getString(R.string.add_fav_mes)
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
 
                 } else {
                     removeFavFruitIcon()//cambia el aspecto del boton
@@ -168,7 +168,6 @@ class DetailFragment : Fragment() {
 
     //--METODOS RECORDATORIO CON BROADCAST RECEIVER-------------------------------------------------------------------------------------------------
     private fun scheduleNotification(fruitId: Long, selectedHour: Int, selectedMinute: Int) {
-        Log.d("DetailFragment", "Estamos dentro del scheduleNotification: ")
 
         // Configura la hora seleccionada en el calendario
         val calendar = Calendar.getInstance()

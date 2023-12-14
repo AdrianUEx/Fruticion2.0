@@ -30,7 +30,6 @@ class DetailViewModel (private val repository: Repository) : ViewModel() {
             isFavorite = !repository.checkFruitIsFav(fruitID)
             val dbFruit = repository.getFruitById(fruitID)
             detailFruit.postValue(dbFruit)
-            Log.i("valor inicial corazon","$isFavorite")
         }
 
     }
