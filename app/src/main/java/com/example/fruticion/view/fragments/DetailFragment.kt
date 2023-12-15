@@ -176,7 +176,7 @@ class DetailFragment : Fragment() {
         calendar.set(Calendar.SECOND, 0)
 
 
-            val fruit = detailViewModel.getDetailFruit().value
+            val fruit = detailViewModel.detailFruit.value
 
             val intent = Intent(
                 requireActivity().applicationContext,

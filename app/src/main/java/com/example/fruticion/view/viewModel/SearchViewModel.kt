@@ -13,16 +13,14 @@ import kotlinx.coroutines.launch
 
 class SearchViewModel(private val repository: Repository) : ViewModel() {
 
-    val fruits = MutableLiveData<List<Fruit>>()
+    private val _fruits = MutableLiveData<List<Fruit>>()
+    val fruits: LiveData<List<Fruit>> = _fruits
 
-    fun getListFruit(): LiveData<List<Fruit>> {
-        return fruits
-    }
 
     fun update() {
         viewModelScope.launch {
             val fruitsList = repository.getFruits()
-            fruits.postValue(fruitsList)
+            _fruits.postValue(fruitsList)
         }
     }
 

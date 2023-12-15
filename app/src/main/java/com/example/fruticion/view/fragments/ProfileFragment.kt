@@ -33,11 +33,6 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        // Se obtiene la instancia de la BD
-        /*db = FruticionDatabase.getInstance(requireContext())!!
-
-        repository = Repository.getInstance(getNetworkService(), db)*/
-
         // Inflate the layout for this fragment
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
@@ -47,24 +42,6 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
-            //TODO: PREGUNTAR ROBERTO POR QUE AL HACER EL VIEWMODEL EN ONVIEWCREATED Y ONSTART NO FUNCIONA BIEN EL CICLO DE VIDA DE NADA, PERO SI SE DEJA EL ONSTART FUNCIONA LA IU PERO NO EL CICLO DE VIDA
-            /*//se recupera el nombre y la contraseña del usuario desde la BD por primera vez
-            var user : User? = profileViewModel.user.value
-
-            if(profileViewModel.user.value==null) {
-                lifecycleScope.launch {
-                    user = repository.getUserById()
-                    profileViewModel.update(user!!)
-                    Log.i("if de profileFragment onStart()","pito")
-                }
-            }
-            else{
-                Log.i("else de profileFragment onStart()","${profileViewModel.user.value!!}")
-                user=profileViewModel.user.value!!
-            }
-
-            valueProfileName.text = user?.username
-            valueProfilePassword.text = user?.password*/
 
             //boton de Editar Perfil
             editProfileButton.setOnClickListener {
@@ -83,7 +60,6 @@ class ProfileFragment : Fragment() {
                 logout()
 
             }
-
 
             //boton de Ajustes
             settingButton.setOnClickListener {
@@ -106,31 +82,6 @@ class ProfileFragment : Fragment() {
 
         profileViewModel.update()
 
-        //se recupera el nombre y la contraseña del usuario desde la BD
-        /*var user : User? = profileViewModel.user.value
-        Log.i("onStart() user", "$user")
-        if(profileViewModel.user.value==null) {
-            lifecycleScope.launch {
-                user = repository.getUserById()
-                profileViewModel.update(user!!)
-                Log.i("if de onStart()","$user")
-                binding.valueProfileName.text = user?.username
-                binding.valueProfilePassword.text = user?.password
-                Log.i("onStart() nombre usuario", "${user?.username}")
-            }
-        }
-        else{
-            user=profileViewModel.user.value!!
-            binding.valueProfileName.text = user?.username
-            binding.valueProfilePassword.text = user?.password
-        }*/
-
-
-        /* lifecycleScope.launch {
-             val user = repository.getUserById()
-             binding.valueProfileName.text = user.username
-             binding.valueProfilePassword.text = user.password
-         }*/
     }
 
     override fun onDestroy() {

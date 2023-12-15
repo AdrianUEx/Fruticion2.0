@@ -54,11 +54,6 @@ class FavoriteFragment : Fragment() {
             updateRecyclerView(favFruitsInList)
         }
 
-        /*favoriteViewModel.favFruits.observe(viewLifecycleOwner, Observer {
-            favoriteViewModel.update(dbFruit)
-            updateRecyclerView(dbFruit)
-        })*/
-
     }
 
     override fun onDestroyView() {

@@ -13,17 +13,13 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel (private val repository: Repository) : ViewModel(){
 
-    val user = MutableLiveData<User>()
-
-    fun getUser(): LiveData<User> {
-        return user
-    }
-
+    private val _user = MutableLiveData<User>()
+    val user: LiveData<User> = _user
 
     fun update(){
         viewModelScope.launch {
             val newUser = repository.getUserById()
-            user.postValue(newUser)
+            _user.postValue(newUser)
         }
     }
 

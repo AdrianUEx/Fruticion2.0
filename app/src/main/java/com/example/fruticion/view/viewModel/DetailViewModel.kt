@@ -18,27 +18,22 @@ import kotlinx.coroutines.launch
 
 class DetailViewModel (private val repository: Repository) : ViewModel() {
 
-    val detailFruit = MutableLiveData<Fruit>()
+    private val _detailFruit = MutableLiveData<Fruit>()
+    val detailFruit: LiveData<Fruit>  = _detailFruit
     var isFavorite : Boolean = false
-
-    fun getDetailFruit(): LiveData<Fruit> {
-        return detailFruit
-    }
 
     fun update(fruitID : Long){
         viewModelScope.launch {
             isFavorite = !repository.checkFruitIsFav(fruitID)
             val dbFruit = repository.getFruitById(fruitID)
-            detailFruit.postValue(dbFruit)
+            _detailFruit.postValue(dbFruit)
         }
-
     }
 
     fun onFavoriteButtonClick(fruitId: Long){
         viewModelScope.launch {
             if (repository.checkFruitIsFav(fruitId)) {
                 repository.addFavFruit(fruitId)
-
             } else {
                 repository.deleteFavFruit(fruitId)
             }
@@ -48,7 +43,6 @@ class DetailViewModel (private val repository: Repository) : ViewModel() {
     fun onAddDailyButtonClick(fruitId: Long){
         viewModelScope.launch {
             repository.insertDailyFruit(fruitId)
-
             repository.insertWeeklyFruit(fruitId)
         }
     }
@@ -59,8 +53,7 @@ class DetailViewModel (private val repository: Repository) : ViewModel() {
             override fun <T : ViewModel> create(
                 modelClass: Class<T>,
                 extras: CreationExtras
-            ): T { // Get the Application object from extras
-
+            ): T {
                 val application =
                     checkNotNull(extras[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY])
                 return DetailViewModel(

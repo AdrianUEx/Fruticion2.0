@@ -1,6 +1,7 @@
 package com.example.fruticion.view.viewModel
 
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -13,13 +14,14 @@ import kotlinx.coroutines.launch
 
 class WeeklyIntakeViewModel(private val repository: Repository) : ViewModel() {
 
-    val fruits = MutableLiveData<List<Fruit>>()
+    private val _fruits = MutableLiveData<List<Fruit>>()
+    val fruits: LiveData<List<Fruit>> = _fruits
 
     fun update() {
         viewModelScope.launch {
 
             val dbFruit = repository.getAllWeeklyFruitsByUser()
-            fruits.value=dbFruit
+            _fruits.value=dbFruit
         }
     }
 
