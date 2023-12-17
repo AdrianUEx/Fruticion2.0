@@ -46,6 +46,7 @@ class Repository (private val api: FruticionAPI, private val db: FruticionDataba
     //Este metodo es para SearchFragment. Obtiene las frutas de la API, las mapea, las inserta en Room y las devuelve para meterlas en el Adapter del RecyclerView.
     suspend fun getFruits(): List<Fruit> {
         try {
+            if(shouldFetchFruits()){
             //llamada a la API
             val serializedFruits = api.getAllFruits()
             Log.i("Llamada API","Llamada realizada a la API")
@@ -55,7 +56,7 @@ class Repository (private val api: FruticionAPI, private val db: FruticionDataba
             val readyFruitList = FruitMapper.mapFromSerializedFruitList(serializedFruits)
             //se aÃ±aden las frutas a la BD
             db.fruitDao().addFruitList(readyFruitList)
-
+            }
             //se devuelven todas las frutas de la BD
             return db.fruitDao().getAllFruitsForList()
 
