@@ -102,7 +102,6 @@ class SearchFragment : Fragment() {
         }
     }
 
-    //Este metodo SOLAMENTE es invocado desde HomeActivity
     fun updateRecyclerView(newData: List<Fruit>) {
         val modifiedData = ArrayList(newData)
         searchAdapter.updateList(modifiedData)
