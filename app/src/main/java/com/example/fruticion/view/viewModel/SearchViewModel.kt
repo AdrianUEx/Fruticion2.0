@@ -19,7 +19,7 @@ class SearchViewModel(private val repository: Repository) : ViewModel() {
 
     fun update() {
         viewModelScope.launch {
-            val fruitsList = repository.getFruits() //Accede a la API y devuelve de Room las frutas
+            val fruitsList = repository.getFruits() //Accede a la API y devuelve de Room todas las frutas
             _fruits.postValue(fruitsList)
         }
     }

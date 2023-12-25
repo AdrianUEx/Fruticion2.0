@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Frutición</string>
+    <string name="app_name" translatable="false">Frutición</string>
     <string name="hello_blank_fragment_favorite">Hola fragmento favorito blanco</string>
     <!-- Bottom Navigation Bar-->
     <string name="title_home">Inicio</string>
@@ -82,12 +82,12 @@
     <!-- Info -->
     <string name="text_title_info">Información de la aplicación</string>
     <string name="text_title_what_info">¿Qué es Frutición?</string>
-    <string name="text_what_info">Frutición es una aplicación que está pensada para llevar un control sobre las frutas ingeridas semanalmenre y diariamente para controlar la nutrición. Además de esto, se pueden marcar las frutas más deliciosas o que gusten más como favoritas.</string>
+    <string name="text_what_info">Frutición es una aplicación que está pensada para llevar un control sobre los nutrientes que contienen las frutas ingeridas diaria y semanalmente para informar al usuario sobre su nutrición. Además de esto, se pueden marcar las frutas más deliciosas o que gusten más como favoritas, así como establecer un recordatorio para que el usuario tome la fruta que haya establecido a la hora indicada.</string>
     <string name="text_title_who_info">¿Quienes somos?</string>
-    <string name="text_who_info">Frutición ha sido creada y desarrollada por unos esudiantes de Ingeniería Informática en Ingeniería del Software en la Escuela Politécnica de Cáceres. Ellos son:</string>
+    <string name="text_who_info">Frutición ha sido creada y desarrollada por estudiantes de Ingeniería Informática en Ingeniería del Software en la Escuela Politécnica de Cáceres. Ellos son:</string>
     <string name="authors" translatable="false">
         <li>Marcos Santos Muñoz</li>\n
-        <li>Adrian Barquilla Rodríguez</li>\n
+        <li>Adrián Barquilla Rodríguez</li>\n
         <li>Jorge Campón Pastor</li>\n
         <li>Arturo Mejías Velasco</li>
     </string>
@@ -107,15 +107,7 @@
     <string name="messages_header">Mensajes</string>
     <string name="sync_header">Sync</string>
 
-    <!-- Messages Preferences -->
-    <string name="reply_title">Default reply action</string>
-
     <!-- Sync Preferences -->
-    <string name="sync_title">Sincronizar email periodicamente</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">"Descarga automaticamente adjuntos de un email entrante "</string>
-    <string name="attachment_summary_off">"Solo descargar adjuntos cuando se requiere manualmente "</string>
-    <string name="signature_title">Tu firma</string>
     <string name="hello_blank_fragment">Hola fragmento blanco</string>
 
 </resources>

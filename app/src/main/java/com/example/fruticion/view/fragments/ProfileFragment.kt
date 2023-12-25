@@ -1,25 +1,18 @@
 package com.example.fruticion.view.fragments
 
 import android.os.Bundle
-
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.fruticion.FruticionApplication
-import com.example.fruticion.view.activity.LoginActivity.Companion.currentUserId
-import com.example.fruticion.api.getNetworkService
-import com.example.fruticion.database.FruticionDatabase
-import com.example.fruticion.database.Repository
 import com.example.fruticion.databinding.FragmentProfileBinding
+import com.example.fruticion.util.FruitDetailDataMapper
+import com.example.fruticion.view.activity.LoginActivity.Companion.currentUserId
 import com.example.fruticion.view.viewModel.ProfileViewModel
-import com.example.fruticion.view.viewModel.SearchViewModel
-import com.example.fruticion.model.User
-import android.util.Log
-import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
 
@@ -27,6 +20,8 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val profileViewModel: ProfileViewModel by viewModels { ProfileViewModel.Factory }
+
+    private lateinit var fruitDetailMap: FruitDetailDataMapper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,6 +62,10 @@ class ProfileFragment : Fragment() {
                 findNavController().navigate(action)
             }
         }
+
+        //Para poder usar el contexto de la aplicacion (application) hay que llamarlo desde la Activity
+        val appContainer = (requireActivity().application as FruticionApplication).appContainer
+        fruitDetailMap = appContainer.fruitDetailMap
     }
 
     //Este metodo sirve para que los campos estén actualizados al volver desde EditProfileFragment. No funciona usando onViewStateRestored()
@@ -93,6 +92,7 @@ class ProfileFragment : Fragment() {
     private fun logout() {
         currentUserId =
             null // Lo pongo a null para asegurarme de que no sigue cargado cuando se cierra sesión. currentUserId es un companion object que esta cargado desde la invocacion del login
+        fruitDetailMap.clearMap() // Limpia el mapa del usuario que acaba de cerrar sesión para descargar la memoria
         requireActivity().finish()
     }
 

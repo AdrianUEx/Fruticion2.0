@@ -9,29 +9,21 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.fruticion.FruticionApplication
 import com.example.fruticion.R
-import com.example.fruticion.view.activity.LoginActivity.Companion.fruitImagesMap
 import com.example.fruticion.broadcastReceiver.AlarmReceiver
 import com.example.fruticion.broadcastReceiver.AlarmReceiver.Companion.NOTIFICATION_ID
-import com.example.fruticion.api.getNetworkService
-import com.example.fruticion.database.FruticionDatabase
-import com.example.fruticion.database.Repository
 import com.example.fruticion.databinding.FragmentDetailBinding
-import com.example.fruticion.model.Fruit
+import com.example.fruticion.util.FruitImagesMap
 import com.example.fruticion.view.viewModel.DetailViewModel
-import com.example.fruticion.view.viewModel.SearchViewModel
-import kotlinx.coroutines.launch
 import java.util.Calendar
 
 class DetailFragment : Fragment() {
@@ -42,6 +34,8 @@ class DetailFragment : Fragment() {
     private val args: DetailFragmentArgs by navArgs()//Esto tiene que ser val porque si no, peta
 
     private val detailViewModel: DetailViewModel by viewModels { DetailViewModel.Factory }
+
+    private lateinit var fruitImagesMap: FruitImagesMap
 
     companion object {
         const val MY_CHANNEL_ID = "myChannel"
@@ -60,6 +54,10 @@ class DetailFragment : Fragment() {
     //El codigo de este metodo podria estar en onCreateView() pero es tecnicamente mas correcto si esta en onViewCreated()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //Para poder usar el contexto de la aplicacion (application) hay que llamarlo desde la Activity
+        val appContainer = (requireActivity().application as FruticionApplication).appContainer
+        fruitImagesMap = appContainer.fruitImagesMap
 
         val fruitId = args.fruitId
         setUpUI(fruitId)

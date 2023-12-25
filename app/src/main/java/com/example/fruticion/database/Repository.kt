@@ -1,7 +1,7 @@
 package com.example.fruticion.database
 
+import android.util.Log
 import androidx.lifecycle.LiveData
-import com.example.fruticion.view.activity.LoginActivity
 import com.example.fruticion.api.APIError
 import com.example.fruticion.api.FruitMapper
 import com.example.fruticion.api.FruticionAPI
@@ -10,14 +10,15 @@ import com.example.fruticion.model.Favourite
 import com.example.fruticion.model.Fruit
 import com.example.fruticion.model.User
 import com.example.fruticion.model.WeeklyIntake
+import com.example.fruticion.view.activity.LoginActivity
 import java.time.LocalDate
 import java.time.LocalTime
-import android.util.Log
 
 // Repository.k
-class Repository (private val api: FruticionAPI, private val db: FruticionDatabase) {
+class Repository(private val api: FruticionAPI, private val db: FruticionDatabase) {
 
-    private var lastUpdateTimeMillis: Long= 0L //Esta variable contendrá el tiempo en milisegundos de la ultima actualizacion de datos desde la API
+    private var lastUpdateTimeMillis: Long =
+        0L //Esta variable contendrá el tiempo en milisegundos de la ultima actualizacion de datos desde la API
 
     val favFruitsInList = LoginActivity.currentUserId?.let { userId ->
         Log.i("Valor id usuario antes de obtener los favs", "$userId")
@@ -37,7 +38,7 @@ class Repository (private val api: FruticionAPI, private val db: FruticionDataba
     // SearchFragment
 
     //Comprueba si se puede realizar una peticion a la API desde la ultima vez que se hizo. La primera vez que se enciende la aplicación siempre entra.
-    fun shouldFetchFruits():Boolean{
+    fun shouldFetchFruits(): Boolean {
         //Se comprueba si el tiempo desde el ultimo fetch es mayor que el tiempo especificado para volver a hacer el fetch (una hora)
         val timeFromLastFetch = System.currentTimeMillis() - lastUpdateTimeMillis
         return timeFromLastFetch > MIN_TIME_FROM_LAST_FETCH_MILLIS
@@ -46,17 +47,21 @@ class Repository (private val api: FruticionAPI, private val db: FruticionDataba
     //Este metodo es para SearchFragment. Obtiene las frutas de la API, las mapea, las inserta en Room y las devuelve para meterlas en el Adapter del RecyclerView.
     suspend fun getFruits(): List<Fruit> {
         try {
-            if(shouldFetchFruits()){
-            //llamada a la API
-            val serializedFruits = api.getAllFruits()
-            Log.i("Llamada API","Llamada realizada a la API")
-            //se actualiza la fecha del ultimo fetch realizado
-            lastUpdateTimeMillis = System.currentTimeMillis()
-            //se mapean las frutas de la API
-            val readyFruitList = FruitMapper.mapFromSerializedFruitList(serializedFruits)
-            //se aÃ±aden las frutas a la BD
-            db.fruitDao().addFruitList(readyFruitList)
+            if (shouldFetchFruits()) {
+                //llamada a la API
+                val serializedFruits = api.getAllFruits()
+                Log.i("Llamada API", "Llamada realizada a la API")
+                //Evita que se inserten frutas vacías en la BD y asi la aplicación funcione normalmente
+                if (serializedFruits.isNotEmpty()) {
+                    //se actualiza la fecha del ultimo fetch realizado
+                    lastUpdateTimeMillis = System.currentTimeMillis()
+                    //se mapean las frutas de la API
+                    val readyFruitList = FruitMapper.mapFromSerializedFruitList(serializedFruits)
+                    //se insertan las frutas en la BD
+                    db.fruitDao().addFruitList(readyFruitList)
+                }
             }
+
             //se devuelven todas las frutas de la BD
             return db.fruitDao().getAllFruitsForList()
 
@@ -79,7 +84,7 @@ class Repository (private val api: FruticionAPI, private val db: FruticionDataba
         return db.favouriteDao().getAllFavFruitsByUserForList(LoginActivity.currentUserId!!)
     }
 
-    suspend fun getFavFruitByUser(fruitId: Long): Fruit{
+    suspend fun getFavFruitByUser(fruitId: Long): Fruit {
         return db.favouriteDao().getFavFruitByUser(LoginActivity.currentUserId!!, fruitId)
     }
 
@@ -96,13 +101,14 @@ class Repository (private val api: FruticionAPI, private val db: FruticionDataba
         db.userDao().insertUser(user)
     }
 
-    suspend fun updateUser(newName: String, newPassword: String){
+    suspend fun updateUser(newName: String, newPassword: String) {
         db.userDao().updateUser(
             User(
                 LoginActivity.currentUserId,
                 newName,
                 newPassword
-            ))
+            )
+        )
     }
 
     suspend fun checkUserByUsername(username: String): Boolean {
@@ -113,16 +119,16 @@ class Repository (private val api: FruticionAPI, private val db: FruticionDataba
         return db.userDao().getUserByUsername(username)
     }
 
-    suspend fun getUserById(): User{
+    suspend fun getUserById(): User {
         return db.userDao().getUserById(LoginActivity.currentUserId)
     }
 
-    suspend fun deleteUserById(){
+    suspend fun deleteUserById() {
         db.userDao().deleteUserById(LoginActivity.currentUserId!!)
     }
 
     //DailyIntakeFragment
-    suspend fun insertDailyFruit(fruitId: Long){
+    suspend fun insertDailyFruit(fruitId: Long) {
         db.dailyIntakeDao().insertDailyFruit(
             DailyIntake(
                 fruitId,
@@ -146,7 +152,7 @@ class Repository (private val api: FruticionAPI, private val db: FruticionDataba
     }
 
     //WeeklyIntakeFragment
-    suspend fun insertWeeklyFruit(fruitId: Long){
+    suspend fun insertWeeklyFruit(fruitId: Long) {
         db.weeklyIntakeDao().insertWeeklyFruit(
             WeeklyIntake(
                 fruitId,
@@ -185,7 +191,8 @@ class Repository (private val api: FruticionAPI, private val db: FruticionDataba
     //Instancia del patron Repository (no tocar)
     companion object {
 
-        private const val MIN_TIME_FROM_LAST_FETCH_MILLIS: Long = 3600000 //Este tiempo es una hora en milisegundos, ya que es muy poco probable que en nuestra API haya cambios frecuentes.
+        private const val MIN_TIME_FROM_LAST_FETCH_MILLIS: Long =
+            3600000 //Este tiempo es una hora en milisegundos, ya que es muy poco probable que en nuestra API haya cambios frecuentes.
 
         @Volatile
         private var instance: Repository? = null
