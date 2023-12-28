@@ -104,6 +104,7 @@
     <string name="fruitImageContentDescription">FruitImage</string>
     <string name="logo_profile">Profile Logo</string>
     <string name="settings_icon">Settings icon</string>
+    <string name="infoFragmentContentDescription">App info image</string>
 
 
 </resources>
