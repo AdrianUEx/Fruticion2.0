@@ -62,6 +62,7 @@
     <string name="add_intake_mes">Fruta añadida a la ingesta</string>
     <string name="add_favourite_description">Boton de anadir a favoritos con forma de corazon rosa</string>
     <string name="time_picker">Recordatorio</string>
+    <string name="fruitImageContentDescription">ImagenFruta</string>
     <!-- Editar perfil -->
     <string name="title_edit">Editar perfil</string>
     <string name="text_edit_username">Nuevo nombre de usuario</string>

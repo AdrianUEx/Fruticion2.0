@@ -7,276 +7,293 @@
     android:layout_height="match_parent"
     tools:context=".view.fragments.DetailFragment">
 
-    <TextView
-        android:id="@+id/text_detail_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/text_detail_name"
-        android:textColor="@color/black"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagenDetalleFruta" />
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="409dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="24dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_detail_name" />
-
-    <TextView
-        android:id="@+id/text_detail_family"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/text_detail_family"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
-
-    <TextView
-        android:id="@+id/text_detail_order"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/text_detail_order"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/text_detail_family"
-        app:layout_constraintTop_toBottomOf="@+id/text_detail_family" />
-
-    <TextView
-        android:id="@+id/text_detail_genus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/text_detail_genus"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/text_detail_order"
-        app:layout_constraintTop_toBottomOf="@+id/text_detail_order" />
-
-    <TextView
-        android:id="@+id/text_detail_nutritition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/text_detail_nutrition"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/text_detail_genus"
-        app:layout_constraintTop_toBottomOf="@+id/text_detail_genus" />
-
-    <TextView
-        android:id="@+id/text_detail_calories"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="12dp"
-        android:text="@string/text_detail_calories"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/text_detail_nutritition"
-        app:layout_constraintTop_toBottomOf="@+id/text_detail_nutritition" />
-
-    <TextView
-        android:id="@+id/text_detail_fat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/text_detail_fat"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/text_detail_calories"
-        app:layout_constraintTop_toBottomOf="@+id/text_detail_calories" />
-
-    <TextView
-        android:id="@+id/text_detail_sugar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/text_detail_sugar"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/text_detail_fat"
-        app:layout_constraintTop_toBottomOf="@+id/text_detail_fat" />
-
-    <TextView
-        android:id="@+id/text_detail_carbo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/text_detail_carbo"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/text_detail_sugar"
-        app:layout_constraintTop_toBottomOf="@+id/text_detail_sugar" />
-
-    <TextView
-        android:id="@+id/text_detail_protein"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/text_detail_protein"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/text_detail_carbo"
-        app:layout_constraintTop_toBottomOf="@+id/text_detail_carbo" />
-
-    <TextView
-        android:id="@+id/value_detail_family"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/value_detail_family"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/text_detail_family"
-        app:layout_constraintStart_toEndOf="@+id/text_detail_family"
-        android:textColor="@color/black" />
-
-    <TextView
-        android:id="@+id/value_detail_order"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:text="@string/value_detail_order"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/text_detail_order"
-        app:layout_constraintTop_toBottomOf="@+id/value_detail_family" />
-
-    <TextView
-        android:id="@+id/value_detail_genus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:text="@string/value_detail_genus"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/text_detail_genus"
-        app:layout_constraintTop_toBottomOf="@+id/value_detail_order" />
-
-    <TextView
-        android:id="@+id/value_detail_calories"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/value_detail_calories"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/text_detail_calories"
-        app:layout_constraintTop_toBottomOf="@+id/text_detail_nutritition" />
-
-    <TextView
-        android:id="@+id/value_detail_fat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/value_detail_fat"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toEndOf="@+id/text_detail_fat"
-        app:layout_constraintTop_toBottomOf="@+id/value_detail_calories" />
-
-    <TextView
-        android:id="@+id/value_detail_sugar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/value_detail_sugar"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toEndOf="@+id/text_detail_sugar"
-        app:layout_constraintTop_toBottomOf="@+id/value_detail_fat" />
-
-    <TextView
-        android:id="@+id/value_detail_carbo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/value_detail_carbo"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toEndOf="@+id/text_detail_carbo"
-        app:layout_constraintTop_toBottomOf="@+id/value_detail_sugar" />
-
-    <TextView
-        android:id="@+id/value_detail_protein"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/value_detail_protein"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toEndOf="@+id/text_detail_protein"
-        app:layout_constraintTop_toBottomOf="@+id/value_detail_carbo" />
-
-    <ImageButton
-        android:id="@+id/add_favourite"
-        android:layout_width="85dp"
-        android:layout_height="74dp"
-        android:background="#00FFFFFF"
-        android:contentDescription="@string/add_favourite_description"
-        android:src="@drawable/corazon"
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.463"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/value_detail_protein"
-        app:layout_constraintVertical_bias="0.333" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
-    <Button
-        android:id="@+id/add_daily_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/formato_botones"
-        android:text="@string/bottom_intake"
-        android:fontFamily="@font/architects_daughter"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/add_favourite"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/add_favourite"
-        app:layout_constraintTop_toTopOf="@+id/add_favourite"
-        app:layout_constraintVertical_bias="0.333" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/timePickerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:background="@drawable/formato_botones"
-        android:text="@string/time_picker"
-        android:fontFamily="@font/architects_daughter"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/add_favourite"
-        app:layout_constraintEnd_toStartOf="@+id/add_favourite"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/add_favourite"
-        app:layout_constraintVertical_bias="0.307" />
+            <TextView
+                android:id="@+id/text_detail_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/text_detail_name"
+                android:textColor="@color/black"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imagenDetalleFruta" />
 
-    <ImageView
-        android:id="@+id/imagenDetalleFruta"
-        android:layout_width="140dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <View
+                android:id="@+id/divider"
+                android:layout_width="409dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="24dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_detail_name" />
 
+            <TextView
+                android:id="@+id/text_detail_family"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/text_detail_family"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+            <TextView
+                android:id="@+id/text_detail_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/text_detail_order"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/text_detail_family"
+                app:layout_constraintTop_toBottomOf="@+id/text_detail_family" />
+
+            <TextView
+                android:id="@+id/text_detail_genus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/text_detail_genus"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/text_detail_order"
+                app:layout_constraintTop_toBottomOf="@+id/text_detail_order" />
+
+            <TextView
+                android:id="@+id/text_detail_nutritition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/text_detail_nutrition"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/text_detail_genus"
+                app:layout_constraintTop_toBottomOf="@+id/text_detail_genus" />
+
+            <TextView
+                android:id="@+id/text_detail_calories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/text_detail_calories"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/text_detail_nutritition"
+                app:layout_constraintTop_toBottomOf="@+id/text_detail_nutritition" />
+
+            <TextView
+                android:id="@+id/text_detail_fat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/text_detail_fat"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/text_detail_calories"
+                app:layout_constraintTop_toBottomOf="@+id/text_detail_calories" />
+
+            <TextView
+                android:id="@+id/text_detail_sugar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/text_detail_sugar"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/text_detail_fat"
+                app:layout_constraintTop_toBottomOf="@+id/text_detail_fat" />
+
+            <TextView
+                android:id="@+id/text_detail_carbo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/text_detail_carbo"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/text_detail_sugar"
+                app:layout_constraintTop_toBottomOf="@+id/text_detail_sugar" />
+
+            <TextView
+                android:id="@+id/text_detail_protein"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/text_detail_protein"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/text_detail_carbo"
+                app:layout_constraintTop_toBottomOf="@+id/text_detail_carbo" />
+
+            <TextView
+                android:id="@+id/value_detail_family"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/value_detail_family"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_detail_family"
+                app:layout_constraintStart_toEndOf="@+id/text_detail_family" />
+
+            <TextView
+                android:id="@+id/value_detail_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/value_detail_order"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/text_detail_order"
+                app:layout_constraintTop_toBottomOf="@+id/value_detail_family" />
+
+            <TextView
+                android:id="@+id/value_detail_genus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/value_detail_genus"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/text_detail_genus"
+                app:layout_constraintTop_toBottomOf="@+id/value_detail_order" />
+
+            <TextView
+                android:id="@+id/value_detail_calories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/value_detail_calories"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/text_detail_calories"
+                app:layout_constraintTop_toBottomOf="@+id/text_detail_nutritition" />
+
+            <TextView
+                android:id="@+id/value_detail_fat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/value_detail_fat"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@+id/text_detail_fat"
+                app:layout_constraintTop_toBottomOf="@+id/value_detail_calories" />
+
+            <TextView
+                android:id="@+id/value_detail_sugar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/value_detail_sugar"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@+id/text_detail_sugar"
+                app:layout_constraintTop_toBottomOf="@+id/value_detail_fat" />
+
+            <TextView
+                android:id="@+id/value_detail_carbo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/value_detail_carbo"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@+id/text_detail_carbo"
+                app:layout_constraintTop_toBottomOf="@+id/value_detail_sugar" />
+
+            <TextView
+                android:id="@+id/value_detail_protein"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/value_detail_protein"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@+id/text_detail_protein"
+                app:layout_constraintTop_toBottomOf="@+id/value_detail_carbo" />
+
+            <ImageButton
+                android:id="@+id/add_favourite"
+                android:layout_width="85dp"
+                android:layout_height="74dp"
+                android:background="#00FFFFFF"
+                android:contentDescription="@string/add_favourite_description"
+                android:src="@drawable/corazon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.463"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/value_detail_protein"
+                app:layout_constraintVertical_bias="0.333" />
+
+            <Button
+                android:id="@+id/add_daily_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/formato_botones"
+                android:fontFamily="@font/architects_daughter"
+                android:text="@string/bottom_intake"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/add_favourite"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/add_favourite"
+                app:layout_constraintTop_toTopOf="@+id/add_favourite"
+                app:layout_constraintVertical_bias="0.333" />
+
+            <Button
+                android:id="@+id/timePickerButton"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:background="@drawable/formato_botones"
+                android:fontFamily="@font/architects_daughter"
+                android:text="@string/time_picker"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/add_favourite"
+                app:layout_constraintEnd_toStartOf="@+id/add_favourite"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/add_favourite"
+                app:layout_constraintVertical_bias="0.307" />
+
+            <ImageView
+                android:id="@+id/imagenDetalleFruta"
+                android:layout_width="140dp"
+                android:layout_height="160dp"
+                android:layout_marginTop="28dp"
+                android:contentDescription="@string/fruitImageContentDescription"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

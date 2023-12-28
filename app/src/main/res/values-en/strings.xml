@@ -103,6 +103,7 @@
     <string name="value_total_fats">0,00</string>
     <string name="new_username_description">Bar to insert the new username</string>
     <string name="new_password_description">Field to enter the new password</string>
+    <string name="fruitImageContentDescription">FruitImage</string>
 
 
 </resources>

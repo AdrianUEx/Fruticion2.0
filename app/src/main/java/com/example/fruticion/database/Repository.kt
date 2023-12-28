@@ -1,7 +1,7 @@
 package com.example.fruticion.database
 
-import android.util.Log
 import androidx.lifecycle.LiveData
+import com.example.fruticion.view.activity.LoginActivity
 import com.example.fruticion.api.APIError
 import com.example.fruticion.api.FruitMapper
 import com.example.fruticion.api.FruticionAPI
@@ -10,9 +10,9 @@ import com.example.fruticion.model.Favourite
 import com.example.fruticion.model.Fruit
 import com.example.fruticion.model.User
 import com.example.fruticion.model.WeeklyIntake
-import com.example.fruticion.view.activity.LoginActivity
 import java.time.LocalDate
 import java.time.LocalTime
+import android.util.Log
 
 // Repository.k
 class Repository(private val api: FruticionAPI, private val db: FruticionDatabase) {
@@ -35,10 +35,10 @@ class Repository(private val api: FruticionAPI, private val db: FruticionDatabas
         db.weeklyIntakeDao().getAllLDWeeklyFruitsByUser(userId)
     }
 
-    // SearchFragment
+    // SearchFragment------------------------------------------------------------------------------
 
     //Comprueba si se puede realizar una peticion a la API desde la ultima vez que se hizo. La primera vez que se enciende la aplicación siempre entra.
-    fun shouldFetchFruits(): Boolean {
+    private fun shouldFetchFruits(): Boolean {
         //Se comprueba si el tiempo desde el ultimo fetch es mayor que el tiempo especificado para volver a hacer el fetch (una hora)
         val timeFromLastFetch = System.currentTimeMillis() - lastUpdateTimeMillis
         return timeFromLastFetch > MIN_TIME_FROM_LAST_FETCH_MILLIS
@@ -71,7 +71,7 @@ class Repository(private val api: FruticionAPI, private val db: FruticionDatabas
     }
 
 
-    // FavouriteFragment
+    // FavouriteFragment--------------------------------------------------------------------------
     fun getAllFavFruits(): LiveData<List<Fruit>> {
         return db.favouriteDao().getAllLDFavFruitsByUser(LoginActivity.currentUserId!!)
     }
@@ -96,7 +96,7 @@ class Repository(private val api: FruticionAPI, private val db: FruticionDatabas
         db.favouriteDao().deleteFavById(LoginActivity.currentUserId!!, fruitId)
     }
 
-    //Register Activity y Login Activity
+    //Register Activity y Login Activity --------------------------------------------------------------
     suspend fun insertUser(user: User) {
         db.userDao().insertUser(user)
     }
@@ -151,7 +151,7 @@ class Repository(private val api: FruticionAPI, private val db: FruticionDatabas
         return db.dailyIntakeDao().getAllDailyFruitsByUserForList(LoginActivity.currentUserId!!)
     }
 
-    //WeeklyIntakeFragment
+    //WeeklyIntakeFragment ------------------------------------------------------------------------
     suspend fun insertWeeklyFruit(fruitId: Long) {
         db.weeklyIntakeDao().insertWeeklyFruit(
             WeeklyIntake(

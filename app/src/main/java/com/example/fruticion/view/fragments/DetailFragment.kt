@@ -152,7 +152,7 @@ class DetailFragment : Fragment() {
                         ).show()
 
                         // Lanza la notificación a la hora seleccionada
-                        scheduleNotification(fruitId, selectedHour, selectedMinute)
+                        scheduleNotification(selectedHour, selectedMinute)
                     },
                     hour,
                     minute,
@@ -165,7 +165,7 @@ class DetailFragment : Fragment() {
     }
 
     //--METODOS RECORDATORIO CON BROADCAST RECEIVER-------------------------------------------------------------------------------------------------
-    private fun scheduleNotification(fruitId: Long, selectedHour: Int, selectedMinute: Int) {
+    private fun scheduleNotification(selectedHour: Int, selectedMinute: Int) {
 
         // Configura la hora seleccionada en el calendario
         val calendar = Calendar.getInstance()
