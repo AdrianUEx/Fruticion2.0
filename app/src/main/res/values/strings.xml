@@ -9,15 +9,19 @@
     <string name="bottom_daily">Diario</string>
     <string name="bottom_weekly">Semanal</string>
     <string name="info_title">Información</string>
-    <!--Login y registro-->
+
+    <!--Login-->
     <string name="title_activity_login">LoginActivity</string>
     <string name="text_login_name">Nombre de usuario</string>
     <string name="text_login_password">Contraseña</string>
     <string name="button_login_login">Iniciar sesión</string>
     <string name="button_login_join">Registrarse</string>
+
+    <!--Registro-->
     <string name="title_join">Registro</string>
     <string name="text_join_check_pass">Confirmar contraseña</string>
     <string name="button_join_join">Registrarse</string>
+
     <!-- ?????? -->
     <string name="search_text">Buscar frutas</string>
     <string name="title_dashboard">Dashboard</string>
@@ -36,50 +40,65 @@
     <string name="edit_profile_button">Editar perfil</string>
     <string name="logout_profile_button">Cerrar sesión</string>
     <string name="delete_user_button">Eliminar cuenta</string>
+    <string name="logo_profile">Logo perfil</string>
+    <string name="settings_icon">Icono ajustes</string>
+
     <!-- Detalles fruta -->
     <string name="title_detail">Detalles</string>
     <string name="text_detail_name">Nombre fruta</string>
+
     <string name="text_detail_family">Familia</string>
     <string name="text_detail_genus">Género</string>
     <string name="text_detail_order">Orden</string>
+
     <string name="text_detail_nutrition">Información nutricional:</string>
+
     <string name="text_detail_carbo">Carbohidratos</string>
     <string name="text_detail_calories">Calorías</string>
     <string name="text_detail_fat">Grasas</string>
     <string name="text_detail_sugar">Azúcar</string>
     <string name="text_detail_protein">Proteínas</string>
-    <string name="value_detail_family">Familia</string>
-    <string name="value_detail_genus">Género</string>
-    <string name="value_detail_order">Orden</string>
-    <string name="value_detail_carbo">Carbohidratos</string>
-    <string name="value_detail_calories">Calorías</string>
-    <string name="value_detail_fat">Grasas</string>
-    <string name="value_detail_sugar">Azúcar</string>
-    <string name="value_detail_protein">Proteínas</string>
+
+    <string name="value_detail_family" translatable="false">0,00</string>
+    <string name="value_detail_genus" translatable="false">0,00</string>
+    <string name="value_detail_order" translatable="false">0,00</string>
+    <string name="value_detail_carbo" translatable="false">0,00</string>
+    <string name="value_detail_calories" translatable="false">0,00</string>
+    <string name="value_detail_fat" translatable="false">0,00</string>
+    <string name="value_detail_sugar" translatable="false">0,00</string>
+    <string name="value_detail_protein" translatable="false">0,00</string>
+
     <string name="add_fav_mes">Fruta añadida a favoritos</string>
     <string name="remove_fav_mes">Fruta eliminada de favoritos</string>
+
     <string name="bottom_intake">Añadir a la ingesta</string>
     <string name="add_intake_mes">Fruta añadida a la ingesta</string>
+
     <string name="add_favourite_description">Boton de anadir a favoritos con forma de corazon rosa</string>
     <string name="time_picker">Recordatorio</string>
     <string name="fruitImageContentDescription">ImagenFruta</string>
+
     <!-- Editar perfil -->
     <string name="title_edit">Editar perfil</string>
     <string name="text_edit_username">Nuevo nombre de usuario</string>
     <string name="value_edit_username">Nuevo nombre de usuario</string>
+
     <string name="text_edit_password">Nueva contraseña</string>
     <string name="value_edit_password">Nueva contraseña</string>
+
     <string name="save_edit_button">Guardar cambios</string>
     <string name="cancel_edit_button">Cancelar</string>
     <string name="new_username_description">Barra para insertar el nuevo nombre de usuario</string>
     <string name="new_password_description">Campo para introducir la nueva contraseña</string>
     <string name="username_chosen">Nombre de ususario ocupado</string>
+
     <!-- Ajustes -->
     <string name="autologin">Autologin</string>
     <string name="sorting">Ordenación</string>
     <string name="enable_sorting">Permitir ordenación</string>
     <string name="criteria">Criterio ordenación</string>
     <string name="settings_header">Ajustes</string>
+
     <!-- Info -->
     <string name="text_title_info">Información de la aplicación</string>
     <string name="text_title_what_info">¿Qué es Frutición?</string>
@@ -92,17 +111,18 @@
         <li>Jorge Campón Pastor</li>\n
         <li>Arturo Mejías Velasco</li>
     </string>
+
     <!-- Ingesta -->
     <string name="text_total_fats">Grasas totales:</string>
     <string name="text_total_calories">Calorías totales:</string>
     <string name="text_total_carbo">Hidratos totales:</string>
     <string name="text_total_sugars">Azúcares totales:</string>
     <string name="text_total_proteins">Proteínas totales:</string>
-    <string name="value_total_fats">0,00</string>
-    <string name="value_total_calories">0,00</string>
-    <string name="value_total_carbo">0,00</string>
-    <string name="value_total_sugars">0,00</string>
-    <string name="value_total_proteins">0,00</string>
+    <string name="value_total_fats" translatable="false">0,00</string>
+    <string name="value_total_calories" translatable="false">0,00</string>
+    <string name="value_total_carbo" translatable="false">0,00</string>
+    <string name="value_total_sugars" translatable="false">0,00</string>
+    <string name="value_total_proteins" translatable="false">0,00</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Mensajes</string>

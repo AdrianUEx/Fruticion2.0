@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="hello_blank_fragment_favorite">hello empty fragment favorite</string>
 
     <!-- Bottom Navigation Bar -->
-    <string name="hello_blank_fragment_favorite">hello empty fragment favorite</string>
     <string name="title_home">Home</string>
     <string name="bottom_fav">Favorites</string>
     <string name="bottom_profile">Profile</string>
@@ -10,30 +10,37 @@
     <string name="bottom_weekly">Weekly</string>
     <string name="bottom_daily">Daily</string>
     <string name="info_title">Information</string>
-    <!--Register and login-->
+
+    <!--Login-->
     <string name="title_activity_login">LoginActivity</string>
     <string name="text_login_name">Username</string>
     <string name="text_login_password">Password</string>
     <string name="button_login_login">Login</string>
     <string name="button_login_join">Join</string>
+
+    <!--Registro-->
     <string name="title_join">Register</string>
     <string name="text_join_check_pass">Repeat password</string>
     <string name="button_join_join">Join</string>
+
     <string name="search_text">Search for fruits</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_fav">Favorites</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <!-- Profile -->
     <string name="title_profile">Profile</string>
     <string name="text_profile_name">Name:</string>
     <string name="value_profile_name">Name</string>
     <string name="text_profile_password">Password:</string>
     <string name="value_profile_password">Password</string>
+
     <string name="edit_profile_button">Edit Profile</string>
     <string name="logout_profile_button">Logout</string>
     <string name="delete_user_button">Delete account</string>
+
     <!-- Fruit details -->
     <string name="title_detail">Details</string>
     <string name="text_detail_name">Fruit name</string>
@@ -46,20 +53,14 @@
     <string name="text_detail_fat">Fat</string>
     <string name="text_detail_sugar">Sugar</string>
     <string name="text_detail_protein">Protein</string>
-    <string name="value_detail_family">Family</string>
-    <string name="value_detail_genus">Genus</string>
-    <string name="value_detail_order">Order</string>
-    <string name="value_detail_carbo">Carbohydrates</string>
-    <string name="value_detail_calories">Calories</string>
-    <string name="value_detail_fat">Fat</string>
-    <string name="value_detail_sugar">Sugar</string>
-    <string name="value_detail_protein">Protein</string>
+
     <string name="add_fav_mes">Added fruit to favorites</string>
     <string name="remove_fav_mes">Removed fruit from favorites</string>
     <string name="bottom_intake">Add to intake</string>
     <string name="add_intake_mes">Add fruit to intake</string>
     <string name="add_favourite_description">Pink heart-shaped add to favorites button</string>
     <string name="time_picker">Select time</string>
+
     <!--Edit profile-->
     <string name="text_edit_username">New username</string>
     <string name="value_edit_username">New username</string>
@@ -69,6 +70,7 @@
     <string name="save_edit_button">Save changes</string>
     <string name="cancel_edit_button">Cancel</string>
     <string name="username_chosen">"Already chosen username "</string>
+
     <!-- Preferences -->
     <string name="autologin">Autologin</string>
     <string name="sorting">Sorting</string>
@@ -91,19 +93,17 @@
     <string name="settings_header">Settings</string>
 
     <!-- Ingesta -->
-    <string name="value_total_calories">0,00</string>
-    <string name="value_total_carbo">0,00</string>
-    <string name="value_total_sugars">0,00</string>
-    <string name="value_total_proteins">0,00</string>
     <string name="text_total_fats">Total fats:</string>
     <string name="text_total_calories">Total calories:</string>
     <string name="text_total_carbo">Total carbo:</string>
     <string name="text_total_sugars">Total sugars:</string>
     <string name="text_total_proteins">Total proteins:</string>
-    <string name="value_total_fats">0,00</string>
+
     <string name="new_username_description">Bar to insert the new username</string>
     <string name="new_password_description">Field to enter the new password</string>
     <string name="fruitImageContentDescription">FruitImage</string>
+    <string name="logo_profile">Profile Logo</string>
+    <string name="settings_icon">Settings icon</string>
 
 
 </resources>
