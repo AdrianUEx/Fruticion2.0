@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name" translatable="false">Frutición</string>
     <string name="hello_blank_fragment_favorite">Hola fragmento favorito blanco</string>
+    <string name="flecha_up">Flecha Up</string>
+
     <!-- Bottom Navigation Bar-->
     <string name="title_home">Inicio</string>
     <string name="bottom_fav">Favoritos</string>
@@ -16,6 +18,7 @@
     <string name="text_login_password">Contraseña</string>
     <string name="button_login_login">Iniciar sesión</string>
     <string name="button_login_join">Registrarse</string>
+    <string name="app_logo">Logo de Frutición</string>
 
     <!--Registro-->
     <string name="title_join">Registro</string>
@@ -71,7 +74,7 @@
     <string name="add_fav_mes">Fruta añadida a favoritos</string>
     <string name="remove_fav_mes">Fruta eliminada de favoritos</string>
 
-    <string name="bottom_intake">Añadir a la ingesta</string>
+    <string name="bottom_intake">Añadir a ingesta</string>
     <string name="add_intake_mes">Fruta añadida a la ingesta</string>
 
     <string name="add_favourite_description">Boton de anadir a favoritos con forma de corazon rosa</string>
@@ -102,7 +105,7 @@
     <!-- Info Fragment-->
     <string name="text_title_info">Información de la aplicación</string>
     <string name="text_title_what_info">¿Qué es Frutición?</string>
-    <string name="text_what_info">Frutición es una aplicación que está pensada para llevar un control sobre los nutrientes que contienen las frutas ingeridas diaria y semanalmente para informar al usuario sobre su nutrición. Además de esto, se pueden marcar las frutas más deliciosas o que gusten más como favoritas, así como establecer un recordatorio para que el usuario tome la fruta que haya establecido a la hora indicada.</string>
+    <string name="text_what_info">Frutición es una aplicación que está pensada para llevar un control sobre los nutrientes que contienen las frutas ingeridas diaria y semanalmente para informar al usuario sobre su nutrición.\n Además de esto, se pueden marcar las frutas más deliciosas o que gusten más como favoritas, así como establecer un recordatorio para que el usuario tome la fruta que haya establecido a la hora indicada.</string>
     <string name="text_title_who_info">¿Quienes somos?</string>
     <string name="text_who_info">Frutición ha sido creada y desarrollada por estudiantes de Ingeniería Informática en Ingeniería del Software en la Escuela Politécnica de Cáceres. Ellos son:</string>
     <string name="authors" translatable="false">

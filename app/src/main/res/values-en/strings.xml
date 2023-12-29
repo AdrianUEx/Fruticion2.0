@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="hello_blank_fragment_favorite">hello empty fragment favorite</string>
 
     <!-- Bottom Navigation Bar -->
@@ -19,6 +19,7 @@
     <string name="button_login_join">Join</string>
 
     <!--Registro-->
+    <string name="app_logo">Fruticion logo</string>
     <string name="title_join">Register</string>
     <string name="text_join_check_pass">Repeat password</string>
     <string name="button_join_join">Join</string>
@@ -105,6 +106,7 @@
     <string name="logo_profile">Profile Logo</string>
     <string name="settings_icon">Settings icon</string>
     <string name="infoFragmentContentDescription">App info image</string>
+    <string name="flecha_up">Up Arrow</string>
 
 
 </resources>

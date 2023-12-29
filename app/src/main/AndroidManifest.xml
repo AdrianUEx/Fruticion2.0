@@ -3,11 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools">
     <!-- Este es el permiso para que la aplicacion pueda conectarse a Internet. Necesario para contactar con la API -->
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
 
     <application

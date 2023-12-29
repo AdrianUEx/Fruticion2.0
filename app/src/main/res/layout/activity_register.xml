@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/PlainTextRegistrate"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,43 +19,42 @@
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoFruticionRegistro" />
+        app:layout_constraintTop_toBottomOf="@+id/logoFruticionRegistro"
+        android:autofillHints="username"/>
 
     <EditText
         android:id="@+id/editTextRegisterPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:autofillHints="password"
         android:hint="@string/text_login_password"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/editTextRegisterUsername"
+        app:layout_constraintStart_toStartOf="@+id/editTextRegisterUsername"
         app:layout_constraintTop_toBottomOf="@id/editTextRegisterUsername" />
 
     <EditText
         android:id="@+id/editTextConfirmPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:autofillHints="password"
         android:hint="@string/text_join_check_pass"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/editTextRegisterPassword"
+        app:layout_constraintStart_toStartOf="@+id/editTextRegisterPassword"
         app:layout_constraintTop_toBottomOf="@id/editTextRegisterPassword" />
 
     <Button
         android:id="@+id/buttonRegister"
-        android:layout_width="0dp"
+        style="@style/button_text"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/formato_botones"
-        style="@style/button_text"
         android:text="@string/button_join_join"
         android:textAllCaps="false"
         android:textSize="28sp"
@@ -88,13 +86,13 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextText"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:srcCompat="@mipmap/ic_launcher"
+        android:contentDescription="@string/app_logo"/>
 
     <TextView
         android:id="@+id/editTextText"
-        android:layout_width="338dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:ems="10"
         android:fontFamily="@font/architects_daughter"
         android:text="@string/title_join"
@@ -103,17 +101,18 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/buttonBackToLogin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/buttonBackToLogin"
         app:layout_constraintTop_toTopOf="@+id/buttonBackToLogin"
-        app:layout_constraintVertical_bias="0.571" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
         android:id="@+id/buttonBackToLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="54dp"
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:backgroundTint="#FFFFFF"
+        android:contentDescription="@string/flecha_up"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/flecha_up" />
