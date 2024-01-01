@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/formato_botones"
+                android:background="@drawable/shape_formato_botones_app"
                 android:text="@string/button_join_join"
                 android:textAllCaps="false"
                 android:textSize="28sp"
@@ -77,7 +77,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/formato_botones"
+                android:background="@drawable/shape_formato_botones_app"
                 style="@style/button_text"
                 android:text="@string/cancel_edit_button"
                 android:textAllCaps="false"
@@ -126,7 +126,7 @@
                 android:contentDescription="@string/flecha_up"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/flecha_up" />
+                app:srcCompat="@drawable/ic_flecha_up" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

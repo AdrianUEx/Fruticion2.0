@@ -29,7 +29,7 @@
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/iconoinfotrabajadores"
+                app:srcCompat="@drawable/ic_info_trabajadores"
                 tools:src="@tools:sample/avatars"
                 android:contentDescription="@string/infoFragmentContentDescription" />
 

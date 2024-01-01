@@ -26,8 +26,7 @@
                 android:id="@+id/text_total_fats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/text_total_fats"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -41,15 +40,17 @@
                 android:alpha="0.8"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.764"
+                app:layout_constraintStart_toEndOf="@+id/divider4"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/text_total_calories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="42dp"
-                android:layout_marginTop="48dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/text_total_calories"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -60,7 +61,7 @@
                 android:id="@+id/text_total_carbo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/text_total_carbo"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -71,7 +72,7 @@
                 android:id="@+id/text_total_sugars"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/text_total_sugars"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -82,7 +83,7 @@
                 android:id="@+id/text_total_proteins"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/text_total_proteins"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -97,6 +98,8 @@
                 android:text="@string/value_total_calories"
                 android:textColor="@color/black"
                 android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/divider4"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/text_total_calories"
                 app:layout_constraintTop_toTopOf="@+id/text_total_calories" />
 
@@ -139,6 +142,17 @@
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/value_total_sugars"
                 app:layout_constraintTop_toTopOf="@+id/text_total_proteins" />
+
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="1dp"
+                android:layout_height="409dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.424"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

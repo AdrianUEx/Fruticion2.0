@@ -31,7 +31,7 @@
                 app:layout_constraintHorizontal_bias="0.523"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/iconoeditarperfil"
+                app:srcCompat="@drawable/ic_edit_profile"
                 android:contentDescription="@string/logo_profile" />
 
             <TextView
@@ -105,7 +105,7 @@
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:background="@drawable/formato_botones"
+                android:background="@drawable/shape_formato_botones_app"
                 android:text="@string/edit_profile_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -117,7 +117,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:background="@drawable/formato_botones"
+                android:background="@drawable/shape_formato_botones_app"
                 android:text="@string/logout_profile_button"
                 app:layout_constraintEnd_toEndOf="@+id/edit_profile_button"
                 app:layout_constraintStart_toStartOf="@+id/edit_profile_button"
@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
-                android:background="@drawable/formato_botones"
+                android:background="@drawable/shape_formato_botones_app"
                 android:text="@string/delete_user_button"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/logout_button"

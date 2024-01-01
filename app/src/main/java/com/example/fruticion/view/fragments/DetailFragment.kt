@@ -212,13 +212,13 @@ class DetailFragment : Fragment() {
 
     //--METODOS CAMBIO ICONO FAVORITOS-----------------------------------------------------------------------------------------------
     private fun addFavFruitIcon() {
-        val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.corazon)
+        val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.ic_corazon)
         binding.addFavourite.setImageDrawable(drawable)
         detailViewModel.isFavorite = true
     }
 
     private fun removeFavFruitIcon() {
-        val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.corazon_sin_fav)
+        val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.ic_corazon_sin_fav)
         binding.addFavourite.setImageDrawable(drawable)
         detailViewModel.isFavorite = false
     }

@@ -18,24 +18,11 @@
         app:layout_constraintStart_toStartOf="@+id/text_total_calories"
         app:layout_constraintTop_toBottomOf="@+id/text_total_calories" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_fruit_weekly_list"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:alpha="0.8"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_total_proteins"
-        app:layout_constraintVertical_bias="0.0" />
-
     <TextView
         android:id="@+id/text_total_calories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="74dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="44dp"
         android:text="@string/text_total_calories"
         android:textColor="@color/black"
@@ -126,5 +113,18 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/text_total_proteins"
         app:layout_constraintStart_toStartOf="@+id/value_total_sugars" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_fruit_weekly_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:alpha="0.8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_total_proteins"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

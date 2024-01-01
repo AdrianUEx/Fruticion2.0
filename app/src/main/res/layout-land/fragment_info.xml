@@ -29,8 +29,10 @@
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/iconoeditarperfil"
-                tools:src="@tools:sample/avatars" />
+                app:srcCompat="@drawable/ic_edit_profile"
+                tools:src="@tools:sample/avatars"
+                android:contentDescription="@string/infoFragmentContentDescription" />
+
 
             <TextView
                 android:id="@+id/text_title_info"

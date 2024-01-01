@@ -48,13 +48,13 @@
 
     <!-- Detalles fruta -->
     <string name="title_detail">Detalles</string>
-    <string name="text_detail_name">Nombre fruta</string>
+    <string name="text_detail_name">Nombre</string>
 
     <string name="text_detail_family">Familia</string>
     <string name="text_detail_genus">Género</string>
     <string name="text_detail_order">Orden</string>
 
-    <string name="text_detail_nutrition">Información nutricional:</string>
+    <string name="text_detail_nutrition">Info nutricional:</string>
 
     <string name="text_detail_carbo">Carbohidratos</string>
     <string name="text_detail_calories">Calorías</string>
@@ -62,9 +62,8 @@
     <string name="text_detail_sugar">Azúcar</string>
     <string name="text_detail_protein">Proteínas</string>
 
-    <string name="value_detail_family" translatable="false">0,00</string>
-    <string name="value_detail_genus" translatable="false">0,00</string>
-    <string name="value_detail_order" translatable="false">0,00</string>
+    <string name="value_detail_family">Familia</string>
+    <string name="value_detail_order">Orden</string>
     <string name="value_detail_carbo" translatable="false">0,00</string>
     <string name="value_detail_calories" translatable="false">0,00</string>
     <string name="value_detail_fat" translatable="false">0,00</string>
@@ -134,5 +133,6 @@
 
     <!-- Sync Preferences -->
     <string name="hello_blank_fragment">Hola fragmento blanco</string>
+    <string name="value_detail_genus">Género</string>
 
 </resources>

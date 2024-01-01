@@ -4,7 +4,7 @@
     <!--Esta es la ActionBar que va metida con la ToolBar. NO ES LA TOOLBAR ENTERA.-->
     <item android:id="@+id/action_search"
         android:title="@string/search_text"
-        android:icon="@drawable/lupita"
+        android:icon="@drawable/ic_lupita"
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
