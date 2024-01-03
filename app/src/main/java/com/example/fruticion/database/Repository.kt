@@ -14,13 +14,12 @@ import java.time.LocalDate
 import java.time.LocalTime
 import android.util.Log
 
-// Repository.k
 class Repository(private val api: FruticionAPI, private val db: FruticionDatabase) {
 
     private var lastUpdateTimeMillis: Long =
         0L //Esta variable contendrá el tiempo en milisegundos de la ultima actualizacion de datos desde la API
 
-    val favFruitsInList = LoginActivity.currentUserId?.let { userId ->
+    /*val favFruitsInList = LoginActivity.currentUserId?.let { userId ->
         Log.i("Valor id usuario antes de obtener los favs", "$userId")
         db.favouriteDao().getAllLDFavFruitsByUser(userId)
     }
@@ -33,7 +32,7 @@ class Repository(private val api: FruticionAPI, private val db: FruticionDatabas
     val weeklyFruitsInList = LoginActivity.currentUserId?.let { userId ->
         Log.i("Valor id usuario antes de obtener los favs", "$userId")
         db.weeklyIntakeDao().getAllLDWeeklyFruitsByUser(userId)
-    }
+    }*/
 
     // SearchFragment------------------------------------------------------------------------------
 
@@ -71,7 +70,7 @@ class Repository(private val api: FruticionAPI, private val db: FruticionDatabas
     }
 
 
-    // FavouriteFragment--------------------------------------------------------------------------
+    // FavouriteFragment----------------------------------------------------------------------------
     fun getAllFavFruits(): LiveData<List<Fruit>> {
         return db.favouriteDao().getAllLDFavFruitsByUser(LoginActivity.currentUserId!!)
     }
@@ -127,7 +126,7 @@ class Repository(private val api: FruticionAPI, private val db: FruticionDatabas
         db.userDao().deleteUserById(LoginActivity.currentUserId!!)
     }
 
-    //DailyIntakeFragment
+    //DailyIntakeFragment -------------------------------------------------------------------------
     suspend fun insertDailyFruit(fruitId: Long) {
         db.dailyIntakeDao().insertDailyFruit(
             DailyIntake(
@@ -139,8 +138,35 @@ class Repository(private val api: FruticionAPI, private val db: FruticionDatabas
         )
     }
 
-    suspend fun deleteDailyFruits(fechaSistema: LocalDate) {
-        db.dailyIntakeDao().deleteDailyfruits(LoginActivity.currentUserId!!, fechaSistema)
+    //Inserta a la vez un DailyIntake y un WeeklyIntake porque cualquier DailyIntake pertenece a un WeeklyIntake. De esta forma, ambas tablas tienen EXACTAMENTE los mismos valores hasta los milisegundos
+    suspend fun insertDailyAndWeeklyFruit(fruitId: Long) {
+        val additionDate = LocalDate.now()
+        val additionTime = LocalTime.now()
+
+        db.dailyIntakeDao().insertDailyFruit(
+            DailyIntake(
+                fruitId,
+                LoginActivity.currentUserId!!,
+                additionDate,
+                additionTime
+            )
+        )
+        db.weeklyIntakeDao().insertWeeklyFruit(
+            WeeklyIntake(
+                fruitId,
+                LoginActivity.currentUserId!!,
+                additionDate,
+                additionTime
+            )
+        )
+    }
+
+    suspend fun deleteDailyFruits() {
+        db.dailyIntakeDao().deleteDailyfruits(LoginActivity.currentUserId!!)
+    }
+
+    suspend fun getOneDailyFruit() : DailyIntake{
+        return db.dailyIntakeDao().getOneDailyFruit(LoginActivity.currentUserId!!)
     }
 
     suspend fun getAllDailyFruitsByUser(): List<Fruit> {
@@ -179,7 +205,7 @@ class Repository(private val api: FruticionAPI, private val db: FruticionDatabas
         return db.weeklyIntakeDao().getAllWeeklyFruitsByUserForList(LoginActivity.currentUserId!!)
     }
 
-    //DetailFragment
+    //DetailFragment -------------------------------------------------------------------------------
     suspend fun getFruitById(fruitId: Long): Fruit {
         return db.fruitDao().getFruitById(fruitId)
     }

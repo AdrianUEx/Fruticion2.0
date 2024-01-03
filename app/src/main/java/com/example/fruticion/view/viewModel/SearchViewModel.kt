@@ -19,25 +19,26 @@ class SearchViewModel(private val repository: Repository) : ViewModel() {
 
     fun update() {
         viewModelScope.launch {
-            val fruitsList = repository.getFruits() //Accede a la API y devuelve de Room todas las frutas
+            val fruitsList =
+                repository.getFruits() //Accede a la API y devuelve de Room todas las frutas
             _fruits.postValue(fruitsList)
         }
     }
 
-companion object {
-    val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel> create(
-            modelClass: Class<T>,
-            extras: CreationExtras
-        ): T { // Get the Application object from extras
+    companion object {
+        val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel> create(
+                modelClass: Class<T>,
+                extras: CreationExtras
+            ): T { // Get the Application object from extras
 
-            val application =
-                checkNotNull(extras[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY])
-            return SearchViewModel(
-                (application as FruticionApplication).appContainer.repository,
-            ) as T
+                val application =
+                    checkNotNull(extras[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY])
+                return SearchViewModel(
+                    (application as FruticionApplication).appContainer.repository,
+                ) as T
+            }
         }
     }
-}
 }

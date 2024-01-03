@@ -7,8 +7,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.example.fruticion.FruticionApplication
-import com.example.fruticion.api.getNetworkService
-import com.example.fruticion.database.FruticionDatabase
 import com.example.fruticion.database.Repository
 import com.example.fruticion.databinding.ActivityRegisterBinding
 import com.example.fruticion.model.User

@@ -10,12 +10,14 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import com.example.fruticion.FruticionApplication
 import com.example.fruticion.database.Repository
 import com.example.fruticion.model.Fruit
+import com.example.fruticion.util.DailyIntakeBuffer
 import com.example.fruticion.util.FruitDetailDataMapper
 import kotlinx.coroutines.launch
 
 class DetailViewModel(
     private val repository: Repository,
-    private val fruitDetailMap: FruitDetailDataMapper
+    private val fruitDetailMap: FruitDetailDataMapper,
+    private val dailyIntakeBuffer: DailyIntakeBuffer
 ) : ViewModel() {
 
     private val _detailFruit = MutableLiveData<Fruit>()
@@ -59,8 +61,11 @@ class DetailViewModel(
 
     fun onAddDailyButtonClick(fruitId: Long) {
         viewModelScope.launch {
-            repository.insertDailyFruit(fruitId)
-            repository.insertWeeklyFruit(fruitId)
+            repository.insertDailyAndWeeklyFruit(fruitId)
+            //repository.insertWeeklyFruit(fruitId)
+
+            dailyIntakeBuffer.insertDailyFruit(repository.getFruitById(fruitId)) //TODO: revisar este metodo para posiblemente meterlo dentro de insertDailyFruit()
+
         }
     }
 
@@ -76,6 +81,7 @@ class DetailViewModel(
                 return DetailViewModel(
                     (application as FruticionApplication).appContainer.repository,
                     (application as FruticionApplication).appContainer.fruitDetailMap,
+                    (application as FruticionApplication).appContainer.dailyIntakeBuffer,
                 ) as T
             }
         }

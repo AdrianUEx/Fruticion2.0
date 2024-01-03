@@ -8,17 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fruticion.FruticionApplication
-import com.example.fruticion.database.Repository
 import com.example.fruticion.databinding.FragmentFavoriteBinding
 import com.example.fruticion.view.adapters.FavoriteAdapter
 import com.example.fruticion.model.Fruit
-import com.example.fruticion.view.viewModel.DailyIntakeViewModel
 import com.example.fruticion.view.viewModel.FavoriteViewModel
-import kotlinx.coroutines.launch
+
 
 class FavoriteFragment : Fragment() {
 
@@ -93,7 +89,7 @@ class FavoriteFragment : Fragment() {
         }
     }
 
-    fun updateRecyclerView(newData: List<Fruit>) {
+    private fun updateRecyclerView(newData: List<Fruit>) {
         val modifiedData = ArrayList(newData)
         favoriteAdapter.updateList(modifiedData)
     }

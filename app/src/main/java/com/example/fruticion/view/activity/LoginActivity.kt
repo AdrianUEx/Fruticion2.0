@@ -1,6 +1,7 @@
 package com.example.fruticion.view.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -16,7 +17,6 @@ import java.util.Locale
 
 class LoginActivity : AppCompatActivity() {
 
-    //private lateinit var db: FruticionDatabase
     private lateinit var binding: ActivityLoginBinding
     private lateinit var repository: Repository
 
@@ -29,17 +29,12 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //Esta linea funciona porque estamos en una Activity
-        val appContainer = (this.application as FruticionApplication).appContainer
+
+        val appContainer = (this.application as FruticionApplication).appContainer //Esta linea funciona porque estamos en una Activity
         repository = appContainer.repository
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        //Inicializacion de la base de datos
-       /* db = FruticionDatabase.getInstance(applicationContext)!!
-
-        repository = Repository.getInstance(getNetworkService(), db)*/
 
         setUpListeners()
 
@@ -95,32 +90,50 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    //Navega hasta HomeActivity y borra las frutas diarias y semanales del usuario.
     private fun navigateToHomeActivity() {
+        deleteDailyandWeeklyFruits()
 
+        HomeActivity.start(this)
+    }
+
+    //Invocado por navigateToHomeActivity(). Borra las frutas diarias y semanales del usuario.
+    private fun deleteDailyandWeeklyFruits() {
         val fechaSistema = LocalDate.now()
+        Log.i("fechaActual", "$fechaSistema")
+
         lifecycleScope.launch {
-            //borra la tabla de frutas diarias del usuario (no toda la tabla)
-            repository.deleteDailyFruits(fechaSistema)
+            //obtiene el ultimo valor introducido en la tabla de fruta diaria
+            val ultimaFrutaDiaria = repository.getOneDailyFruit()
 
-            // Obtiene el número de semana del año actual utilizando WeekFields
-            val numeroSemanaActual =
-                fechaSistema.get(WeekFields.of(Locale.getDefault()).weekOfYear())
+            if (ultimaFrutaDiaria != null) {
+                if (ultimaFrutaDiaria.additionDate < fechaSistema) {
+                    //borra la tabla de frutas diarias del usuario (no toda la tabla). Falla al borrar la fruta al cambiar de año.
+                    repository.deleteDailyFruits()
+                }
+            }
 
-            //obtiene el ultimo valor introducido en la tabla
+
+            //obtiene el ultimo valor introducido en la tabla de fruta semanal
             val frutaEjemplo = repository.getOneWeeklyFruit()
 
             if (frutaEjemplo != null) {
                 //se obtiene la semana de la fecha de frutaEjemplo
-                val semanaFrutaEjemplo =
+                val semFrutaEjemplo =
                     frutaEjemplo.additionDate.get(WeekFields.of(Locale.getDefault()).weekOfYear())
 
-                //si el numero de la semana actual es mayor que el mayor numero de la semana de la tabla del usuario, se borra.
-                //tambien, si la semana de comienzo de año es 0 porque empieza a mitad de semana, no se borra (dale vueltas)
-                if (numeroSemanaActual > semanaFrutaEjemplo && numeroSemanaActual > 0)
+                // Obtiene el número de semana del año actual utilizando WeekFields
+                val numSemActual =
+                    fechaSistema.get(WeekFields.of(Locale.getDefault()).weekOfYear())
+
+                //Si el numero de la semana actual es mayor que el mayor numero de la semana de la tabla del usuario, se borra.
+                //Tambien, si la semana de comienzo de año es 0 porque empieza a mitad de semana, no se borra (dale vueltas)
+                //Con la condicion después del OR se comprueba el caso del cambio de año, ya que si el año empieza en Lunes,
+                //la semana del nuevo año es 1 y la semana del año anterior es 52, con lo que la condicion previa no sirve
+                if (numSemActual > semFrutaEjemplo && numSemActual > 0 || (numSemActual == 1 && semFrutaEjemplo == 52))
                     repository.deleteWeeklyFruits()
             }
         }
-        HomeActivity.start(this)
     }
 
     //este metodo es necesario porque si no peta y no coge el contexto

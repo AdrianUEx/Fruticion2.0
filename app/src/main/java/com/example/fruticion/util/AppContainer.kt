@@ -18,5 +18,7 @@ class AppContainer(context: Context?) { //el contexto es necesario para poder cr
 
     val fruitDetailMap = FruitDetailDataMapper() //DataMapper de frutas para DetailFragment
 
-    val fruitImagesMap = FruitImagesMap() //Mapa normal con las imágenes de las frutas para DetailFragment (en principio)
+    val fruitImagesMap = FruitImagesMap() //Mapa normal con las imágenes de las frutas solo para DetailFragment (en principio)
+
+    val dailyIntakeBuffer = DailyIntakeBuffer() //Buffer para guardar la lista de frutas diaria del usuario (más adelante guardará tambien la nutrición)
 }
