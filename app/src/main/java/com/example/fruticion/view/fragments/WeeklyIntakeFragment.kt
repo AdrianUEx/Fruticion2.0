@@ -8,19 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fruticion.FruticionApplication
-import com.example.fruticion.view.activity.LoginActivity
-import com.example.fruticion.api.getNetworkService
-import com.example.fruticion.database.FruticionDatabase
-import com.example.fruticion.database.Repository
+import com.example.fruticion.api.Nutrition
 import com.example.fruticion.databinding.FragmentWeeklyIntakeBinding
 import com.example.fruticion.view.adapters.WeeklyIntakeAdapter
 import com.example.fruticion.model.Fruit
-import com.example.fruticion.view.viewModel.DailyIntakeViewModel
 import com.example.fruticion.view.viewModel.WeeklyIntakeViewModel
-import kotlinx.coroutines.launch
 
 
 class WeeklyIntakeFragment : Fragment() {
@@ -54,9 +47,14 @@ class WeeklyIntakeFragment : Fragment() {
             Log.i("Valor lista frutas semanal", "$weeklyFruitsInList")
             onWeeklyFruitsLoadedListener?.onWeeklyFruitsLoaded(weeklyFruitsInList)
 
+            //obtainWeeklyNutritions(weeklyFruitsInList)
 
-            obtainWeeklyNutritions(weeklyFruitsInList)
             updateRecyclerView(weeklyFruitsInList)
+        }
+
+        weeklyIntakeViewModel.nutritions.observe(viewLifecycleOwner){ weeklyNutrition ->
+            //llamada a actualización de las nutritions
+            obtainWeeklyNutritionsFromLD(weeklyNutrition)
         }
 
     }
@@ -92,6 +90,23 @@ class WeeklyIntakeFragment : Fragment() {
 
     }
 
+    private fun obtainWeeklyNutritionsFromLD(weeklyNutrition: Nutrition) {
+        //Se formatean en String antes de pasarselo a los TextView para evitar el fallo de los 15 ceros
+        val formatCalories = String.format("%.2f", weeklyNutrition.calories)
+        val formatCarbo = String.format("%.2f", weeklyNutrition.carbohydrates)
+        val formatFats = String.format("%.2f", weeklyNutrition.fat)
+        val formatSugars = String.format("%.2f", weeklyNutrition.sugar)
+        val formatProteins = String.format("%.2f", weeklyNutrition.protein)
+
+        with(binding) {
+            valueTotalCalories.text = formatCalories
+            valueTotalCarbo.text = formatCarbo
+            valueTotalFats.text = formatFats
+            valueTotalSugars.text = formatSugars
+            valueTotalProteins.text = formatProteins
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -122,7 +137,7 @@ class WeeklyIntakeFragment : Fragment() {
         }
     }
 
-    fun updateRecyclerView(newData: List<Fruit>) {
+    private fun updateRecyclerView(newData: List<Fruit>) {
         val modifiedData = ArrayList(newData)
         weeklyIntakeAdapter.updateList(modifiedData)
     }

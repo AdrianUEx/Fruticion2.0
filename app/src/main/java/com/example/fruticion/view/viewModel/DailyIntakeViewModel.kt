@@ -14,7 +14,7 @@ import com.example.fruticion.model.Fruit
 import com.example.fruticion.util.DailyIntakeBuffer
 import kotlinx.coroutines.launch
 
-class DailyIntakeViewModel(private val repository: Repository, private val dailyIntakeFruitsList: DailyIntakeBuffer) : ViewModel() {
+class DailyIntakeViewModel(private val repository: Repository, private val dailyIntakeBuffer: DailyIntakeBuffer) : ViewModel() {
 
     private val _fruits = MutableLiveData<List<Fruit>>()
     val fruits: LiveData<List<Fruit>> = _fruits
@@ -25,16 +25,16 @@ class DailyIntakeViewModel(private val repository: Repository, private val daily
     fun update() {
         viewModelScope.launch {
 
-            if(dailyIntakeFruitsList.dailyIntakeFruitsListIsNotEmpty()){
+            if(dailyIntakeBuffer.dailyIntakeFruitsListIsNotEmpty()){
                 Log.i("dailyIntake","Obteniendo frutas del buffer de frutas diarias")
-                _fruits.value = dailyIntakeFruitsList.returnDailyIntakeFruitsList()
+                _fruits.value = dailyIntakeBuffer.returnDailyIntakeFruitsList()
                 _nutritions.value = returnTotalDailyNutrition()
             }else{
                 Log.i("dailyIntake","Obteniendo frutas diarias de la BD")
                 val fruitList = repository.getAllDailyFruitsByUser()
                 _fruits.value=fruitList
 
-                dailyIntakeFruitsList.insertDailyFruitsList(fruitList) //carga toda la lista de frutas y la nutrition al principio
+                dailyIntakeBuffer.insertDailyFruitsList(fruitList) //carga toda la lista de frutas y la nutrition al principio
                 _nutritions.value = returnTotalDailyNutrition() //Se carga el LiveData con los datos de la nutrition
             }
 
@@ -42,7 +42,7 @@ class DailyIntakeViewModel(private val repository: Repository, private val daily
     }
 
     private fun returnTotalDailyNutrition() : Nutrition{
-        return dailyIntakeFruitsList.returnTotalDailyNutrition()
+        return dailyIntakeBuffer.returnTotalDailyNutrition()
     }
 
     companion object {

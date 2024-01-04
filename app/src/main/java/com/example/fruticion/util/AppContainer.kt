@@ -20,5 +20,7 @@ class AppContainer(context: Context?) { //el contexto es necesario para poder cr
 
     val fruitImagesMap = FruitImagesMap() //Mapa normal con las imágenes de las frutas solo para DetailFragment (en principio)
 
-    val dailyIntakeBuffer = DailyIntakeBuffer() //Buffer para guardar la lista de frutas diaria del usuario (más adelante guardará tambien la nutrición)
+    val dailyIntakeBuffer = DailyIntakeBuffer() //Buffer para guardar la lista de frutas diaria del usuario y su recuento nutricional
+
+    val weeklyIntakeBuffer = WeeklyIntakeBuffer() //Bufer para guardar la lista de frutas semanal del usuario y su recuento nutricional
 }

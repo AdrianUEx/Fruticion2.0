@@ -12,12 +12,14 @@ import com.example.fruticion.database.Repository
 import com.example.fruticion.model.Fruit
 import com.example.fruticion.util.DailyIntakeBuffer
 import com.example.fruticion.util.FruitDetailDataMapper
+import com.example.fruticion.util.WeeklyIntakeBuffer
 import kotlinx.coroutines.launch
 
 class DetailViewModel(
     private val repository: Repository,
     private val fruitDetailMap: FruitDetailDataMapper,
-    private val dailyIntakeBuffer: DailyIntakeBuffer
+    private val dailyIntakeBuffer: DailyIntakeBuffer,
+    private val weeklyIntakeBuffer: WeeklyIntakeBuffer
 ) : ViewModel() {
 
     private val _detailFruit = MutableLiveData<Fruit>()
@@ -66,7 +68,7 @@ class DetailViewModel(
 
             val fruit = repository.getFruitById(fruitId)
             dailyIntakeBuffer.insertDailyFruit(fruit) //TODO: revisar este metodo para posiblemente meterlo dentro de insertDailyAndWeeklyFruit()
-
+            weeklyIntakeBuffer.insertWeeklyFruit(fruit)
         }
     }
 
@@ -83,6 +85,7 @@ class DetailViewModel(
                     (application as FruticionApplication).appContainer.repository,
                     (application as FruticionApplication).appContainer.fruitDetailMap,
                     (application as FruticionApplication).appContainer.dailyIntakeBuffer,
+                    (application as FruticionApplication).appContainer.weeklyIntakeBuffer,
                 ) as T
             }
         }
