@@ -30,7 +30,7 @@ class DetailViewModel(
             isFavorite = !repository.checkFruitIsFav(fruitID)
 
 
-            var tiempoIni= System.currentTimeMillis()
+            val tiempoIni= System.currentTimeMillis()
             val dbFruit: Fruit?
             if (fruitDetailMap.containsElement(fruitID)) {
                 //obtiene la fruta del mapa, ya que existe en él
@@ -43,7 +43,7 @@ class DetailViewModel(
                     fruitDetailMap.addElement(fruitID,dbFruit)
                 }
             }
-            var tiempoFinal=System.currentTimeMillis() - tiempoIni
+            val tiempoFinal=System.currentTimeMillis() - tiempoIni
             Log.i("FruitDetailMap","Tiempo total rec fruta: $tiempoFinal")
             _detailFruit.postValue(dbFruit!!)
         }
@@ -61,10 +61,11 @@ class DetailViewModel(
 
     fun onAddDailyButtonClick(fruitId: Long) {
         viewModelScope.launch {
-            repository.insertDailyAndWeeklyFruit(fruitId)
+            repository.insertDailyAndWeeklyFruit(fruitId) //hace dos llamadas a BD. Con esto se activa el .observe() en DailyIntake y WeeklyIntake
             //repository.insertWeeklyFruit(fruitId)
 
-            dailyIntakeBuffer.insertDailyFruit(repository.getFruitById(fruitId)) //TODO: revisar este metodo para posiblemente meterlo dentro de insertDailyFruit()
+            val fruit = repository.getFruitById(fruitId)
+            dailyIntakeBuffer.insertDailyFruit(fruit) //TODO: revisar este metodo para posiblemente meterlo dentro de insertDailyAndWeeklyFruit()
 
         }
     }
