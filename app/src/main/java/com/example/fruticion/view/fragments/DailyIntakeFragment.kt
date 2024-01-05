@@ -46,10 +46,6 @@ class DailyIntakeFragment : Fragment() {
         dailyIntakeViewModel.fruits.observe(viewLifecycleOwner) { dailyFruitsInList ->
             Log.i("Valor lista frutas diaria", "$dailyFruitsInList")
 
-           // obtainDailyNutritions(dailyFruitsInList) //se calcula la info nutricional y se muestra por pantalla
-
-            //obtainDailyNutritions2(dailyIntakeViewModel.returnTotalDailyNutrition()) //esta llamada aqui tarda demasiado en cargar los datos nutricionales por pantalla
-
             onDailyFruitsLoadedListener?.onDailyFruitsLoaded(dailyFruitsInList)
 
             updateRecyclerView(dailyFruitsInList) //se actualiza la RecyclerView, tenga elementos o no
@@ -58,44 +54,6 @@ class DailyIntakeFragment : Fragment() {
         dailyIntakeViewModel.nutritions.observe(viewLifecycleOwner) { dailyNutrition ->
             //llamada a actualización de las nutritions
             obtainDailyNutritionsFromLD(dailyNutrition)
-        }
-    }
-
-    private fun obtainDailyNutritions(fruitList: List<Fruit>) {
-        var totalCalories = 0.0
-        var totalSugars = 0.0
-        var totalFats = 0.0
-        var totalCarbo = 0.0
-        var totalProtein = 0.0
-
-        for (it in fruitList) {
-            totalCalories += it.calories!!
-            totalSugars += it.sugar!!
-            totalFats += it.fat!!
-            totalCarbo += it.carbohydrates!!
-            totalProtein += it.protein!!
-        }
-
-
-        //Se formatean en String antes de pasarselo a los TextView para evitar el fallo de los 15 ceros
-        /* val formatCalories = String.format("%.2f", dailyNutrition.calories)
-         val formatCarbo = String.format("%.2f", dailyNutrition.carbohydrates)
-         val formatFats = String.format("%.2f", dailyNutrition.fat)
-         val formatSugars = String.format("%.2f", dailyNutrition.sugar)
-         val formatProteins = String.format("%.2f", dailyNutrition.protein)*/
-
-        val formatCalories = String.format("%.2f", totalCalories)
-        val formatCarbo = String.format("%.2f", totalCarbo)
-        val formatFats = String.format("%.2f", totalFats)
-        val formatSugars = String.format("%.2f", totalSugars)
-        val formatProteins = String.format("%.2f", totalProtein)
-
-        with(binding) {
-            valueTotalCalories.text = formatCalories
-            valueTotalCarbo.text = formatCarbo
-            valueTotalFats.text = formatFats
-            valueTotalSugars.text = formatSugars
-            valueTotalProteins.text = formatProteins
         }
     }
 
@@ -132,7 +90,7 @@ class DailyIntakeFragment : Fragment() {
         recyclerView.adapter = dailyIntakeAdapter
     }
 
-    fun updateRecyclerView(newData: List<Fruit>) {
+    private fun updateRecyclerView(newData: List<Fruit>) {
         val modifiedData = ArrayList(newData)
         dailyIntakeAdapter.updateList(modifiedData)
     }

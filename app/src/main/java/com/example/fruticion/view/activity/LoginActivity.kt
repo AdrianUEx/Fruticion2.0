@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import com.example.fruticion.FruticionApplication
+import com.example.fruticion.R
 import com.example.fruticion.database.Repository
 import com.example.fruticion.databinding.ActivityLoginBinding
 import com.example.fruticion.util.CredentialCheck
@@ -20,6 +21,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var repository: Repository
 
+    private var passwordVisible = false
     companion object {
         //Esta variable se puede modificar para que no salte error al usarla en los metodos del Dao quitandole el ? y metiendole un valor cualquiera
         var currentUserId: Long? =
@@ -53,6 +55,10 @@ class LoginActivity : AppCompatActivity() {
 
             buttonRegister.setOnClickListener {
                 navigateToRegister()
+            }
+
+            passVisibilityButton?.setOnClickListener {
+                togglePasswordVisibility()
             }
         }
     }
@@ -90,6 +96,30 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    // Este método hace esencialmente lo mismo que en el listener del boton de favoritos en DetailFragment
+    private fun togglePasswordVisibility(){
+        with(binding) {
+            // Cambiar el tipo de entrada de contraseña
+            editTextPassword.inputType =
+                if (passwordVisible)
+                    android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD //Esta expresión tiene que ser asi obligatoriamente o no conmuta el estado de visibilidad
+                else
+                    android.text.InputType.TYPE_CLASS_TEXT
+
+            // Cambiar el ícono del botón de visibilidad
+            val visibilityIcon =
+                if (passwordVisible)
+                    R.drawable.ic_visibilidad
+                else
+                    R.drawable.ic_visibility_off
+
+            passVisibilityButton.setImageResource(visibilityIcon)
+
+            // Invertir el estado de visibilidad
+            passwordVisible = !passwordVisible
+        }
+    }
+
     //Navega hasta HomeActivity y borra las frutas diarias y semanales del usuario.
     private fun navigateToHomeActivity() {
         deleteDailyandWeeklyFruits()
@@ -108,7 +138,7 @@ class LoginActivity : AppCompatActivity() {
 
             if (ultimaFrutaDiaria != null) {
                 if (ultimaFrutaDiaria.additionDate < fechaSistema) {
-                    //borra la tabla de frutas diarias del usuario (no toda la tabla). Falla al borrar la fruta al cambiar de año.
+                    //borra la tabla de frutas diarias del usuario (no toda la tabla).
                     repository.deleteDailyFruits()
                 }
             }
