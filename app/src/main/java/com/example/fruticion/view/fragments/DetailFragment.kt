@@ -75,20 +75,34 @@ class DetailFragment : Fragment() {
 
 
             with(binding) {//Recordar que with es para no poner binding delante de todas las lineas que tiene with dentro
-                setUpFruitImage(fruit?.order.toString())
+                setUpFruitImage(fruit?.name.toString())
 
                 textDetailName.text = fruit?.name
+                if(fruit?.name == "Kiwi"){
+                    //Familia, genero y orden
+                    valueDetailFamily.text = getString(R.string.kiwisFamily)
+                    valueDetailOrder.text = fruit.order
+                    valueDetailGenus.text = fruit.genus
+                    //Informacion nutricional
+                    valueDetailCalories.text = getString(R.string.kiwi_description_1)
+                    valueDetailFat.text = getString(R.string.kiwi_description_2)
+                    valueDetailSugar.text = getString(R.string.kiwi_description_3)
+                    valueDetailCarbo.text = getString(R.string.kiwi_description_4)
+                    valueDetailProtein.text = getString(R.string.kiwi_description_5)
+                }else{
+                    //Familia, genero y orden
+                    valueDetailFamily.text = fruit?.family
+                    valueDetailOrder.text = fruit?.order
+                    valueDetailGenus.text = fruit?.genus
+                    //Informacion nutricional
+                    valueDetailCalories.text = fruit?.calories.toString()
+                    valueDetailFat.text = fruit?.fat.toString()
+                    valueDetailSugar.text = fruit?.sugar.toString()
+                    valueDetailCarbo.text = fruit?.carbohydrates.toString()
+                    valueDetailProtein.text = fruit?.protein.toString()
+                }
 
-                //Familia, genero y orden
-                valueDetailFamily.text = fruit?.family
-                valueDetailOrder.text = fruit?.order
-                valueDetailGenus.text = fruit?.genus
-                //Informacion nutricional
-                valueDetailCalories.text = fruit?.calories.toString()
-                valueDetailFat.text = fruit?.fat.toString()
-                valueDetailSugar.text = fruit?.sugar.toString()
-                valueDetailCarbo.text = fruit?.carbohydrates.toString()
-                valueDetailProtein.text = fruit?.protein.toString()
+
             }
 
             if (!detailViewModel.isFavorite)
@@ -99,11 +113,11 @@ class DetailFragment : Fragment() {
 
     }
 
-    private fun setUpFruitImage(order: String) {
+    private fun setUpFruitImage(name: String) {
 
-        if (fruitImagesMap.contieneClave(order))
+        if (fruitImagesMap.contieneClave(name))
             binding.imagenDetalleFruta.setImageResource(
-                fruitImagesMap.obtenerValor(order)!!
+                fruitImagesMap.obtenerValor(name)!!
             )
         else
             binding.imagenDetalleFruta.setImageResource(R.mipmap.ic_launcher_foreground)

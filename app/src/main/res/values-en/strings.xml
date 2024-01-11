@@ -70,6 +70,7 @@
     <string name="value_edit_username">New username</string>
     <string name="value_edit_password">New password</string>
     <string name="text_edit_password">New password</string>
+    <string name="kiwi_description_1">It\'s an animal original from New Zealand</string>
     <string name="title_edit">Edit profile</string>
     <string name="save_edit_button">Save changes</string>
     <string name="cancel_edit_button">Cancel</string>
@@ -110,6 +111,10 @@
     <string name="settings_icon">Settings icon</string>
     <string name="infoFragmentContentDescription">App info image</string>
     <string name="flecha_up">Up Arrow</string>
+    <string name="kiwi_description_2">It has 5 species</string>
+    <string name="kiwi_description_3">It measures between 25 and 45 cm (the same as a chicken)</string>
+    <string name="kiwi_description_4">It\'s omnivorous</string>
+    <string name="kiwi_description_5">It has several small-sized predators, like dogs or cats</string>
 
 
 </resources>

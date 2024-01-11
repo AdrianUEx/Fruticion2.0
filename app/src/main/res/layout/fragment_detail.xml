@@ -254,7 +254,7 @@
                 android:layout_marginBottom="24dp"
                 android:background="#00FFFFFF"
                 android:contentDescription="@string/add_favourite_description"
-                android:src="@drawable/ic_corazon"
+                android:src="@drawable/ic_corazon_sin_fav"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

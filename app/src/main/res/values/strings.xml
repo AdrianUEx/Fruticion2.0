@@ -80,6 +80,13 @@
     <string name="time_picker">Recordatorio</string>
     <string name="fruitImageContentDescription">ImagenFruta</string>
 
+    <string name="kiwisFamily" translatable="false">Apterygidae</string>
+    <string name="kiwi_description_1">Es un animal original de Nueva Zelanda</string>
+    <string name="kiwi_description_2">Cuenta con 5 especies</string>
+    <string name="kiwi_description_3">Mide entre 25 y 45 cm (como una gallina)</string>
+    <string name="kiwi_description_4">Son omnívoros</string>
+    <string name="kiwi_description_5">Tiene varios depredadores de tamaño pequeño, como perros o gatos</string>
+
     <!-- Editar perfil -->
     <string name="title_edit">Editar perfil</string>
     <string name="text_edit_username">Nuevo nombre de usuario</string>
